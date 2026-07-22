@@ -237,4 +237,59 @@ describe('WebDavStorageProvider', () => {
       'partially successful',
     );
   });
+
+  test('creates and reuses read-only Nextcloud public share links', async () => {
+    const provider = new WebDavStorageProvider({
+      ...config,
+      provider: 'nextcloud',
+      serverUrl: 'https://cloud.example.test/nextcloud',
+      basePath: 'Team Recordings',
+    });
+    expect(provider.capabilities.shareLinks).toBe(true);
+
+    request
+      .mockResolvedValueOnce({ data: { ocs: { data: [] } } })
+      .mockResolvedValueOnce({
+        data: { ocs: { data: { url: 'https://cloud.example.test/s/abc' } } },
+      })
+      .mockResolvedValueOnce({
+        data: {
+          ocs: {
+            data: [
+              {
+                share_type: 3,
+                url: 'https://cloud.example.test/s/abc',
+              },
+            ],
+          },
+        },
+      });
+
+    await expect(provider.createShareLink('raid')).resolves.toBe(
+      'https://cloud.example.test/s/abc',
+    );
+    const createCall = request.mock.calls[1][0];
+    expect(createCall.url).toBe(
+      'https://cloud.example.test/nextcloud/ocs/v2.php/apps/files_sharing/api/v1/shares',
+    );
+    expect(createCall.data).toContain(
+      'path=%2FTeam+Recordings%2Fvideos%2Fraid.mp4',
+    );
+    expect(createCall.data).toContain('shareType=3');
+    expect(createCall.data).toContain('permissions=1');
+
+    await expect(provider.createShareLink('raid')).resolves.toBe(
+      'https://cloud.example.test/s/abc',
+    );
+    expect(request).toHaveBeenCalledTimes(3);
+  });
+
+  test('does not advertise share links for generic WebDAV', async () => {
+    const provider = new WebDavStorageProvider(config);
+    expect(provider.capabilities.shareLinks).toBe(false);
+    await expect(provider.createShareLink('raid')).rejects.toThrow(
+      'does not support share links',
+    );
+    expect(request).not.toHaveBeenCalled();
+  });
 });

@@ -1,5 +1,5 @@
 import path from 'path';
-import { ipcMain } from 'electron';
+import { clipboard, ipcMain } from 'electron';
 import ConfigService from 'config/ConfigService';
 import {
   CloudStatus,
@@ -192,6 +192,25 @@ export default class RemoteStorageService implements StorageClient {
         };
       }
       return this.provider.testConnection();
+    });
+
+    ipcMain.handle('getShareableLink', async (_event, args) => {
+      if (!this.provider.capabilities.shareLinks) {
+        throw new Error(
+          'The active remote storage provider does not support share links',
+        );
+      }
+      if (!Array.isArray(args) || typeof args[0] !== 'string') {
+        throw new Error('Invalid remote video name');
+      }
+      const videoName = sanitizeRemoteFileName(args[0]);
+      try {
+        const shareUrl = await this.provider.createShareLink(videoName);
+        clipboard.writeText(shareUrl);
+        return shareUrl;
+      } catch (error) {
+        throw new Error(redactRemoteStorageError(error));
+      }
     });
 
     ipcMain.on('deleteVideosCloud', async (_event, args) => {

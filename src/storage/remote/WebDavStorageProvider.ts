@@ -26,6 +26,15 @@ export type WebDavStorageConfig = {
 
 type DavEntry = { href: string; name: string; size: number; modified: number };
 
+type NextcloudShare = { share_type?: number; url?: string };
+type NextcloudOcsResponse<T> = {
+  ocs?: {
+    meta?: { status?: string; statuscode?: number; message?: string };
+    data?: T;
+  };
+};
+type NextcloudShareListResponse = NextcloudOcsResponse<NextcloudShare[]>;
+
 const decodeXml = (value: string) =>
   value
     .replace(/&amp;/g, '&')
@@ -52,6 +61,9 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
   private readonly username: string;
   private readonly password: string;
   private readonly timeoutMs: number;
+  private readonly provider: 'webdav' | 'nextcloud';
+  private readonly basePath: string;
+  private readonly nextcloudSharesUrl?: string;
 
   constructor(config: WebDavStorageConfig) {
     const normalized = normalizeWebDavEndpoint(
@@ -61,12 +73,28 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     );
     const basePath = normalizeBasePath(config.basePath);
     this.id = config.provider;
+    this.provider = config.provider;
+    this.basePath = basePath;
     this.endpoint = normalized.endpoint;
     this.insecure = normalized.insecure;
     this.username = config.username.trim();
     this.password = config.password;
     this.timeoutMs = config.timeoutMs ?? 15000;
     this.videosUrl = new URL(`${basePath}/videos/`, this.endpoint).toString();
+    this.capabilities.shareLinks = config.provider === 'nextcloud';
+
+    if (config.provider === 'nextcloud') {
+      const endpointUrl = new URL(this.endpoint);
+      const remotePhpIndex = endpointUrl.pathname.indexOf('/remote.php/');
+      const installationPath =
+        remotePhpIndex >= 0
+          ? endpointUrl.pathname.slice(0, remotePhpIndex)
+          : endpointUrl.pathname.replace(/\/$/, '');
+      this.nextcloudSharesUrl = new URL(
+        `${installationPath}/ocs/v2.php/apps/files_sharing/api/v1/shares`,
+        endpointUrl.origin,
+      ).toString();
+    }
   }
 
   private request<T = unknown>(config: AxiosRequestConfig) {
@@ -394,5 +422,62 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     }
     if (failures.length)
       throw new Error('Remote video deletion was only partially successful');
+  }
+
+  private nextcloudFilePath(videoName: string) {
+    const decodedBasePath = this.basePath
+      .split('/')
+      .map((segment) => decodeURIComponent(segment))
+      .join('/');
+    return `/${decodedBasePath}/videos/${videoName}.mp4`;
+  }
+
+  private getShareUrl(response: NextcloudOcsResponse<NextcloudShare>) {
+    const url = response.ocs?.data?.url;
+    if (typeof url !== 'string' || !/^https?:\/\//i.test(url)) {
+      throw new Error('Nextcloud did not return a valid public share URL');
+    }
+    return url;
+  }
+
+  async createShareLink(rawVideoName: string): Promise<string> {
+    if (this.provider !== 'nextcloud' || !this.nextcloudSharesUrl) {
+      throw new Error(
+        'The active WebDAV provider does not support share links',
+      );
+    }
+
+    const videoName = sanitizeRemoteFileName(rawVideoName);
+    const remotePath = this.nextcloudFilePath(videoName);
+    const headers = {
+      Accept: 'application/json',
+      'OCS-APIRequest': 'true',
+    };
+
+    const existing = await this.request<NextcloudShareListResponse>({
+      url: this.nextcloudSharesUrl,
+      method: 'GET',
+      headers,
+      params: { path: remotePath, reshares: true },
+    });
+    const publicShare = existing.data.ocs?.data?.find(
+      (share) => share.share_type === 3 && typeof share.url === 'string',
+    );
+    if (publicShare?.url) return publicShare.url;
+
+    const created = await this.request<NextcloudOcsResponse<NextcloudShare>>({
+      url: this.nextcloudSharesUrl,
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      data: new URLSearchParams({
+        path: remotePath,
+        shareType: '3',
+        permissions: '1',
+      }).toString(),
+    });
+    return this.getShareUrl(created.data);
   }
 }

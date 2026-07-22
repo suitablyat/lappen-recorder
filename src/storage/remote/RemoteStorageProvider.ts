@@ -46,6 +46,7 @@ export interface RemoteStorageProvider {
     onProgress: ProgressCallback,
   ): Promise<void>;
   deleteVideos(videoNames: string[]): Promise<void>;
+  createShareLink(videoName: string): Promise<string>;
 }
 
 export const disabledCapabilities: RemoteStorageCapabilities = {

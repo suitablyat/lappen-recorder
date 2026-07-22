@@ -54,4 +54,9 @@ export default class DisabledStorageProvider implements RemoteStorageProvider {
     void videoNames;
     throw new Error('Remote storage is disabled');
   }
+
+  async createShareLink(videoName: string): Promise<string> {
+    void videoName;
+    throw new Error('Remote storage is disabled');
+  }
 }
