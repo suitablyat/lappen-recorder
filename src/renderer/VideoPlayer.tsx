@@ -31,6 +31,10 @@ import ClearIcon from '@mui/icons-material/Clear';
 import DoneIcon from '@mui/icons-material/Done';
 import ReactPlayer from 'react-player';
 import { toPlayableVideoSource } from './videoSourceUtils';
+import {
+  isExpectedMediaAbort,
+  setMediaElementPlaying,
+} from './videoPlaybackUtils';
 import screenfull from 'screenfull';
 import { ConfigurationSchema } from 'config/configSchema';
 import { getLocalePhrase } from 'localisation/translations';
@@ -132,7 +136,7 @@ export const VideoPlayer = forwardRef<VideoPlayerRef, IProps>((props, ref) => {
   const player2 = useRef<HTMLVideoElement>(null);
   const player3 = useRef<HTMLVideoElement>(null);
   const player4 = useRef<HTMLVideoElement>(null);
-  const players = [player1, player2, player3, player4];
+  const players = useRef([player1, player2, player3, player4]).current;
 
   const seekPlayer = (
     player: RefObject<HTMLVideoElement | null>,
@@ -214,6 +218,16 @@ export const VideoPlayer = forwardRef<VideoPlayerRef, IProps>((props, ref) => {
   const srcs = instantReplay
     ? [instantReplay.path]
     : videos.map((rv) => rv.videoSource);
+  const playbackSourceKey = srcs.join('\0');
+
+  useEffect(() => {
+    players.forEach((player) => {
+      if (!player.current) return;
+      setMediaElementPlaying(player.current, playing, (error) => {
+        console.error('[VideoPlayer] Failed to start playback', error);
+      });
+    });
+  }, [playbackSourceKey, players, playing]);
 
   // Read and store the video player state of 'volume' and 'muted' so that we may
   // restore it when selecting a different video. This config gets stored as a
@@ -691,6 +705,7 @@ export const VideoPlayer = forwardRef<VideoPlayerRef, IProps>((props, ref) => {
    * retry happen automatically?
    */
   const onError = (e: unknown) => {
+    if (isExpectedMediaAbort(e)) return;
     console.error('[VideoPlayer] Video Player Error', e);
   };
 
@@ -785,7 +800,6 @@ export const VideoPlayer = forwardRef<VideoPlayerRef, IProps>((props, ref) => {
         key={src}
         src={safe}
         style={style}
-        playing={playing}
         volume={volume}
         muted={primary ? muted : true}
         playbackRate={playbackRate}

@@ -88,11 +88,20 @@ ipcMain.handle('getHardwareAcceleration', () => {
   return hardwareAccelerationAtStartup;
 });
 
-// Register the vod:// protocol as privileged. Required to securely play
-// videos from disk.
+// Register the VOD protocols as privileged. The stream privilege is required
+// for Chromium to issue byte-range requests when seeking through video files.
 protocol.registerSchemesAsPrivileged([
   {
     scheme: 'vod',
+    privileges: {
+      bypassCSP: true,
+      standard: true,
+      stream: true,
+      supportFetchAPI: true,
+    },
+  },
+  {
+    scheme: 'remote-vod',
     privileges: {
       bypassCSP: true,
       standard: true,
