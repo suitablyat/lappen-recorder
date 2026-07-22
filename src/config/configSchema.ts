@@ -61,15 +61,18 @@ export type ConfigurationSchema = {
   obsAudioSuppression: boolean;
   raidOverrun: number;
   dungeonOverrun: number;
-  cloudStorage: boolean;
-  cloudUpload: boolean;
+  remoteStorageEnabled: boolean;
+  remoteStorageProvider: 'webdav' | 'nextcloud';
+  webdavServerUrl: string;
+  webdavUsername: string;
+  webdavBasePath: string;
+  remoteStorageAutoUpload: boolean;
+  remoteStorageUploadRateLimit: boolean;
+  remoteStorageUploadRateLimitMbps: number;
+  remoteStorageNeedsSetup: boolean;
+  remoteStorageMigrationVersion: number;
   cloudUploadRetail: boolean;
   cloudUploadClassic: boolean;
-  cloudUploadRateLimit: boolean;
-  cloudUploadRateLimitMbps: number;
-  cloudAccountName: string;
-  cloudAccountPassword: string;
-  cloudGuildName: string;
   cloudUpload2v2: boolean;
   cloudUpload3v3: boolean;
   cloudUpload5v5: boolean;
@@ -430,15 +433,57 @@ export const configSchema = {
     minimum: 0,
     maximum: 60,
   },
-  cloudStorage: {
-    description: Phrase.CloudStorageDescription,
+  remoteStorageEnabled: {
+    description: Phrase.RemoteStorageEnabledDescription,
     type: 'boolean',
     default: false,
   },
-  cloudUpload: {
-    description: Phrase.CloudUploadDescription,
+  remoteStorageProvider: {
+    description: Phrase.RemoteStorageProviderDescription,
+    type: 'string',
+    enum: ['webdav', 'nextcloud'],
+    default: 'nextcloud',
+  },
+  webdavServerUrl: {
+    description: Phrase.WebDavServerUrlDescription,
+    type: 'string',
+    default: '',
+  },
+  webdavUsername: {
+    description: Phrase.WebDavUsernameDescription,
+    type: 'string',
+    default: '',
+  },
+  webdavBasePath: {
+    description: Phrase.WebDavBasePathDescription,
+    type: 'string',
+    default: 'WarcraftRecorder',
+  },
+  remoteStorageAutoUpload: {
+    description: Phrase.RemoteStorageAutoUploadDescription,
     type: 'boolean',
     default: false,
+  },
+  remoteStorageUploadRateLimit: {
+    description: Phrase.CloudUploadRateLimitDescription,
+    type: 'boolean',
+    default: false,
+  },
+  remoteStorageUploadRateLimitMbps: {
+    description: Phrase.CloudUploadRateLimitMbpsDescription,
+    type: 'integer',
+    default: 100,
+    minimum: 1,
+  },
+  remoteStorageNeedsSetup: {
+    description: Phrase.Unknown,
+    type: 'boolean',
+    default: false,
+  },
+  remoteStorageMigrationVersion: {
+    description: Phrase.Unknown,
+    type: 'integer',
+    default: 0,
   },
   cloudUploadRetail: {
     description: Phrase.CloudUploadRetailDescription,
@@ -449,31 +494,6 @@ export const configSchema = {
     description: Phrase.CloudUploadClassicDescription,
     type: 'boolean',
     default: true,
-  },
-  cloudUploadRateLimit: {
-    description: Phrase.CloudUploadRateLimitDescription,
-    type: 'boolean',
-    default: false,
-  },
-  cloudUploadRateLimitMbps: {
-    description: Phrase.CloudUploadRateLimitMbpsDescription,
-    type: 'integer',
-    default: 100,
-  },
-  cloudAccountName: {
-    description: Phrase.CloudAccountNameDescription,
-    type: 'string',
-    default: '',
-  },
-  cloudAccountPassword: {
-    description: Phrase.CloudAccountPasswordDescription,
-    type: 'string',
-    default: '',
-  },
-  cloudGuildName: {
-    description: Phrase.CloudGuildNameDescription,
-    type: 'string',
-    default: '',
   },
   cloudUpload2v2: {
     description: Phrase.CloudUpload2v2Description,

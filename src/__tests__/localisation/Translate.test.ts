@@ -1,3 +1,5 @@
+jest.mock('../../main/main', () => ({ send: jest.fn() }));
+
 import { Flavour, Metadata } from '../../main/types';
 import { convertKoreanVideoCategory } from '../../main/util';
 import { VideoCategory } from '../../types/VideoCategory';

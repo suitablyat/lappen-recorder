@@ -77,7 +77,6 @@ declare global {
         reconfigureCloud(): void;
 
         getSensibleEncoderDefault(): Promise<string>;
-        refreshCloudGuilds(): void;
         getOrCreateChatCorrelator(video: RendererVideo): Promise<string>;
         getChatMessages(correlator: string): Promise<TChatMessageWithId[]>;
         postChatMessage(correlator: string, message: string): void;

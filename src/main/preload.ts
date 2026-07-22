@@ -51,7 +51,9 @@ export type Channels =
   | 'reconfigureOverlay'
   | 'reconfigureCloud'
   | 'getSensibleEncoderDefault'
-  | 'refreshCloudGuilds';
+  | 'reconfigureRemoteStorage'
+  | 'setRemoteStoragePassword'
+  | 'testRemoteStorageConnection';
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {
@@ -199,10 +201,6 @@ contextBridge.exposeInMainWorld('electron', {
 
     getSensibleEncoderDefault(): Promise<string> {
       return ipcRenderer.invoke('getSensibleEncoderDefault');
-    },
-
-    refreshCloudGuilds() {
-      ipcRenderer.send('refreshCloudGuilds');
     },
 
     getOrCreateChatCorrelator(video: RendererVideo): Promise<string> {

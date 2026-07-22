@@ -117,6 +117,10 @@ const WarcraftRecorder = () => {
       usage: 0,
       limit: 0,
       migrated: false,
+      shareLinks: false,
+      chat: false,
+      tags: false,
+      protection: false,
     },
 
     // The disk storage status.

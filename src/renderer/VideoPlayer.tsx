@@ -1002,11 +1002,11 @@ export const VideoPlayer = forwardRef<VideoPlayerRef, IProps>((props, ref) => {
     const color = cloudVideo ? 'white' : 'gray';
     const opacity = isSelected ? 1 : 0.3;
 
-    if (!cloudVideo && !config.cloudUpload) {
+    if (!cloudVideo && !config.remoteStorageAutoUpload) {
       return getNoCloudIcon();
     }
 
-    if (!cloudVideo && config.cloudUpload) {
+    if (!cloudVideo && config.remoteStorageAutoUpload) {
       return renderUploadButton();
     }
 
@@ -1322,6 +1322,7 @@ export const VideoPlayer = forwardRef<VideoPlayerRef, IProps>((props, ref) => {
         {!multiPlayerMode &&
           !clipMode &&
           !instantReplay &&
+          appState.cloudStatus.shareLinks &&
           renderGetLinkButton()}
         <Separator className="mx-2" orientation="vertical" />
         {instantReplay && (

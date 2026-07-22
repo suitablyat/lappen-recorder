@@ -123,7 +123,7 @@ const ChatOverlayControls = (props: IProps) => {
             )}
             side="right"
           >
-            {cloudStatus.authorized ? (
+            {cloudStatus.chat ? (
               <Info size={20} className="inline-flex" />
             ) : (
               <Lock size={20} className="inline-flex" />
@@ -136,7 +136,7 @@ const ChatOverlayControls = (props: IProps) => {
             onCheckedChange={setOwnImage}
             disabled={
               !config.chatOverlayOwnImage &&
-              (!config.chatOverlayEnabled || !cloudStatus.authorized)
+              (!config.chatOverlayEnabled || !cloudStatus.chat)
             }
           />
         </div>

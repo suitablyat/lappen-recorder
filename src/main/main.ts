@@ -31,7 +31,7 @@ import Manager from './Manager';
 import AppUpdater from './AppUpdater';
 import MenuBuilder from './menu';
 import { Phrase } from 'localisation/phrases';
-import CloudClient from 'storage/CloudClient';
+import RemoteStorageService from 'storage/RemoteStorageService';
 import DiskClient from 'storage/DiskClient';
 import Poller from 'utils/Poller';
 import Recorder from './Recorder';
@@ -237,7 +237,7 @@ const createWindow = async () => {
     // refresh, otherwise the frontend will be in its default state
     // which may not reflect reality.
     const disk = DiskClient.getInstance();
-    const cloud = CloudClient.getInstance();
+    const cloud = RemoteStorageService.getInstance();
 
     await Promise.all([
       manager.refreshStatus(),
@@ -439,33 +439,20 @@ ipcMain.handle('getAllDisplays', (): OurDisplayType[] => {
   return getAvailableDisplays();
 });
 
-const refreshCloudGuilds = async () => {
-  console.info('[Main] Frontend triggered cloud guilds refresh');
-  const client = CloudClient.getInstance();
-  await client.fetchAffiliations(true);
-  client.refreshStatus();
-};
-
-ipcMain.on('refreshCloudGuilds', refreshCloudGuilds);
-
-ipcMain.handle('getOrCreateChatCorrelator', async (event, video) => {
-  const client = CloudClient.getInstance();
-  return client.getOrCreateChatCorrelator(video);
+ipcMain.handle('getOrCreateChatCorrelator', async () => {
+  throw new Error('Remote storage providers do not support video chat');
 });
 
-ipcMain.handle('getChatMessages', async (event, correlator) => {
-  const client = CloudClient.getInstance();
-  return client.getChatMessages(correlator);
+ipcMain.handle('getChatMessages', async () => {
+  return [];
 });
 
-ipcMain.on('postChatMessage', (event, correlator, message) => {
-  const client = CloudClient.getInstance();
-  client.postChatMessage(correlator, message);
+ipcMain.on('postChatMessage', () => {
+  console.warn('[Main] Ignoring unsupported remote video chat request');
 });
 
-ipcMain.on('deleteChatMessage', (event, id) => {
-  const client = CloudClient.getInstance();
-  client.deleteChatMessage(id);
+ipcMain.on('deleteChatMessage', () => {
+  console.warn('[Main] Ignoring unsupported remote video chat delete');
 });
 
 /**

@@ -64,7 +64,7 @@ const SettingsPage: React.FC<IProps> = (props: IProps) => {
             {getLocalePhrase(appState.language, Phrase.SettingsPageGameHeader)}
           </TabsTrigger>
           <TabsTrigger value="pro">
-            {getLocalePhrase(appState.language, Phrase.SettingsPageProHeader)}
+            {getLocalePhrase(appState.language, Phrase.RemoteStorageLabel)}
           </TabsTrigger>
         </TabsList>
         <ScrollArea
@@ -169,7 +169,7 @@ const SettingsPage: React.FC<IProps> = (props: IProps) => {
                 <CategoryHeading>
                   {getLocalePhrase(
                     appState.language,
-                    Phrase.CloudSettingsLabel,
+                    Phrase.RemoteStorageLabel,
                   )}
                 </CategoryHeading>
                 <Separator className="mt-2 mb-4" />

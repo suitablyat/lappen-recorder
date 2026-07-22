@@ -4,7 +4,6 @@ import {
   ObsAudioConfig,
   ObsOverlayConfig,
   Metadata,
-  CloudConfig,
   Flavour,
   AudioSource,
   CharacterFilter,
@@ -56,10 +55,10 @@ const allowRecordCategory = (cfg: ConfigService, category: VideoCategory) => {
 const shouldUpload = (cfg: ConfigService, metadata: Metadata) => {
   const { category, flavour } = metadata;
 
-  const upload = cfg.get<boolean>('cloudUpload');
+  const upload = cfg.get<boolean>('remoteStorageAutoUpload');
 
   if (!upload) {
-    console.info('[configUtils] Cloud upload is disabled');
+    console.info('[configUtils] Remote storage upload is disabled');
     return false;
   }
 
@@ -282,18 +281,6 @@ const getOverlayConfig = (cfg: ConfigService): ObsOverlayConfig => {
     chatOverlayYPosition: cfg.get<number>('chatOverlayYPosition'),
     chatOverlayCropX: cfg.get<number>('chatOverlayCropX'),
     chatOverlayCropY: cfg.get<number>('chatOverlayCropY'),
-  };
-};
-
-const getCloudConfig = (): CloudConfig => {
-  const cfg = ConfigService.getInstance();
-
-  return {
-    cloudStorage: cfg.get<boolean>('cloudStorage'),
-    cloudUpload: cfg.get<boolean>('cloudUpload'),
-    cloudAccountName: cfg.get<string>('cloudAccountName'),
-    cloudAccountPassword: cfg.get<string>('cloudAccountPassword'),
-    cloudGuildName: cfg.get<string>('cloudGuildName'),
   };
 };
 
@@ -529,7 +516,6 @@ export {
   getObsVideoConfig,
   getObsAudioConfig,
   getOverlayConfig,
-  getCloudConfig,
   validateBaseConfig,
   getLocaleError,
 };

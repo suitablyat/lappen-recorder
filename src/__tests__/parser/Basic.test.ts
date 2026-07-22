@@ -1,8 +1,10 @@
+jest.mock('../../main/main', () => ({ send: jest.fn() }));
+
 import LogLine from '../../parsing/LogLine';
 import CombatLogWatcher from '../../parsing/CombatLogWatcher';
 
 test('Basic Retail', async () => {
-  const combatLogParser = new CombatLogWatcher('', 2);
+  const combatLogParser = new CombatLogWatcher('');
   let promiseResolve: (value: LogLine | PromiseLike<LogLine>) => void;
 
   const testLogLinePromise: Promise<LogLine> = new Promise((resolve) => {
