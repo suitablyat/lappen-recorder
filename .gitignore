@@ -40,3 +40,5 @@ buffer
 
 # Some stuff OBS window capture creates at runtime?
 win-capture/
+
+AGENTS.md

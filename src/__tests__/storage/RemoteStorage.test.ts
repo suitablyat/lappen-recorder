@@ -206,6 +206,21 @@ describe('WebDavStorageProvider', () => {
     expect(puts[0]).toMatch(/raid\.mp4$/);
     expect(puts[1]).toMatch(/raid\.json$/);
     expect(puts.filter((url) => url.endsWith('raid.mp4'))).toHaveLength(2);
+
+    const videoPuts = request.mock.calls
+      .map(([call]) => call)
+      .filter(
+        (call) =>
+          call.method === 'PUT' && String(call.url).endsWith('raid.mp4'),
+      );
+    const metadataPut = request.mock.calls
+      .map(([call]) => call)
+      .find(
+        (call) =>
+          call.method === 'PUT' && String(call.url).endsWith('raid.json'),
+      );
+    expect(videoPuts.every((call) => call.timeout === 0)).toBe(true);
+    expect(metadataPut?.timeout).toBe(config.timeoutMs);
   });
 
   test('reports partial delete failures', async () => {

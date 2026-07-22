@@ -73,7 +73,7 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     return axios.request<T>({
       ...config,
       auth: { username: this.username, password: this.password },
-      timeout: this.timeoutMs,
+      timeout: config.timeout ?? this.timeoutMs,
       maxBodyLength: Infinity,
       maxContentLength: Infinity,
     });
@@ -313,6 +313,10 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
       method: 'PUT',
       headers: { 'Content-Type': 'video/mp4', 'Content-Length': stat.size },
       data: fs.createReadStream(videoPath),
+      // Videos can legitimately take hours to upload. A fixed request timeout
+      // aborts healthy transfers, especially when a bandwidth limit is set.
+      // Short metadata and connection-test requests retain timeoutMs.
+      timeout: 0,
       maxRate: maxRate ? [maxRate, Infinity] : undefined,
       onUploadProgress: ({ loaded, total }) =>
         onProgress(

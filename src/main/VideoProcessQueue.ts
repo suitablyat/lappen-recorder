@@ -337,6 +337,7 @@ export default class VideoProcessQueue {
         rateLimit,
         progressCallback,
       );
+      console.info('[VideoProcessQueue] Upload succeeded', item.path);
     } catch (error) {
       console.error('[RemoteStorage] Error uploading video', String(error));
       progressCallback(0);
@@ -568,7 +569,7 @@ export default class VideoProcessQueue {
    * Called on the end of an upload.
    */
   private finishUploadingVideo(item: UploadQueueItem) {
-    console.info('[VideoProcessQueue] Finished uploading video', item.path);
+    console.info('[VideoProcessQueue] Upload attempt complete', item.path);
 
     this.inProgressUploads = this.inProgressUploads.filter(
       (p) => p !== item.path,
