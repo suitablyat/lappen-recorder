@@ -169,7 +169,41 @@ describe('WebDavStorageProvider', () => {
     const provider = new WebDavStorageProvider(config);
     const videos = await provider.listVideos();
     expect(videos).toHaveLength(1);
-    expect(videos[0]).toMatchObject({ videoName: 'raid', cloud: true });
+    expect(videos[0]).toMatchObject({
+      videoName: 'raid',
+      videoSource: 'remote-vod://wcr/raid',
+      cloud: true,
+    });
+  });
+
+  test('streams video ranges through authenticated provider requests', async () => {
+    const data = Readable.from(Buffer.from('mp4'));
+    request.mockResolvedValue({
+      data,
+      status: 206,
+      headers: {
+        'content-length': '3',
+        'content-range': 'bytes 0-2/3',
+      },
+    });
+    const provider = new WebDavStorageProvider(config);
+    await expect(
+      provider.streamVideo('raid', 'bytes=0-2'),
+    ).resolves.toMatchObject({
+      data,
+      status: 206,
+      contentLength: '3',
+      contentRange: 'bytes 0-2/3',
+    });
+    expect(request).toHaveBeenCalledWith(
+      expect.objectContaining({
+        url: 'https://dav.example.test/root/WarcraftRecorder/videos/raid.mp4',
+        method: 'GET',
+        headers: { Range: 'bytes=0-2' },
+        auth: { username: 'user', password: 'secret' },
+        responseType: 'stream',
+      }),
+    );
   });
 
   test('uploads MP4 before metadata and supports retry after a partial failure', async () => {

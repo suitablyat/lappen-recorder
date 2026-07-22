@@ -7,6 +7,7 @@ import {
   RemoteStorageProvider,
   RemoteStorageTestErrorCode,
   RemoteStorageTestResult,
+  RemoteVideoStream,
 } from './RemoteStorageProvider';
 import {
   normalizeBasePath,
@@ -304,7 +305,7 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
         videos.push({
           ...metadata,
           videoName,
-          videoSource: new URL(mp4Name, this.videosUrl).toString(),
+          videoSource: `remote-vod://wcr/${encodeURIComponent(videoName)}`,
           isProtected: Boolean(metadata.protected),
           cloud: true,
           multiPov: [],
@@ -402,6 +403,30 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
       await fs.promises.unlink(partialPath).catch(() => undefined);
       throw error;
     }
+  }
+
+  async streamVideo(
+    rawVideoName: string,
+    range?: string,
+  ): Promise<RemoteVideoStream> {
+    const videoName = sanitizeRemoteFileName(rawVideoName);
+    const response = await this.request<NodeJS.ReadableStream>({
+      url: new URL(`${videoName}.mp4`, this.videosUrl).toString(),
+      method: 'GET',
+      headers: range ? { Range: range } : undefined,
+      responseType: 'stream',
+    });
+    const contentLength = response.headers['content-length'];
+    const contentRange = response.headers['content-range'];
+
+    return {
+      data: response.data,
+      status: response.status === 206 ? 206 : 200,
+      contentLength:
+        contentLength === undefined ? undefined : String(contentLength),
+      contentRange:
+        contentRange === undefined ? undefined : String(contentRange),
+    };
   }
 
   async deleteVideos(videoNames: string[]) {

@@ -4,6 +4,7 @@ import {
   ProgressCallback,
   RemoteStorageProvider,
   RemoteStorageTestResult,
+  RemoteVideoStream,
 } from './RemoteStorageProvider';
 
 export default class DisabledStorageProvider implements RemoteStorageProvider {
@@ -47,6 +48,15 @@ export default class DisabledStorageProvider implements RemoteStorageProvider {
     void video;
     void destinationPath;
     void onProgress;
+    throw new Error('Remote storage is disabled');
+  }
+
+  async streamVideo(
+    videoName: string,
+    range?: string,
+  ): Promise<RemoteVideoStream> {
+    void videoName;
+    void range;
     throw new Error('Remote storage is disabled');
   }
 

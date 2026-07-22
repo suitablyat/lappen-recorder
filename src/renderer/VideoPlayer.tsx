@@ -30,6 +30,7 @@ import MovieIcon from '@mui/icons-material/Movie';
 import ClearIcon from '@mui/icons-material/Clear';
 import DoneIcon from '@mui/icons-material/Done';
 import ReactPlayer from 'react-player';
+import { toPlayableVideoSource } from './videoSourceUtils';
 import screenfull from 'screenfull';
 import { ConfigurationSchema } from 'config/configSchema';
 import { getLocalePhrase } from 'localisation/translations';
@@ -771,7 +772,7 @@ export const VideoPlayer = forwardRef<VideoPlayerRef, IProps>((props, ref) => {
       throw new Error('No player reference');
     }
 
-    let safe = src.startsWith('https://') ? src : `vod://wcr/${src}`;
+    let safe = toPlayableVideoSource(src);
     safe += timestamp.current;
 
     return (

@@ -525,6 +525,9 @@ app
 
     // Required by the video player to safely play files from disk.
     protocol.handle('vod', handleSafeVodRequest);
+    protocol.handle('remote-vod', (request) =>
+      RemoteStorageService.getInstance().handleVideoRequest(request),
+    );
 
     createWindow();
   })

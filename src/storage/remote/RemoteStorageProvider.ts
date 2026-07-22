@@ -28,6 +28,13 @@ export type RemoteStorageTestResult =
 
 export type ProgressCallback = (progress: number) => void;
 
+export type RemoteVideoStream = {
+  data: NodeJS.ReadableStream;
+  status: 200 | 206;
+  contentLength?: string;
+  contentRange?: string;
+};
+
 export interface RemoteStorageProvider {
   readonly id: string;
   readonly capabilities: RemoteStorageCapabilities;
@@ -45,6 +52,7 @@ export interface RemoteStorageProvider {
     destinationPath: string,
     onProgress: ProgressCallback,
   ): Promise<void>;
+  streamVideo(videoName: string, range?: string): Promise<RemoteVideoStream>;
   deleteVideos(videoNames: string[]): Promise<void>;
   createShareLink(videoName: string): Promise<string>;
 }

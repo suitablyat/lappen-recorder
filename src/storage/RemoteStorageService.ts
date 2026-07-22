@@ -1,4 +1,5 @@
 import path from 'path';
+import { Readable } from 'stream';
 import { clipboard, ipcMain } from 'electron';
 import ConfigService from 'config/ConfigService';
 import {
@@ -149,6 +150,47 @@ export default class RemoteStorageService implements StorageClient {
     onProgress: ProgressCallback,
   ) {
     return this.provider.downloadVideo(video, destinationPath, onProgress);
+  }
+
+  async handleVideoRequest(request: Request): Promise<Response> {
+    try {
+      const prefix = 'remote-vod://wcr/';
+      const encodedName = request.url.slice(prefix.length).split(/[?#]/, 1)[0];
+      const videoName = decodeURIComponent(encodedName);
+      if (!videoName || sanitizeRemoteFileName(videoName) !== videoName) {
+        return new Response('', { status: 400, statusText: 'Bad video name' });
+      }
+
+      const range = request.headers.get('Range') ?? undefined;
+      if (range && !/^bytes=\d*-\d*$/.test(range)) {
+        return new Response('', { status: 416, statusText: 'Invalid range' });
+      }
+
+      const remote = await this.provider.streamVideo(videoName, range);
+      const headers = new Headers({
+        'Accept-Ranges': 'bytes',
+        'Content-Type': 'video/mp4',
+        'Cache-Control': 'no-cache',
+      });
+      if (remote.contentLength)
+        headers.set('Content-Length', remote.contentLength);
+      if (remote.contentRange)
+        headers.set('Content-Range', remote.contentRange);
+
+      return new Response(
+        Readable.toWeb(remote.data as Readable) as ReadableStream<Uint8Array>,
+        { status: remote.status, headers },
+      );
+    } catch (error) {
+      console.warn(
+        '[RemoteStorage] Failed to stream remote video',
+        redactRemoteStorageError(error),
+      );
+      return new Response('', {
+        status: 502,
+        statusText: 'Remote video unavailable',
+      });
+    }
   }
 
   private isSafeLocalVideoPath(candidate: string) {
