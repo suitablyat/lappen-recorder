@@ -477,9 +477,11 @@ describe('WebDavStorageProvider', () => {
     expect(progress).toEqual([95, 96, 98, 100]);
   });
 
-  test('chunks large Nextcloud uploads and retries only the failed chunk', async () => {
+  test('uploads three v2 Nextcloud chunks in parallel and retries only the failed chunk', async () => {
     const chunkSize = 64 * 1024 ** 2;
     const videoSize = 4 * chunkSize;
+    const rateLimitMb = 12;
+    const rateLimitBytes = rateLimitMb * 1024 ** 2;
     jest.spyOn(fs.promises, 'stat').mockResolvedValue({
       size: videoSize,
       mtimeMs: 123,
@@ -489,20 +491,27 @@ describe('WebDavStorageProvider', () => {
       .mockImplementation(() => Readable.from([]) as fs.ReadStream);
     createReadStream.mockClear();
     let firstChunkFailures = 1;
+    let activeChunkUploads = 0;
+    let maxActiveChunkUploads = 0;
     request.mockImplementation(async (call) => {
       const url = String(call.url);
       if (call.method === 'PROPFIND' && url.includes('/dav/uploads/')) {
         return { data: '' };
       }
       if (call.method === 'PUT' && url.includes('/dav/uploads/')) {
+        activeChunkUploads += 1;
+        maxActiveChunkUploads = Math.max(
+          maxActiveChunkUploads,
+          activeChunkUploads,
+        );
         const size = Number(call.headers?.['Content-Length']);
         call.onUploadProgress?.({ loaded: size, total: size } as never);
-        if (url.endsWith('000000000000000-000000067108863')) {
-          if (firstChunkFailures-- > 0) {
-            const error = new AxiosError('temporary upload failure');
-            Object.assign(error, { response: { status: 503 } });
-            throw error;
-          }
+        await Promise.resolve();
+        activeChunkUploads -= 1;
+        if (url.endsWith('00001') && firstChunkFailures-- > 0) {
+          const error = new AxiosError('temporary upload failure');
+          Object.assign(error, { response: { status: 503 } });
+          throw error;
         }
       }
       return { data: '' };
@@ -515,8 +524,11 @@ describe('WebDavStorageProvider', () => {
         'https://cloud.example.test/remote.php/dav/files/storage-user-id',
     });
 
-    await provider.uploadVideo('/recordings/raid.mp4', metadata, -1, (value) =>
-      progress.push(value),
+    await provider.uploadVideo(
+      '/recordings/raid.mp4',
+      metadata,
+      rateLimitMb,
+      (value) => progress.push(value),
     );
 
     const calls = request.mock.calls.map(([call]) => call);
@@ -526,14 +538,46 @@ describe('WebDavStorageProvider', () => {
     );
     expect(chunkPuts).toHaveLength(5);
     expect(String(chunkPuts[0].url)).toContain(
-      '/remote.php/dav/uploads/storage-user-id/',
+      '/remote.php/dav/uploads/storage-user-id/warcraft-recorder-v2-',
     );
+    expect(maxActiveChunkUploads).toBe(3);
     expect(
       chunkPuts.every(
         (call) =>
-          call.headers?.['OC-Total-Length'] === videoSize && call.timeout === 0,
+          call.headers?.['OC-Total-Length'] === videoSize &&
+          call.headers?.Destination ===
+            'https://cloud.example.test/remote.php/dav/files/storage-user-id/LappenRecorder/videos/raid.mp4' &&
+          call.timeout === 0,
       ),
     ).toBe(true);
+    expect(
+      chunkPuts.filter((call) => String(call.url).endsWith('00001')),
+    ).toHaveLength(2);
+    expect(
+      chunkPuts
+        .filter((call) => !String(call.url).endsWith('00004'))
+        .every((call) => call.maxRate?.[0] === rateLimitBytes / 3),
+    ).toBe(true);
+    expect(
+      chunkPuts.find((call) => String(call.url).endsWith('00004'))
+        ?.maxRate?.[0],
+    ).toBe(rateLimitBytes);
+    const createUploadFolder = calls.find(
+      (call) =>
+        call.method === 'MKCOL' &&
+        String(call.url).includes('/remote.php/dav/uploads/'),
+    );
+    expect(createUploadFolder?.headers?.Destination).toBe(
+      'https://cloud.example.test/remote.php/dav/files/storage-user-id/LappenRecorder/videos/raid.mp4',
+    );
+    const inspectUploadFolder = calls.find(
+      (call) =>
+        call.method === 'PROPFIND' &&
+        String(call.url).includes('/remote.php/dav/uploads/'),
+    );
+    expect(inspectUploadFolder?.headers?.Destination).toBe(
+      'https://cloud.example.test/remote.php/dav/files/storage-user-id/LappenRecorder/videos/raid.mp4',
+    );
     const move = calls.find((call) => call.method === 'MOVE');
     expect(move).toMatchObject({
       headers: {
@@ -558,7 +602,7 @@ describe('WebDavStorageProvider', () => {
   test('resumes a Nextcloud upload from validated existing chunks', async () => {
     const chunkSize = 64 * 1024 ** 2;
     const videoSize = 4 * chunkSize;
-    const firstChunkName = '000000000000000-000000067108863';
+    const firstChunkName = '00001';
     jest.spyOn(fs.promises, 'stat').mockResolvedValue({
       size: videoSize,
       mtimeMs: 123,

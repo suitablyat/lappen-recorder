@@ -48,6 +48,8 @@ type NextcloudShareListResponse = NextcloudOcsResponse<NextcloudShare[]>;
 const NEXTCLOUD_CHUNK_THRESHOLD_BYTES = 256 * 1024 ** 2;
 const NEXTCLOUD_CHUNK_SIZE_BYTES = 64 * 1024 ** 2;
 const NEXTCLOUD_CHUNK_UPLOAD_ATTEMPTS = 3;
+const NEXTCLOUD_CHUNK_UPLOAD_CONCURRENCY = 3;
+const NEXTCLOUD_MAX_CHUNKS = 10000;
 const VIDEO_UPLOAD_PROGRESS_PERCENT = 95;
 const MAX_CHAT_MESSAGES = 1000;
 const MAX_CHAT_DOCUMENT_BYTES = 1024 * 1024;
@@ -152,11 +154,15 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     }
   }
 
-  private async propfind(url: string, depth: 0 | 1) {
+  private async propfind(
+    url: string,
+    depth: 0 | 1,
+    headers: Record<string, string> = {},
+  ) {
     return this.request<string>({
       url,
       method: 'PROPFIND',
-      headers: { Depth: String(depth) },
+      headers: { Depth: String(depth), ...headers },
       data: '<?xml version="1.0"?><d:propfind xmlns:d="DAV:"><d:prop><d:getcontentlength/><d:getlastmodified/></d:prop></d:propfind>',
       responseType: 'text',
     });
@@ -508,14 +514,14 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
       .update(`${videoName}\0${stat.size}\0${stat.mtimeMs}`)
       .digest('hex')
       .slice(0, 24);
-    return `warcraft-recorder-${identity}`;
+    // Keep v2 uploads separate from temporary folders created by the legacy
+    // range-named implementation. Mixing both naming schemes would make
+    // Nextcloud assemble stale chunks into the destination file.
+    return `warcraft-recorder-v2-${identity}`;
   }
 
-  private nextcloudChunkName(start: number, end: number) {
-    return `${String(start).padStart(15, '0')}-${String(end).padStart(
-      15,
-      '0',
-    )}`;
+  private nextcloudChunkName(index: number) {
+    return String(index).padStart(5, '0');
   }
 
   private isRetryableChunkError(error: unknown) {
@@ -532,6 +538,7 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     start: number,
     end: number,
     totalSize: number,
+    destinationUrl: string,
     maxRate: number | undefined,
     onChunkProgress: (loaded: number) => void,
   ) {
@@ -549,6 +556,7 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
             'Content-Type': 'application/octet-stream',
             'Content-Length': chunkSize,
             'OC-Total-Length': totalSize,
+            Destination: destinationUrl,
           },
           data: fs.createReadStream(videoPath, { start, end }),
           timeout: 0,
@@ -580,61 +588,112 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
       throw new Error('Nextcloud upload endpoint is unavailable');
     }
 
+    const chunkCount = Math.ceil(stat.size / NEXTCLOUD_CHUNK_SIZE_BYTES);
+    if (chunkCount > NEXTCLOUD_MAX_CHUNKS) {
+      throw new Error('The video requires more than 10,000 Nextcloud chunks');
+    }
+
     const uploadId = this.nextcloudUploadId(videoName, stat);
     const uploadFolderUrl = new URL(
       `${uploadId}/`,
       this.nextcloudUploadsUrl,
     ).toString();
     try {
-      await this.request({ url: uploadFolderUrl, method: 'MKCOL' });
+      await this.request({
+        url: uploadFolderUrl,
+        method: 'MKCOL',
+        headers: { Destination: videoUrl },
+      });
     } catch (error) {
       if ((error as AxiosError).response?.status !== 405) throw error;
     }
 
-    const existingResponse = await this.propfind(uploadFolderUrl, 1);
+    const existingResponse = await this.propfind(uploadFolderUrl, 1, {
+      Destination: videoUrl,
+    });
     const existingChunks = new Map(
       this.parseEntries(existingResponse.data).map((entry) => [
         entry.name,
         entry.size,
       ]),
     );
-    let committedBytes = 0;
-    let reportedBytes = 0;
-    const reportBytes = (bytes: number) => {
-      reportedBytes = Math.max(reportedBytes, Math.min(bytes, stat.size));
-      onProgress(
-        Math.round((reportedBytes / stat.size) * VIDEO_UPLOAD_PROGRESS_PERCENT),
-      );
-    };
-
-    for (
-      let start = 0;
-      start < stat.size;
-      start += NEXTCLOUD_CHUNK_SIZE_BYTES
-    ) {
+    const chunks = Array.from({ length: chunkCount }, (_, index) => {
+      const start = index * NEXTCLOUD_CHUNK_SIZE_BYTES;
       const end = Math.min(
         start + NEXTCLOUD_CHUNK_SIZE_BYTES - 1,
         stat.size - 1,
       );
-      const chunkSize = end - start + 1;
-      const chunkName = this.nextcloudChunkName(start, end);
-      if (existingChunks.get(chunkName) === chunkSize) {
-        committedBytes += chunkSize;
-        reportBytes(committedBytes);
-        continue;
-      }
-
-      await this.uploadNextcloudChunk(
-        videoPath,
-        new URL(chunkName, uploadFolderUrl).toString(),
+      return {
         start,
         end,
-        stat.size,
-        maxRate,
-        (loaded) => reportBytes(committedBytes + loaded),
+        size: end - start + 1,
+        name: this.nextcloudChunkName(index + 1),
+      };
+    });
+    const uploadedBytes = new Map<string, number>();
+    let uploadedBytesTotal = 0;
+    let reportedBytes = 0;
+    const reportBytes = () => {
+      reportedBytes = Math.max(
+        reportedBytes,
+        Math.min(uploadedBytesTotal, stat.size),
       );
-      committedBytes += chunkSize;
-      reportBytes(committedBytes);
+      onProgress(
+        Math.round((reportedBytes / stat.size) * VIDEO_UPLOAD_PROGRESS_PERCENT),
+      );
+    };
+    const setUploadedBytes = (chunkName: string, loaded: number) => {
+      const previous = uploadedBytes.get(chunkName) ?? 0;
+      const next = Math.max(previous, loaded);
+      uploadedBytes.set(chunkName, next);
+      uploadedBytesTotal += next - previous;
+      reportBytes();
+    };
+
+    const pendingChunks = chunks.filter((chunk) => {
+      if (existingChunks.get(chunk.name) === chunk.size) {
+        setUploadedBytes(chunk.name, chunk.size);
+        return false;
+      }
+      return true;
+    });
+    reportBytes();
+
+    for (
+      let offset = 0;
+      offset < pendingChunks.length;
+      offset += NEXTCLOUD_CHUNK_UPLOAD_CONCURRENCY
+    ) {
+      const batch = pendingChunks.slice(
+        offset,
+        offset + NEXTCLOUD_CHUNK_UPLOAD_CONCURRENCY,
+      );
+      // Axios applies maxRate per request. Dividing it among the active batch
+      // keeps the combined traffic at or below the configured limit while the
+      // final, smaller batch can still use the full allowance.
+      const chunkMaxRate = maxRate
+        ? Math.max(1, Math.floor(maxRate / batch.length))
+        : undefined;
+      const results = await Promise.allSettled(
+        batch.map(async (chunk) => {
+          await this.uploadNextcloudChunk(
+            videoPath,
+            new URL(chunk.name, uploadFolderUrl).toString(),
+            chunk.start,
+            chunk.end,
+            stat.size,
+            videoUrl,
+            chunkMaxRate,
+            (loaded) => setUploadedBytes(chunk.name, loaded),
+          );
+          setUploadedBytes(chunk.name, chunk.size);
+        }),
+      );
+      const failure = results.find(
+        (result): result is PromiseRejectedResult =>
+          result.status === 'rejected',
+      );
+      if (failure) throw failure.reason;
     }
 
     await this.request({

@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [8.0.0-rc.2] - 2026-07-23
+
 ### Added
 
 - Added the SignPath Foundation code-signing policy, privacy disclosure,
@@ -34,6 +36,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   playback starts.
 - [Issue 876](https://github.com/aza547/wow-recorder/issues/876) - Fix tag
   dialog not opening on some categories.
+
+### Changed
+
+- Large Nextcloud uploads now use the recommended chunk-upload v2 wire format
+  and upload up to three chunks concurrently. Resumable retries remain isolated
+  per chunk, and configured bandwidth limits apply to the combined traffic.
 
 ## [8.0.0-rc.1] - 2026-07-23
 
