@@ -9,6 +9,7 @@ This file is the prominent modification notice for Lappen Recorder, a modified d
 - Fixed remote video seek, pause, and authenticated playback behavior.
 - Added Nextcloud public share links and support for long-running WebDAV uploads.
 - Changed product, package, installer, update-feed, repository identity, and application artwork to Lappen Recorder so fork builds do not impersonate or update from upstream.
+- Changed the Windows setup from one-click installation to an assisted wizard that allows users to choose the installation folder.
 - Added a non-destructive, one-time migration of compatible configuration files into the fork's separate application-data directory.
 - Removed upstream donation and community links from the fork UI and documentation.
 - Added GPL compliance automation, third-party notices, exact source manifests, release-source links, source-retention policy, contribution licensing terms, and fork/trademark notices.

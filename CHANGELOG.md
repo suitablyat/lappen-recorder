@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Changed
+- Changed the Windows setup wizard to allow choosing the installation folder.
 ### Added
 - Add the ability to seek to a clip's source, if it is still available.
 - Added some hotkey hints to the video selection table.

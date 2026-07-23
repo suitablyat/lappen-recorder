@@ -76,7 +76,8 @@
       "package.json"
     ],
     "nsis": {
-      "oneClick": true,
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
       "include": "installer.nsh",
       "deleteAppDataOnUninstall": true
     },
