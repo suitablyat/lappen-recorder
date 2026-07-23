@@ -1,11 +1,14 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import type { Metadata, RendererVideo } from '../../main/types';
 import { ChatMessageWithId, TChatMessageWithId } from '../../types/api';
 import {
   ProgressCallback,
+  RemoteStorageError,
   RemoteStorageProvider,
+  RemoteStorageQuota,
   RemoteStorageTestErrorCode,
   RemoteStorageTestResult,
   RemoteVideoStream,
@@ -42,6 +45,11 @@ type NextcloudOcsResponse<T> = {
 };
 type NextcloudShareListResponse = NextcloudOcsResponse<NextcloudShare[]>;
 
+const NEXTCLOUD_CHUNK_THRESHOLD_BYTES = 256 * 1024 ** 2;
+const NEXTCLOUD_CHUNK_SIZE_BYTES = 64 * 1024 ** 2;
+const NEXTCLOUD_CHUNK_UPLOAD_ATTEMPTS = 3;
+const VIDEO_UPLOAD_PROGRESS_PERCENT = 95;
+
 const decodeXml = (value: string) =>
   value
     .replace(/&amp;/g, '&')
@@ -61,6 +69,7 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     tags: false,
     protection: false,
     chat: true,
+    quota: true,
   };
 
   private readonly endpoint: string;
@@ -73,6 +82,7 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
   private readonly provider: 'webdav' | 'nextcloud';
   private readonly basePath: string;
   private readonly nextcloudSharesUrl?: string;
+  private readonly nextcloudUploadsUrl?: string;
   private chatMutationQueue: Promise<void> = Promise.resolve();
   private chatsCollectionReady = false;
 
@@ -102,21 +112,40 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
         remotePhpIndex >= 0
           ? endpointUrl.pathname.slice(0, remotePhpIndex)
           : endpointUrl.pathname.replace(/\/$/, '');
+      const endpointUserId = endpointUrl.pathname.match(
+        /\/remote\.php\/dav\/files\/([^/]+)\/?$/i,
+      )?.[1];
       this.nextcloudSharesUrl = new URL(
         `${installationPath}/ocs/v2.php/apps/files_sharing/api/v1/shares`,
+        endpointUrl.origin,
+      ).toString();
+      this.nextcloudUploadsUrl = new URL(
+        `${installationPath}/remote.php/dav/uploads/${
+          endpointUserId ?? encodeURIComponent(this.username)
+        }/`,
         endpointUrl.origin,
       ).toString();
     }
   }
 
-  private request<T = unknown>(config: AxiosRequestConfig) {
-    return axios.request<T>({
-      ...config,
-      auth: { username: this.username, password: this.password },
-      timeout: config.timeout ?? this.timeoutMs,
-      maxBodyLength: Infinity,
-      maxContentLength: Infinity,
-    });
+  private async request<T = unknown>(config: AxiosRequestConfig) {
+    try {
+      return await axios.request<T>({
+        ...config,
+        auth: { username: this.username, password: this.password },
+        timeout: config.timeout ?? this.timeoutMs,
+        maxBodyLength: Infinity,
+        maxContentLength: Infinity,
+      });
+    } catch (error) {
+      if ((error as AxiosError).response?.status === 507) {
+        throw new RemoteStorageError(
+          'INSUFFICIENT_STORAGE',
+          'The remote storage does not have enough free space',
+        );
+      }
+      throw error;
+    }
   }
 
   private async propfind(url: string, depth: 0 | 1) {
@@ -127,6 +156,40 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
       data: '<?xml version="1.0"?><d:propfind xmlns:d="DAV:"><d:prop><d:getcontentlength/><d:getlastmodified/></d:prop></d:propfind>',
       responseType: 'text',
     });
+  }
+
+  async getQuota(): Promise<RemoteStorageQuota | undefined> {
+    try {
+      const response = await this.request<string>({
+        url: this.endpoint,
+        method: 'PROPFIND',
+        headers: { Depth: '0' },
+        data: '<?xml version="1.0"?><d:propfind xmlns:d="DAV:"><d:prop><d:quota-used-bytes/><d:quota-available-bytes/></d:prop></d:propfind>',
+        responseType: 'text',
+      });
+      const usedMatch = response.data.match(
+        /<(?:[\w.-]+:)?quota-used-bytes\b[^>]*>\s*(\d+)\s*<\//i,
+      );
+      const availableMatch = response.data.match(
+        /<(?:[\w.-]+:)?quota-available-bytes\b[^>]*>\s*(\d+)\s*<\//i,
+      );
+      if (!usedMatch || !availableMatch) return undefined;
+
+      const usedBytes = Number(usedMatch[1]);
+      const availableBytes = Number(availableMatch[1]);
+      const totalBytes = usedBytes + availableBytes;
+      if (
+        !Number.isSafeInteger(usedBytes) ||
+        !Number.isSafeInteger(availableBytes) ||
+        !Number.isSafeInteger(totalBytes) ||
+        totalBytes <= 0
+      ) {
+        return undefined;
+      }
+      return { usedBytes, availableBytes, totalBytes };
+    } catch {
+      return undefined;
+    }
   }
 
   private async ensureCollection(collectionUrl = this.videosUrl) {
@@ -160,6 +223,9 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     code: RemoteStorageTestErrorCode;
     message: string;
   } {
+    if (error instanceof RemoteStorageError) {
+      return { code: 'QUOTA', message: error.message };
+    }
     if (!(error instanceof AxiosError)) {
       return { code: 'UNKNOWN', message: redactRemoteStorageError(error) };
     }
@@ -283,7 +349,9 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     await this.ensureCollection();
     const response = await this.propfind(this.videosUrl, 1);
     const entries = this.parseEntries(response.data);
-    const names = new Set(entries.map((entry) => entry.name));
+    const entriesByName = new Map(
+      entries.map((entry) => [entry.name, entry] as const),
+    );
     const metadataEntries = entries.filter((entry) =>
       entry.name.toLowerCase().endsWith('.json'),
     );
@@ -294,7 +362,8 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
         entry.name.replace(/\.json$/i, ''),
       );
       const mp4Name = `${videoName}.mp4`;
-      if (!names.has(mp4Name)) {
+      const mp4Entry = entriesByName.get(mp4Name);
+      if (!mp4Entry) {
         console.warn(
           '[RemoteStorage] Skipping incomplete remote entry',
           videoName,
@@ -315,6 +384,7 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
         const metadata = metadataResponse.data;
         videos.push({
           ...metadata,
+          size: mp4Entry.size || metadata.size,
           videoName,
           videoSource: `remote-vod://wcr/${encodeURIComponent(videoName)}`,
           isProtected: Boolean(metadata.protected),
@@ -348,21 +418,29 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     const stat = await fs.promises.stat(videoPath);
     const maxRate = rateLimitMbps > 0 ? rateLimitMbps * 1024 ** 2 : undefined;
 
-    await this.request({
-      url: videoUrl,
-      method: 'PUT',
-      headers: { 'Content-Type': 'video/mp4', 'Content-Length': stat.size },
-      data: fs.createReadStream(videoPath),
-      // Videos can legitimately take hours to upload. A fixed request timeout
-      // aborts healthy transfers, especially when a bandwidth limit is set.
-      // Short metadata and connection-test requests retain timeoutMs.
-      timeout: 0,
-      maxRate: maxRate ? [maxRate, Infinity] : undefined,
-      onUploadProgress: ({ loaded, total }) =>
-        onProgress(
-          Math.min(99, Math.round((loaded / (total || stat.size)) * 100)),
-        ),
-    });
+    if (
+      this.provider === 'nextcloud' &&
+      this.nextcloudUploadsUrl &&
+      stat.size >= NEXTCLOUD_CHUNK_THRESHOLD_BYTES
+    ) {
+      await this.uploadNextcloudChunks(
+        videoPath,
+        videoName,
+        videoUrl,
+        stat,
+        maxRate,
+        onProgress,
+      );
+    } else {
+      await this.uploadSingleFile(
+        videoPath,
+        videoUrl,
+        stat.size,
+        maxRate,
+        onProgress,
+      );
+    }
+    onProgress(96);
 
     const remoteMetadata = {
       ...metadata,
@@ -377,11 +455,195 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
       headers: { 'Content-Type': 'application/json' },
       data: JSON.stringify(remoteMetadata),
     });
+    onProgress(98);
     await Promise.all([
       this.propfind(videoUrl, 0),
       this.propfind(metadataUrl, 0),
     ]);
     onProgress(100);
+  }
+
+  private async uploadSingleFile(
+    videoPath: string,
+    videoUrl: string,
+    size: number,
+    maxRate: number | undefined,
+    onProgress: ProgressCallback,
+  ) {
+    await this.request({
+      url: videoUrl,
+      method: 'PUT',
+      headers: { 'Content-Type': 'video/mp4', 'Content-Length': size },
+      data: fs.createReadStream(videoPath),
+      // Videos can legitimately take hours to upload. A fixed request timeout
+      // aborts healthy transfers, especially when a bandwidth limit is set.
+      // Short metadata and connection-test requests retain timeoutMs.
+      timeout: 0,
+      maxRate: maxRate ? [maxRate, Infinity] : undefined,
+      onUploadProgress: ({ loaded, total }) =>
+        onProgress(
+          // Axios reports bytes after they have been written to the request,
+          // before the WebDAV server has committed and acknowledged the file.
+          // Leave room for that acknowledgement, metadata, and verification.
+          Math.min(
+            VIDEO_UPLOAD_PROGRESS_PERCENT,
+            Math.round(
+              (loaded / (total || size)) * VIDEO_UPLOAD_PROGRESS_PERCENT,
+            ),
+          ),
+        ),
+    });
+  }
+
+  private nextcloudUploadId(
+    videoName: string,
+    stat: Pick<fs.Stats, 'size' | 'mtimeMs'>,
+  ) {
+    const identity = crypto
+      .createHash('sha256')
+      .update(`${videoName}\0${stat.size}\0${stat.mtimeMs}`)
+      .digest('hex')
+      .slice(0, 24);
+    return `warcraft-recorder-${identity}`;
+  }
+
+  private nextcloudChunkName(start: number, end: number) {
+    return `${String(start).padStart(15, '0')}-${String(end).padStart(
+      15,
+      '0',
+    )}`;
+  }
+
+  private isRetryableChunkError(error: unknown) {
+    if (!(error instanceof AxiosError)) return false;
+    const status = error.response?.status;
+    return (
+      status === undefined || status === 408 || status === 429 || status >= 500
+    );
+  }
+
+  private async uploadNextcloudChunk(
+    videoPath: string,
+    chunkUrl: string,
+    start: number,
+    end: number,
+    totalSize: number,
+    maxRate: number | undefined,
+    onChunkProgress: (loaded: number) => void,
+  ) {
+    const chunkSize = end - start + 1;
+    for (
+      let attempt = 1;
+      attempt <= NEXTCLOUD_CHUNK_UPLOAD_ATTEMPTS;
+      attempt += 1
+    ) {
+      try {
+        await this.request({
+          url: chunkUrl,
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/octet-stream',
+            'Content-Length': chunkSize,
+            'OC-Total-Length': totalSize,
+          },
+          data: fs.createReadStream(videoPath, { start, end }),
+          timeout: 0,
+          maxRate: maxRate ? [maxRate, Infinity] : undefined,
+          onUploadProgress: ({ loaded }) =>
+            onChunkProgress(Math.min(loaded, chunkSize)),
+        });
+        return;
+      } catch (error) {
+        if (
+          attempt === NEXTCLOUD_CHUNK_UPLOAD_ATTEMPTS ||
+          !this.isRetryableChunkError(error)
+        ) {
+          throw error;
+        }
+      }
+    }
+  }
+
+  private async uploadNextcloudChunks(
+    videoPath: string,
+    videoName: string,
+    videoUrl: string,
+    stat: Pick<fs.Stats, 'size' | 'mtimeMs'>,
+    maxRate: number | undefined,
+    onProgress: ProgressCallback,
+  ) {
+    if (!this.nextcloudUploadsUrl) {
+      throw new Error('Nextcloud upload endpoint is unavailable');
+    }
+
+    const uploadId = this.nextcloudUploadId(videoName, stat);
+    const uploadFolderUrl = new URL(
+      `${uploadId}/`,
+      this.nextcloudUploadsUrl,
+    ).toString();
+    try {
+      await this.request({ url: uploadFolderUrl, method: 'MKCOL' });
+    } catch (error) {
+      if ((error as AxiosError).response?.status !== 405) throw error;
+    }
+
+    const existingResponse = await this.propfind(uploadFolderUrl, 1);
+    const existingChunks = new Map(
+      this.parseEntries(existingResponse.data).map((entry) => [
+        entry.name,
+        entry.size,
+      ]),
+    );
+    let committedBytes = 0;
+    let reportedBytes = 0;
+    const reportBytes = (bytes: number) => {
+      reportedBytes = Math.max(reportedBytes, Math.min(bytes, stat.size));
+      onProgress(
+        Math.round((reportedBytes / stat.size) * VIDEO_UPLOAD_PROGRESS_PERCENT),
+      );
+    };
+
+    for (
+      let start = 0;
+      start < stat.size;
+      start += NEXTCLOUD_CHUNK_SIZE_BYTES
+    ) {
+      const end = Math.min(
+        start + NEXTCLOUD_CHUNK_SIZE_BYTES - 1,
+        stat.size - 1,
+      );
+      const chunkSize = end - start + 1;
+      const chunkName = this.nextcloudChunkName(start, end);
+      if (existingChunks.get(chunkName) === chunkSize) {
+        committedBytes += chunkSize;
+        reportBytes(committedBytes);
+        continue;
+      }
+
+      await this.uploadNextcloudChunk(
+        videoPath,
+        new URL(chunkName, uploadFolderUrl).toString(),
+        start,
+        end,
+        stat.size,
+        maxRate,
+        (loaded) => reportBytes(committedBytes + loaded),
+      );
+      committedBytes += chunkSize;
+      reportBytes(committedBytes);
+    }
+
+    await this.request({
+      url: new URL('.file', uploadFolderUrl).toString(),
+      method: 'MOVE',
+      headers: {
+        Destination: videoUrl,
+        'OC-Total-Length': stat.size,
+      },
+      // Nextcloud assembles all chunks during MOVE, which can take longer than
+      // an ordinary metadata request for multi-gigabyte recordings.
+      timeout: 0,
+    });
   }
 
   async downloadVideo(

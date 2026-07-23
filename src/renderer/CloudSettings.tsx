@@ -39,8 +39,20 @@ type ConnectionResult =
   | { ok: true; canDelete: boolean; warning?: string }
   | { ok: false; code: string; message: string };
 
+const formatBytes = (bytes: number) => {
+  if (!Number.isFinite(bytes) || bytes <= 0) return '0 B';
+  const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+  const unit = Math.min(
+    Math.floor(Math.log(bytes) / Math.log(1024)),
+    units.length - 1,
+  );
+  const value = bytes / 1024 ** unit;
+  return `${value.toFixed(value >= 10 || unit === 0 ? 0 : 1)} ${units[unit]}`;
+};
+
 const CloudSettings = ({ appState, config, setConfig, videoState }: IProps) => {
   const { language } = appState;
+  const { cloudStatus } = appState;
   const [password, setPassword] = useState('');
   const [testing, setTesting] = useState(false);
   const [connectionResult, setConnectionResult] = useState<ConnectionResult>();
@@ -54,6 +66,8 @@ const CloudSettings = ({ appState, config, setConfig, videoState }: IProps) => {
         webdavUsername: config.webdavUsername,
         webdavBasePath: config.webdavBasePath,
         remoteStorageAutoUpload: config.remoteStorageAutoUpload,
+        remoteStorageRetentionEnabled: config.remoteStorageRetentionEnabled,
+        remoteStorageRetentionLimitGb: config.remoteStorageRetentionLimitGb,
         remoteStorageUploadRateLimit: config.remoteStorageUploadRateLimit,
         remoteStorageUploadRateLimitMbps:
           config.remoteStorageUploadRateLimitMbps,
@@ -68,6 +82,8 @@ const CloudSettings = ({ appState, config, setConfig, videoState }: IProps) => {
     config.webdavUsername,
     config.webdavBasePath,
     config.remoteStorageAutoUpload,
+    config.remoteStorageRetentionEnabled,
+    config.remoteStorageRetentionLimitGb,
     config.remoteStorageUploadRateLimit,
     config.remoteStorageUploadRateLimitMbps,
   ]);
@@ -174,6 +190,14 @@ const CloudSettings = ({ appState, config, setConfig, videoState }: IProps) => {
     ['cloudUploadClips', Phrase.UploadClipsLabel],
     ['manualRecordUpload', Phrase.ManualRecordUploadLabel],
   ];
+  const managedRemoteUsage = videoState
+    .filter((video) => video.cloud && Number.isSafeInteger(video.size))
+    .reduce((total, video) => total + (video.size ?? 0), 0);
+  const retentionLimitBytes = config.remoteStorageRetentionLimitGb * 1024 ** 3;
+  const retentionUsagePercent =
+    retentionLimitBytes > 0
+      ? Math.min(100, (managedRemoteUsage / retentionLimitBytes) * 100)
+      : 0;
 
   return (
     <div className="flex flex-col gap-5">
@@ -271,6 +295,130 @@ const CloudSettings = ({ appState, config, setConfig, videoState }: IProps) => {
               </span>
             )}
           </div>
+
+          {(cloudStatus.quotaAvailable ||
+            cloudStatus.remoteStorageError === 'INSUFFICIENT_STORAGE') && (
+            <div className="flex flex-col gap-2 max-w-2xl">
+              <div className="flex justify-between gap-4 text-sm">
+                <span>
+                  {getLocalePhrase(language, Phrase.RemoteStorageUsageLabel)}
+                </span>
+                {cloudStatus.quotaAvailable && (
+                  <span className="text-foreground-lighter">
+                    {formatBytes(cloudStatus.usage)} /{' '}
+                    {formatBytes(cloudStatus.limit)}
+                  </span>
+                )}
+              </div>
+              {cloudStatus.quotaAvailable && (
+                <div
+                  className="h-3 overflow-hidden rounded-full bg-card"
+                  role="progressbar"
+                  aria-valuemin={0}
+                  aria-valuemax={cloudStatus.limit}
+                  aria-valuenow={cloudStatus.usage}
+                >
+                  <div
+                    className={`h-full transition-all ${
+                      cloudStatus.usage / cloudStatus.limit >= 0.9
+                        ? 'bg-error'
+                        : 'bg-primary'
+                    }`}
+                    style={{
+                      width: `${Math.min(
+                        100,
+                        (cloudStatus.usage / cloudStatus.limit) * 100,
+                      )}%`,
+                    }}
+                  />
+                </div>
+              )}
+              {cloudStatus.remoteStorageError === 'INSUFFICIENT_STORAGE' && (
+                <div className="text-error text-sm">
+                  {getLocalePhrase(
+                    language,
+                    Phrase.RemoteStorageInsufficientStorage,
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          <Separator />
+          <h2 className="text-foreground-lighter font-bold">
+            {getLocalePhrase(language, Phrase.RemoteStorageRetentionHeading)}
+          </h2>
+          <div className="flex flex-wrap items-end gap-5">
+            {settingSwitch(
+              'remoteStorageRetentionEnabled',
+              Phrase.RemoteStorageRetentionLabel,
+            )}
+            {config.remoteStorageRetentionEnabled && (
+              <div className="flex flex-col min-w-48">
+                <Label
+                  htmlFor="remoteStorageRetentionLimitGb"
+                  className="flex items-center"
+                >
+                  {getLocalePhrase(
+                    language,
+                    Phrase.RemoteStorageRetentionLimitLabel,
+                  )}
+                  <Tooltip
+                    content={getLocalePhrase(
+                      language,
+                      configSchema.remoteStorageRetentionLimitGb.description,
+                    )}
+                  >
+                    <Info size={18} className="ml-2" />
+                  </Tooltip>
+                </Label>
+                <Input
+                  name="remoteStorageRetentionLimitGb"
+                  type="number"
+                  min={1}
+                  value={config.remoteStorageRetentionLimitGb}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                    const value = Math.max(
+                      1,
+                      Math.floor(Number(event.target.value) || 1),
+                    );
+                    update('remoteStorageRetentionLimitGb', value);
+                    setConfigValue('remoteStorageRetentionLimitGb', value);
+                  }}
+                />
+              </div>
+            )}
+          </div>
+          {config.remoteStorageRetentionEnabled && (
+            <div className="flex flex-col gap-2 max-w-2xl">
+              <div className="flex justify-between gap-4 text-sm">
+                <span>
+                  {getLocalePhrase(
+                    language,
+                    Phrase.RemoteStorageManagedUsageLabel,
+                  )}
+                </span>
+                <span className="text-foreground-lighter">
+                  {formatBytes(managedRemoteUsage)} /{' '}
+                  {formatBytes(retentionLimitBytes)}
+                </span>
+              </div>
+              <div
+                className="h-3 overflow-hidden rounded-full bg-card"
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={retentionLimitBytes}
+                aria-valuenow={managedRemoteUsage}
+              >
+                <div
+                  className={`h-full transition-all ${
+                    retentionUsagePercent >= 95 ? 'bg-error' : 'bg-primary'
+                  }`}
+                  style={{ width: `${retentionUsagePercent}%` }}
+                />
+              </div>
+            </div>
+          )}
 
           <Separator />
           <h2 className="text-foreground-lighter font-bold">

@@ -264,6 +264,10 @@ export default class VideoProcessQueue {
     this.killVideoQueue.write(item);
   };
 
+  public hasPendingUploads() {
+    return this.inProgressUploads.length > 0;
+  }
+
   /**
    * Process a video by cutting it to size and saving it to disk, also
    * writes out the metadata JSON file.
@@ -568,7 +572,7 @@ export default class VideoProcessQueue {
   /**
    * Called on the end of an upload.
    */
-  private finishUploadingVideo(item: UploadQueueItem) {
+  private async finishUploadingVideo(item: UploadQueueItem) {
     console.info('[VideoProcessQueue] Upload attempt complete', item.path);
 
     this.inProgressUploads = this.inProgressUploads.filter(
@@ -577,6 +581,9 @@ export default class VideoProcessQueue {
 
     const queued = Math.max(0, this.inProgressUploads.length);
     send('updateUploadQueueLength', queued);
+    if (queued === 0) {
+      await RemoteStorageService.getInstance().enforceRetention();
+    }
   }
 
   /**

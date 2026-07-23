@@ -10,7 +10,26 @@ export type RemoteStorageCapabilities = {
   tags: boolean;
   protection: boolean;
   chat: boolean;
+  quota: boolean;
 };
+
+export type RemoteStorageQuota = {
+  usedBytes: number;
+  availableBytes: number;
+  totalBytes: number;
+};
+
+export type RemoteStorageErrorCode = 'INSUFFICIENT_STORAGE';
+
+export class RemoteStorageError extends Error {
+  constructor(
+    readonly code: RemoteStorageErrorCode,
+    message: string,
+  ) {
+    super(message);
+    this.name = 'RemoteStorageError';
+  }
+}
 
 export type RemoteStorageTestErrorCode =
   | 'URL'
@@ -21,6 +40,7 @@ export type RemoteStorageTestErrorCode =
   | 'READ'
   | 'WRITE'
   | 'DELETE'
+  | 'QUOTA'
   | 'TIMEOUT'
   | 'UNKNOWN';
 
@@ -42,6 +62,7 @@ export interface RemoteStorageProvider {
   readonly capabilities: RemoteStorageCapabilities;
   ready(): Promise<boolean>;
   testConnection(): Promise<RemoteStorageTestResult>;
+  getQuota(): Promise<RemoteStorageQuota | undefined>;
   listVideos(): Promise<RendererVideo[]>;
   uploadVideo(
     videoPath: string,
@@ -75,4 +96,5 @@ export const disabledCapabilities: RemoteStorageCapabilities = {
   tags: false,
   protection: false,
   chat: false,
+  quota: false,
 };

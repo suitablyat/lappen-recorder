@@ -122,7 +122,9 @@ const CloudStatus = ({ appState, setPreviewEnabled }: StatusProps) => {
     return (
       <div className="inline-flex gap-x-[2px] text-xs text-foreground-lighter">
         <CloudUpload size={16} />
-        {cloudState.uploadProgress.toFixed(0)}%
+        {cloudState.uploadProgress >= 95
+          ? getLocalePhrase(language, Phrase.RemoteStorageUploadFinalizing)
+          : `${cloudState.uploadProgress.toFixed(0)}%`}
         <span className="text-[0.60rem] text-foreground mx-[2px]">
           {cloudState.queuedUploads > 1 && `+${cloudState.queuedUploads - 1}`}
         </span>

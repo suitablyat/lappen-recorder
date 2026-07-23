@@ -9,16 +9,18 @@ export const getConfigValue = <T>(configKey: string): T => {
   ]) as T;
 };
 
-export const setConfigValue = (configKey: string, value: any): void => {
+export const setConfigValue = <K extends keyof ConfigurationSchema>(
+  configKey: K,
+  value: ConfigurationSchema[K],
+): void => {
   window.electron.ipcRenderer.sendMessage('config', ['set', configKey, value]);
 };
 
-export const setConfigValues = (dict: { [key: string]: any }): void => {
+export const setConfigValues = (dict: Partial<ConfigurationSchema>): void => {
   window.electron.ipcRenderer.sendMessage('config', ['set_values', dict]);
 };
 
 export const getSettings = (): ConfigurationSchema => {
-  /* eslint-disable prettier/prettier */
   const configValues = {
     storagePath: getConfigValue<string>('storagePath'),
     bufferStoragePath: getConfigValue<string>('bufferStoragePath'),
@@ -86,6 +88,12 @@ export const getSettings = (): ConfigurationSchema => {
     webdavUsername: getConfigValue<string>('webdavUsername'),
     webdavBasePath: getConfigValue<string>('webdavBasePath'),
     remoteStorageAutoUpload: getConfigValue<boolean>('remoteStorageAutoUpload'),
+    remoteStorageRetentionEnabled: getConfigValue<boolean>(
+      'remoteStorageRetentionEnabled',
+    ),
+    remoteStorageRetentionLimitGb: getConfigValue<number>(
+      'remoteStorageRetentionLimitGb',
+    ),
     remoteStorageUploadRateLimit: getConfigValue<boolean>(
       'remoteStorageUploadRateLimit',
     ),
@@ -143,7 +151,6 @@ export const getSettings = (): ConfigurationSchema => {
     characterUploadFilters: getConfigValue<CharacterFilter[]>(
       'characterUploadFilters',
     ),
-    /* eslint-enable prettier/prettier */
   };
 
   return configValues;

@@ -24,6 +24,10 @@ export default class DisabledStorageProvider implements RemoteStorageProvider {
     };
   }
 
+  async getQuota() {
+    return undefined;
+  }
+
   async listVideos(): Promise<RendererVideo[]> {
     return [];
   }

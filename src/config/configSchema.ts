@@ -67,6 +67,8 @@ export type ConfigurationSchema = {
   webdavUsername: string;
   webdavBasePath: string;
   remoteStorageAutoUpload: boolean;
+  remoteStorageRetentionEnabled: boolean;
+  remoteStorageRetentionLimitGb: number;
   remoteStorageUploadRateLimit: boolean;
   remoteStorageUploadRateLimitMbps: number;
   remoteStorageNeedsSetup: boolean;
@@ -463,6 +465,17 @@ export const configSchema = {
     description: Phrase.RemoteStorageAutoUploadDescription,
     type: 'boolean',
     default: false,
+  },
+  remoteStorageRetentionEnabled: {
+    description: Phrase.RemoteStorageRetentionDescription,
+    type: 'boolean',
+    default: false,
+  },
+  remoteStorageRetentionLimitGb: {
+    description: Phrase.RemoteStorageRetentionLimitDescription,
+    type: 'integer',
+    default: 50,
+    minimum: 1,
   },
   remoteStorageUploadRateLimit: {
     description: Phrase.CloudUploadRateLimitDescription,

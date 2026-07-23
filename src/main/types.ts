@@ -483,6 +483,8 @@ type CloudStatus = {
   chat: boolean;
   tags: boolean;
   protection: boolean;
+  quotaAvailable?: boolean;
+  remoteStorageError?: 'INSUFFICIENT_STORAGE';
 };
 
 type DiskStatus = {

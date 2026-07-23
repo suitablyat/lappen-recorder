@@ -571,6 +571,15 @@ enum Phrase {
   SelectMultiple,
   Navigate,
   SelectAll,
+  RemoteStorageUploadFinalizing,
+  RemoteStorageUsageLabel,
+  RemoteStorageInsufficientStorage,
+  RemoteStorageRetentionHeading,
+  RemoteStorageRetentionLabel,
+  RemoteStorageRetentionDescription,
+  RemoteStorageRetentionLimitLabel,
+  RemoteStorageRetentionLimitDescription,
+  RemoteStorageManagedUsageLabel,
 }
 
 enum Language {

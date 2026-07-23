@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import { Readable } from 'stream';
 import { clipboard, ipcMain } from 'electron';
 import ConfigService from 'config/ConfigService';
@@ -13,10 +14,12 @@ import { send } from 'main/main';
 import { getMetadataForVideo } from 'main/util';
 import type { TChatMessageWithId } from 'types/api';
 import StorageClient from './StorageClient';
+import RemoteStorageRetentionMonitor from './RemoteStorageRetentionMonitor';
 import DisabledStorageProvider from './remote/DisabledStorageProvider';
 import { createRemoteStorageProvider } from './remote/RemoteStorageProviderFactory';
 import {
   ProgressCallback,
+  RemoteStorageError,
   RemoteStorageProvider,
 } from './remote/RemoteStorageProvider';
 import RemoteStorageSecretStore from './remote/RemoteStorageSecretStore';
@@ -29,6 +32,7 @@ export default class RemoteStorageService implements StorageClient {
   private static instance: RemoteStorageService;
   private provider: RemoteStorageProvider = new DisabledStorageProvider();
   private configurationError: string | undefined;
+  private remoteStorageError: 'INSUFFICIENT_STORAGE' | undefined;
   private readonly cfg = ConfigService.getInstance();
   private readonly secrets = new RemoteStorageSecretStore();
 
@@ -77,6 +81,8 @@ export default class RemoteStorageService implements StorageClient {
     const enabled = this.cfg.get<boolean>('remoteStorageEnabled');
     const ready = enabled && (await this.ready());
     const capabilities = this.provider.capabilities;
+    const quota =
+      ready && capabilities.quota ? await this.provider.getQuota() : undefined;
     const status: CloudStatus = {
       enabled,
       authenticated: ready,
@@ -86,13 +92,15 @@ export default class RemoteStorageService implements StorageClient {
       read: ready && capabilities.list,
       write: ready && capabilities.upload,
       del: ready && capabilities.delete,
-      usage: 0,
-      limit: 0,
+      usage: quota?.usedBytes ?? 0,
+      limit: quota?.totalBytes ?? 0,
       migrated: false,
       shareLinks: capabilities.shareLinks,
       chat: ready && capabilities.chat,
       tags: capabilities.tags,
       protection: capabilities.protection,
+      quotaAvailable: Boolean(quota),
+      remoteStorageError: this.remoteStorageError,
     };
     send('updateCloudStatus', status);
   }
@@ -110,6 +118,26 @@ export default class RemoteStorageService implements StorageClient {
         redactRemoteStorageError(error),
       );
       send('setCloudVideos', []);
+    }
+  }
+
+  async enforceRetention(reservedBytes = 0, beforeUpload = false) {
+    const limitGb = this.cfg.get<number>('remoteStorageRetentionLimitGb');
+    const limitBytes = limitGb * 1024 ** 3;
+    const monitor = new RemoteStorageRetentionMonitor(this.provider);
+    const deleted = await monitor.run({
+      enabled:
+        this.cfg.get<boolean>('remoteStorageEnabled') &&
+        this.cfg.get<boolean>('remoteStorageRetentionEnabled'),
+      limitBytes: Number.isSafeInteger(limitBytes) ? limitBytes : 0,
+      uploadsActive:
+        !beforeUpload && VideoProcessQueue.getInstance().hasPendingUploads(),
+      reservedBytes,
+    });
+
+    if (deleted.length > 0) {
+      this.remoteStorageError = undefined;
+      await Promise.all([this.refreshStatus(), this.refreshVideos()]);
     }
   }
 
@@ -131,18 +159,37 @@ export default class RemoteStorageService implements StorageClient {
     );
   }
 
-  uploadVideo(
+  async uploadVideo(
     videoPath: string,
     metadata: Metadata,
     rateLimitMbps: number,
     onProgress: ProgressCallback,
   ) {
-    return this.provider.uploadVideo(
-      videoPath,
-      metadata,
-      rateLimitMbps,
-      onProgress,
-    );
+    try {
+      const metadataSize = metadata.size;
+      const incomingBytes =
+        Number.isSafeInteger(metadataSize) && metadataSize! > 0
+          ? metadataSize!
+          : (await fs.promises.stat(videoPath)).size;
+      await this.enforceRetention(incomingBytes, true);
+      await this.provider.uploadVideo(
+        videoPath,
+        metadata,
+        rateLimitMbps,
+        onProgress,
+      );
+      this.remoteStorageError = undefined;
+      await this.refreshStatus();
+    } catch (error) {
+      if (
+        error instanceof RemoteStorageError &&
+        error.code === 'INSUFFICIENT_STORAGE'
+      ) {
+        this.remoteStorageError = error.code;
+        await this.refreshStatus();
+      }
+      throw error;
+    }
   }
 
   downloadVideo(
@@ -270,6 +317,7 @@ export default class RemoteStorageService implements StorageClient {
     ipcMain.on('reconfigureRemoteStorage', async () => {
       this.configure();
       await Promise.all([this.refreshStatus(), this.refreshVideos()]);
+      await this.enforceRetention();
     });
     // Compatibility with older renderer builds during migration.
     ipcMain.on('reconfigureCloud', () => {
@@ -325,6 +373,8 @@ export default class RemoteStorageService implements StorageClient {
         .filter((video) => video?.cloud && typeof video.videoName === 'string')
         .map((video) => sanitizeRemoteFileName(video.videoName));
       if (names.length) await this.deleteVideos(names);
+      this.remoteStorageError = undefined;
+      await this.refreshStatus();
       await this.refreshVideos();
     });
 

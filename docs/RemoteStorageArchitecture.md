@@ -17,6 +17,42 @@
 - Providers with the `chat` capability store validated per-video chat documents
   under `WarcraftRecorder/chats/<video-name>.json`. Chat is polled while open;
   it has no account, guild, proprietary API, or WebSocket dependency.
+- WebDAV upload progress reserves the final percentage range for server
+  acknowledgement, JSON metadata upload, and remote verification. Request-byte
+  progress alone is not treated as a completed remote write.
+- Nextcloud MP4 files of 256 MiB or larger use its provider-specific chunked
+  upload v2 protocol with 64 MiB chunks. Chunk names encode inclusive byte
+  ranges, each transiently failed chunk is attempted at most three times, and
+  `OC-Total-Length` is sent for quota validation. A deterministic temporary
+  upload ID based on the normalized video name, size, and modification time
+  allows a later retry or application restart to validate and skip chunks that
+  Nextcloud still retains. The MP4 becomes visible only after Nextcloud
+  assembles it with `MOVE`; JSON metadata is uploaded afterward.
+- Generic WebDAV continues to use one standards-compatible `PUT`, because
+  resumable chunk assembly is not part of the generic WebDAV protocol.
+- Storage quota is an optional provider capability. WebDAV providers query the
+  authenticated account root for the standard `DAV:quota-used-bytes` and
+  `DAV:quota-available-bytes` properties. Servers that omit those properties
+  remain fully usable, while Nextcloud and other supporting servers expose the
+  values through validated IPC as a Settings usage bar.
+- HTTP 507 responses are converted inside the provider into a sanitized
+  `INSUFFICIENT_STORAGE` error. The upload queue keeps the local recording,
+  stops that upload without an automatic retry loop, and refreshes remote
+  status so Settings can explain the failure.
+- Optional remote retention provides automatic cleanup for recordings
+  managed by Warcraft Recorder. It sums only complete, validated MP4/JSON
+  pairs returned by the provider, never account-wide quota usage or unrelated
+  server files. When managed recordings exceed the user-defined ceiling, the
+  oldest unprotected recordings are removed until usage is at or below 95% of
+  that ceiling.
+- Retention runs while the upload queue is empty and as a reservation step
+  immediately before an upload request starts. The reservation includes the
+  incoming MP4 size, preventing a server-side quota rejection before cleanup
+  gets a chance to run. It never deletes during network transfer and requires
+  explicit provider listing and deletion capabilities. Missing sizes,
+  protected recordings, provider errors, and incomplete entries are never
+  guessed at or deleted. Local recordings remain the source of truth and are
+  unaffected.
 - The renderer wraps local sources in the `vod://wcr/` protocol. The main
   process protocol handler serves those files with byte-range support.
 
