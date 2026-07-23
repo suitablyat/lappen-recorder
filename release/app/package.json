@@ -1,10 +1,10 @@
 {
-  "name": "WarcraftRecorder",
-  "version": "7.11.0",
-  "description": "Warcraft Recorder",
+  "name": "lappen-recorder",
+  "version": "8.0.0-rc.1",
+  "description": "Lappen Recorder - an unofficial World of Warcraft gameplay recorder",
   "main": "./dist/main/main.js",
   "author": {
-    "name": "Alex K"
+    "name": "Lappen Recorder contributors"
   },
   "scripts": {
     "electron-rebuild": "node -r ts-node/register ../../.erb/scripts/electron-rebuild.js",
@@ -16,5 +16,5 @@
     "noobs": "^0.0.201",
     "uiohook-napi": "^1.5.2"
   },
-  "license": "MIT"
+  "license": "GPL-2.0-only"
 }

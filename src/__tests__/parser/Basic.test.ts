@@ -1,8 +1,10 @@
+jest.mock('../../main/main', () => ({ send: jest.fn() }));
+
 import LogLine from '../../parsing/LogLine';
 import CombatLogWatcher from '../../parsing/CombatLogWatcher';
 
 test('Basic Retail', async () => {
-  const combatLogParser = new CombatLogWatcher('', 2);
+  const combatLogParser = new CombatLogWatcher('');
   let promiseResolve: (value: LogLine | PromiseLike<LogLine>) => void;
 
   const testLogLinePromise: Promise<LogLine> = new Promise((resolve) => {
@@ -19,7 +21,7 @@ test('Basic Retail', async () => {
   combatLogParser.handleLogLine(arenaMatchStartLine);
 
   const testLogLine = await testLogLinePromise;
-  const expectedDate = new Date('2025-08-03T22:12:04');
+  const expectedDate = new Date(`${new Date().getFullYear()}-08-03T22:12:04`);
 
   expect(testLogLine.date()).toStrictEqual(expectedDate);
   expect(testLogLine.type()).toBe('ARENA_MATCH_START');
@@ -34,7 +36,7 @@ test('Date Parsing', async () => {
   // Pre The War Within expansion there were note years or timezones.
   const preTWW = '8/3 22:12:04.000  ARENA_MATCH_START,2547,33,5v5,1';
   const parsedPreTWW = new LogLine(preTWW);
-  const expectedPreTww = new Date('2025-08-03T22:12:04');
+  const expectedPreTww = new Date(`${new Date().getFullYear()}-08-03T22:12:04`);
   expect(parsedPreTWW.date()).toStrictEqual(expectedPreTww);
 
   // Year but no TZ.

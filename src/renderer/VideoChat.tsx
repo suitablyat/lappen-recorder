@@ -5,12 +5,11 @@ import { RefObject, useEffect, useRef, useState } from 'react';
 import { RendererVideo } from 'main/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { CircularProgress } from '@mui/material';
-import { ChatMessageWithId, TChatMessageWithId } from 'types/api';
+import { TChatMessageWithId } from 'types/api';
 import { Tooltip } from './components/Tooltip/Tooltip';
 import { VideoPlayerRef } from './VideoPlayer';
 import { getLocalePhrase, Language } from 'localisation/translations';
 import { Phrase } from 'localisation/phrases';
-import { z } from 'zod';
 
 const ipc = window.electron.ipcRenderer;
 
@@ -35,73 +34,13 @@ const VideoChat = (props: IProps) => {
     gcTime: 0, // Always refetch.
     queryKey: ['chats', video.videoName],
     refetchOnWindowFocus: false,
+    refetchInterval: 5000,
     queryFn: async () => {
       const correlator = await ipc.getOrCreateChatCorrelator(video);
       correlatorRef.current = correlator;
       return ipc.getChatMessages(correlator);
     },
   });
-
-  const addChatMessage = (message: unknown) => {
-    let parsed: TChatMessageWithId;
-
-    try {
-      parsed = ChatMessageWithId.parse(message);
-    } catch (e) {
-      console.error('Invalid chat message received', message, e);
-      return;
-    }
-
-    const { correlator } = parsed;
-
-    if (correlator !== correlatorRef.current) {
-      // Websocket update for another video.
-      return;
-    }
-
-    // Add to the cached query data directly. This triggers a re-render just
-    // like updating state does.
-    queryClient.setQueryData(
-      ['chats', video.videoName],
-      (prev: TChatMessageWithId[]) => {
-        return [...prev, parsed].sort((a, b) => a.timestamp - b.timestamp);
-      },
-    );
-  };
-
-  const deleteChatMessage = (id: unknown) => {
-    let parsedId: number;
-
-    try {
-      parsedId = z.number().parse(id);
-    } catch (e) {
-      console.error('Invalid delete chat message received', id, e);
-      return;
-    }
-
-    // Add to the cached query data directly. This triggers a re-render just
-    // like updating state does.
-    queryClient.setQueryData(
-      ['chats', video.videoName],
-      (prev: TChatMessageWithId[]) => {
-        return prev?.filter((msg) => msg.id !== parsedId) ?? [];
-      },
-    );
-  };
-
-  useEffect(() => {
-    // We get a websocket message if a new chat is added/deleted.
-    ipc.on('displayAddChatMessage', addChatMessage);
-    ipc.on('displayDeleteChatMessage', deleteChatMessage);
-
-    // If guild websocket reconnects, refresh the chat in case we missed any messages.
-    ipc.on('refreshChatMessages', () => refetch());
-
-    return () => {
-      ipc.removeAllListeners('displayAddChatMessage');
-      ipc.removeAllListeners('refreshChatMessages');
-    };
-  }, [addChatMessage]);
 
   // Scrolls to the bottom of the chat on loading it, or receiving a new message.
   useEffect(() => {
@@ -113,7 +52,7 @@ const VideoChat = (props: IProps) => {
     });
   }, [data]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (message.trim() === '') {
       setMessage('');
       return;
@@ -125,8 +64,27 @@ const VideoChat = (props: IProps) => {
       return;
     }
 
-    window.electron.ipcRenderer.postChatMessage(correlatorRef.current, message);
-    setMessage('');
+    try {
+      await ipc.postChatMessage(correlatorRef.current, message);
+      setMessage('');
+      await refetch();
+    } catch (e) {
+      console.error('Unable to post chat message', e);
+    }
+  };
+
+  const handleDeleteMessage = async (id: number) => {
+    if (correlatorRef.current === null) return;
+    try {
+      await ipc.deleteChatMessage(correlatorRef.current, id);
+      queryClient.setQueryData(
+        ['chats', video.videoName],
+        (prev: TChatMessageWithId[] | undefined) =>
+          prev?.filter((entry) => entry.id !== id) ?? [],
+      );
+    } catch (e) {
+      console.error('Unable to delete chat message', e);
+    }
   };
 
   const processMessageContent = (msg: string) => {
@@ -222,7 +180,7 @@ const VideoChat = (props: IProps) => {
                     <Button
                       variant="ghost"
                       className="mx-1 p-0 w-4 h-4 rounded-sm"
-                      onClick={() => ipc.deleteChatMessage(chat.id)}
+                      onClick={() => handleDeleteMessage(chat.id)}
                     >
                       <X />
                     </Button>

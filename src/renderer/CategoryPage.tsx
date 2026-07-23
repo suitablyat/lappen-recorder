@@ -56,7 +56,6 @@ import VideoCorrelator from './VideoCorrelator';
 import { Phrase } from 'localisation/phrases';
 import BulkTransferDialog from './BulkTransferDialog';
 import VideoChat from './VideoChat';
-import ConfirmChatNamePrompt from './ConfirmChatNamePrompt';
 
 interface IProps {
   category: VideoCategory;
@@ -194,22 +193,21 @@ const CategoryPage = (props: IProps) => {
   }, [playerHeight]);
 
   const renderChat = (video: RendererVideo | undefined) => {
+    if (!cloudStatus.chat) {
+      return (
+        <div className="flex-1 flex flex-col items-center justify-center text-foreground text-sm font-bold">
+          <Cloud size={35} className="mb-2" />
+          {getLocalePhrase(language, Phrase.RemoteStorageFeatureUnavailable)}
+        </div>
+      );
+    }
+
     if (!video) {
       return (
         <div className="flex-1 flex flex-col items-center justify-center text-foreground text-sm font-bold">
           <Cloud size={35} className="mb-2" />
           {getLocalePhrase(language, Phrase.ChatUploadToCloudText)}
         </div>
-      );
-    }
-
-    if (config.cloudAccountName !== config.chatUserNameAgreed) {
-      return (
-        <ConfirmChatNamePrompt
-          cloudAccountName={config.cloudAccountName}
-          setConfig={setConfig}
-          language={language}
-        />
       );
     }
 
@@ -248,10 +246,9 @@ const CategoryPage = (props: IProps) => {
       ? selectedRow.original
       : filteredState[0];
 
-    // Only try to find a chat video if we have a video with cloud storage,
-    // a start time and a hash, else we cannot find the chat correlator.
+    // Chat documents are keyed by the provider-independent remote video name.
     const chatVideo = [activeParentVideo, ...activeParentVideo.multiPov].find(
-      (rv) => rv.cloud && rv.uniqueHash && rv.start,
+      (rv) => rv.cloud,
     );
 
     const renderTextDescr = () => {
@@ -488,6 +485,7 @@ const CategoryPage = (props: IProps) => {
       // don't have write permissions, or if the action is to unprotect and we
       // don't have delete permissions.
       const noPermission =
+        (!cloudStatus.protection && toProtect.some((v) => v.cloud)) ||
         (!write && toProtect.some((v) => v.cloud)) || // Some in the selection are cloud videos and no write permission.
         (!del && !lock && toProtect.some((v) => v.cloud)); // Some in the selection are locked cloud videos no delete permission.
 
@@ -614,7 +612,7 @@ const CategoryPage = (props: IProps) => {
         text += ` (${selectedRows.length})`;
       }
 
-      if (!config.cloudStorage || (write && del)) {
+      if (!config.remoteStorageEnabled || (write && del)) {
         // Cloud storage if off, or we have full permission. No need
         // to render the disk only switch.
         return <Label>{text}</Label>;
@@ -670,8 +668,8 @@ const CategoryPage = (props: IProps) => {
           <div>
             {renderSelectionLabel()}
             <div className="flex gap-x-1 mr-2 py-[1px]">
-              {config.cloudUpload && renderBulkTransferButton(true)}
-              {config.cloudStorage && renderBulkTransferButton(false)}
+              {config.remoteStorageAutoUpload && renderBulkTransferButton(true)}
+              {config.remoteStorageEnabled && renderBulkTransferButton(false)}
               {renderProtectButton()}
               {renderDeleteButton()}
             </div>
@@ -691,7 +689,7 @@ const CategoryPage = (props: IProps) => {
 
   const openSetupInstructions = () => {
     window.electron.ipcRenderer.sendMessage('openURL', [
-      'https://www.warcraftrecorder.com/setup',
+      'https://github.com/suitablyat/lappen-recorder#how-to-use',
     ]);
   };
 

@@ -41,6 +41,7 @@ export type Channels =
   | 'disablePreview'
   | 'getSourcePosition'
   | 'setSourcePosition'
+  | 'setOverlayCrop'
   | 'resetSourcePosition'
   | 'setForceMono'
   | 'setAudioSuppression'
@@ -51,7 +52,9 @@ export type Channels =
   | 'reconfigureOverlay'
   | 'reconfigureCloud'
   | 'getSensibleEncoderDefault'
-  | 'refreshCloudGuilds';
+  | 'reconfigureRemoteStorage'
+  | 'setRemoteStoragePassword'
+  | 'testRemoteStorageConnection';
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {
@@ -132,6 +135,10 @@ contextBridge.exposeInMainWorld('electron', {
       ipcRenderer.send('setSourcePosition', src, target);
     },
 
+    setOverlayCrop(cropX: number, cropY: number) {
+      ipcRenderer.send('setOverlayCrop', cropX, cropY);
+    },
+
     resetSourcePosition(src: SceneItem) {
       ipcRenderer.send('resetSourcePosition', src);
     },
@@ -201,10 +208,6 @@ contextBridge.exposeInMainWorld('electron', {
       return ipcRenderer.invoke('getSensibleEncoderDefault');
     },
 
-    refreshCloudGuilds() {
-      ipcRenderer.send('refreshCloudGuilds');
-    },
-
     getOrCreateChatCorrelator(video: RendererVideo): Promise<string> {
       return ipcRenderer.invoke('getOrCreateChatCorrelator', video);
     },
@@ -213,12 +216,15 @@ contextBridge.exposeInMainWorld('electron', {
       return ipcRenderer.invoke('getChatMessages', correlator);
     },
 
-    postChatMessage(correlator: string, message: string) {
-      ipcRenderer.send('postChatMessage', correlator, message);
+    postChatMessage(
+      correlator: string,
+      message: string,
+    ): Promise<TChatMessageWithId> {
+      return ipcRenderer.invoke('postChatMessage', correlator, message);
     },
 
-    deleteChatMessage(id: number) {
-      ipcRenderer.send('deleteChatMessage', id);
+    deleteChatMessage(correlator: string, id: number): Promise<void> {
+      return ipcRenderer.invoke('deleteChatMessage', correlator, id);
     },
 
     toggleManualRecording() {

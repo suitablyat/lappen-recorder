@@ -13,6 +13,7 @@ interface TooltipProps
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   side?: 'bottom' | 'left' | 'top' | 'right';
   maxWidth?: number;
+  allowPointerDown?: boolean;
 }
 const Tooltip = ({
   children,
@@ -26,6 +27,7 @@ const Tooltip = ({
   side,
   sideOffset = 8,
   onClick,
+  allowPointerDown = false,
   ...props
 }: TooltipProps) => {
   return (
@@ -38,7 +40,9 @@ const Tooltip = ({
       <TooltipPrimitive.Trigger
         onClick={onClick ? onClick : (e) => e.preventDefault()}
         asChild
-        onPointerDown={(e) => e.preventDefault()}
+        onPointerDown={
+          allowPointerDown ? undefined : (event) => event.preventDefault()
+        }
       >
         {children}
       </TooltipPrimitive.Trigger>

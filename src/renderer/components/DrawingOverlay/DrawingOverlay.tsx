@@ -4,10 +4,11 @@ import '@excalidraw/excalidraw/index.css';
 import './DrawingOverlay.css';
 import { AppState } from 'main/types';
 import { Language } from 'localisation/phrases';
+import type { ExcalidrawElement } from '@excalidraw/excalidraw/dist/types/excalidraw/element/types';
 
 interface DrawingOverlayProps {
   isDrawingEnabled: boolean;
-  onDrawingChange: (elements: readonly any[]) => void;
+  onDrawingChange: (elements: readonly ExcalidrawElement[]) => void;
   appState: AppState;
 }
 

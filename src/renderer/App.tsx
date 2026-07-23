@@ -44,7 +44,7 @@ import KillVideoProgress from './KillVideoProgress';
 const ipc = window.electron.ipcRenderer;
 const queryClient = new QueryClient();
 
-const WarcraftRecorder = () => {
+const LappenRecorder = () => {
   const [config, setConfig] = useSettings();
   const [error, setError] = useState<string>('');
   const [micStatus, setMicStatus] = useState<MicStatus>(MicStatus.NONE);
@@ -117,6 +117,10 @@ const WarcraftRecorder = () => {
       usage: 0,
       limit: 0,
       migrated: false,
+      shareLinks: false,
+      chat: false,
+      tags: false,
+      protection: false,
     },
 
     // The disk storage status.
@@ -568,7 +572,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<WarcraftRecorder />} />
+        <Route path="/" element={<LappenRecorder />} />
       </Routes>
     </Router>
   );

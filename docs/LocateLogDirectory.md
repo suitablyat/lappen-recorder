@@ -22,7 +22,7 @@ It can be a bit confusing to find the right directory where your Warcraft combat
 7. Right click the address bar in Explorer and copy the location<br/>
   ![](https://i.imgur.com/4pegWpB.png)
 
-8. This location can be pasted into the folder selection box in Warcraft Recorder
+8. This location can be pasted into the folder selection box in Lappen Recorder
 
 # Tips
 

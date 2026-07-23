@@ -4,6 +4,18 @@ import path from 'path';
 import { EventEmitter } from 'stream';
 import { configSchema, ConfigurationSchema } from './configSchema';
 import _ from 'lodash';
+import { migrateLegacyRemoteStorage } from './remoteStorageMigration';
+
+type ConfigStore = {
+  store: ConfigurationSchema;
+  onDidAnyChange: (
+    callback: (newValue: unknown, oldValue: unknown) => void,
+  ) => void;
+  has: (key: string) => boolean;
+  get: (key: string) => unknown;
+  set: (key: string, value: unknown) => void;
+  delete: (key: string) => void;
+};
 
 /**
  * Interface for the ConfigService class.
@@ -26,7 +38,7 @@ export interface IConfigService extends EventEmitter {
    * @param key - The configuration key to set.
    * @param value - The value to set for the key.
    */
-  set(key: keyof ConfigurationSchema, value: any): void;
+  set(key: keyof ConfigurationSchema, value: unknown): void;
 
   /**
    * Get the value of a configuration key as a number.
@@ -61,7 +73,7 @@ export default class ConfigService
     // @ts-ignore 'schema' is "wrong", but it really isn't.
     configSchema,
     name: 'config-v3',
-  });
+  }) as unknown as ConfigStore;
 
   /**
    * Get the instance of the class as a singleton.
@@ -75,17 +87,14 @@ export default class ConfigService
   private constructor() {
     super();
 
+    this.migrateRemoteStorage();
     this.cleanupStore();
 
-    const loggable = this._store.store;
-
-    if (loggable.cloudAccountPassword) {
-      loggable.cloudAccountPassword = '**********';
-    }
+    const loggable = { ...this._store.store };
 
     console.info('[Config Service] Using configuration', loggable);
 
-    this._store.onDidAnyChange((newValue: any, oldValue: any) => {
+    this._store.onDidAnyChange((newValue: unknown, oldValue: unknown) => {
       this.emit('configChanged', oldValue, newValue);
     });
 
@@ -114,9 +123,9 @@ export default class ConfigService
         }
 
         case 'set_values': {
-          const configObject = args[1];
+          const configObject = args[1] as Record<string, unknown>;
           const configKeys = Object.keys(configObject);
-          const newConfigValues: { [key: string]: any } = {};
+          const newConfigValues: Record<string, unknown> = {};
 
           configKeys.forEach((key: string) => {
             if (!this.configValueChanged(key, configObject[key])) {
@@ -126,10 +135,10 @@ export default class ConfigService
             newConfigValues[key] = configObject[key];
           });
 
-          Object.keys(newConfigValues).forEach((key: any) => {
+          Object.keys(newConfigValues).forEach((key) => {
             const value = newConfigValues[key];
 
-            this.set(key, value);
+            this.set(key as keyof ConfigurationSchema, value);
             this.emit('change', key, value);
           });
 
@@ -145,6 +154,21 @@ export default class ConfigService
         }
       }
     });
+  }
+
+  /** Migrate proprietary cloud settings without ever reusing its credentials. */
+  private migrateRemoteStorage(): void {
+    const legacy = this._store.store as unknown as Record<string, unknown>;
+    const legacyStore = this._store;
+    const migration = migrateLegacyRemoteStorage(legacy);
+    if (!migration) return;
+
+    Object.entries(migration.values).forEach(([key, value]) =>
+      legacyStore.set(key, value),
+    );
+
+    // Legacy account data is intentionally not interpreted as WebDAV data.
+    migration.deleteKeys.forEach((key) => legacyStore.delete(key));
   }
 
   has(key: keyof ConfigurationSchema): boolean {
@@ -169,7 +193,7 @@ export default class ConfigService
     return value as T;
   }
 
-  set(key: keyof ConfigurationSchema, value: any): void {
+  set(key: keyof ConfigurationSchema, value: unknown): void {
     if (!configSchema[key]) {
       throw Error(
         `[Config Service] Attempted to set invalid configuration key '${key}'`,
@@ -232,7 +256,7 @@ export default class ConfigService
   /**
    * Determine whether a configuration value has changed.
    */
-  private configValueChanged(key: string, value: any): boolean {
+  private configValueChanged(key: string, value: unknown): boolean {
     // We're checking for null here because we don't allow storing
     // null values and as such if we get one, it's because it's empty/shouldn't
     // be saved.
@@ -243,11 +267,12 @@ export default class ConfigService
     return !_.isEqual(this._store.get(key), value);
   }
 
-  private static logConfigChanged(newConfig: { [key: string]: any }): void {
-    if (newConfig.cloudAccountPassword) {
-      newConfig.cloudAccountPassword = '**********';
+  private static logConfigChanged(newConfig: Record<string, unknown>): void {
+    const safe = { ...newConfig };
+    for (const key of Object.keys(safe)) {
+      if (/password|authorization|token/i.test(key)) safe[key] = '**********';
     }
 
-    console.info('[Config Service] Configuration changed:', newConfig);
+    console.info('[Config Service] Configuration changed:', safe);
   }
 }

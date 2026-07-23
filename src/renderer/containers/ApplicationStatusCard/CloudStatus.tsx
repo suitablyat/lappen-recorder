@@ -82,7 +82,7 @@ const CloudStatus = ({ appState, setPreviewEnabled }: StatusProps) => {
         <h2 className="text-sm font-semibold">{status}</h2>
         <Separator className="my-1" />
         <p className="text-xs text-popover-foreground/60">
-          {getLocalePhrase(language, Phrase.StatusDescrDisconnected)}
+          {getLocalePhrase(language, Phrase.RemoteStorageEnabledDescription)}
         </p>
       </div>
     );
@@ -95,37 +95,7 @@ const CloudStatus = ({ appState, setPreviewEnabled }: StatusProps) => {
         <h2 className="text-sm font-semibold">{status}</h2>
         <Separator className="my-1" />
         <p className="text-xs text-popover-foreground/60">
-          {getLocalePhrase(language, Phrase.StatusDescrNotAuthenticated)}
-        </p>
-      </div>
-    );
-  } else if (!cloudStatus.authorized) {
-    variant = 'error';
-    status = cloudStatus.guild
-      ? getLocalePhrase(language, Phrase.StatusTitleNotAuthorized)
-      : getLocalePhrase(language, Phrase.StatusTitleNoGuild);
-
-    description = (
-      <div className="flex flex-col gap-y-2">
-        <h2 className="text-sm font-semibold">{status}</h2>
-        <Separator className="my-1" />
-        <p className="text-xs text-popover-foreground/60">
-          {status === getLocalePhrase(language, Phrase.StatusTitleNotAuthorized)
-            ? getLocalePhrase(language, Phrase.StatusDescrNotAuthorized)
-            : getLocalePhrase(language, Phrase.StatusDescrNoGuild)}
-        </p>
-      </div>
-    );
-  } else if (cloudStatus.migrated) {
-    variant = 'error';
-    status = getLocalePhrase(language, Phrase.StatusTitleMigrated);
-
-    description = (
-      <div className="flex flex-col gap-y-2">
-        <h2 className="text-sm font-semibold">{status}</h2>
-        <Separator className="my-1" />
-        <p className="text-xs text-popover-foreground/60">
-          {getLocalePhrase(language, Phrase.StatusDescrMigrated)}
+          {getLocalePhrase(language, Phrase.ConnectionTestFailed)}
         </p>
       </div>
     );
@@ -141,7 +111,7 @@ const CloudStatus = ({ appState, setPreviewEnabled }: StatusProps) => {
         <h2 className="text-sm font-semibold">{status}</h2>
         <Separator className="my-1" />
         <p className="text-xs text-popover-foreground/60">
-          {getLocalePhrase(language, Phrase.StatusDescrConnected)}
+          {getLocalePhrase(language, Phrase.ConnectionTestSuccess)}
         </p>
       </div>
     );
@@ -152,7 +122,9 @@ const CloudStatus = ({ appState, setPreviewEnabled }: StatusProps) => {
     return (
       <div className="inline-flex gap-x-[2px] text-xs text-foreground-lighter">
         <CloudUpload size={16} />
-        {cloudState.uploadProgress.toFixed(0)}%
+        {cloudState.uploadProgress >= 95
+          ? getLocalePhrase(language, Phrase.RemoteStorageUploadFinalizing)
+          : `${cloudState.uploadProgress.toFixed(0)}%`}
         <span className="text-[0.60rem] text-foreground mx-[2px]">
           {cloudState.queuedUploads > 1 && `+${cloudState.queuedUploads - 1}`}
         </span>
@@ -188,7 +160,7 @@ const CloudStatus = ({ appState, setPreviewEnabled }: StatusProps) => {
           />
           <div className="ml-4 mr-1 py-2 font-sans flex flex-col justify-around">
             <span className="text-foreground-lighter font-bold text-xs drop-shadow-sm opacity-60 hover:text-foreground-lighter">
-              {getLocalePhrase(language, Phrase.StatusTitlePro)}
+              {getLocalePhrase(language, Phrase.RemoteStorageLabel)}
             </span>
 
             <span className="text-popover-foreground font-semibold text-sm transition-all hover:text-popover-foreground whitespace-nowrap overflow-hidden text-ellipsis">

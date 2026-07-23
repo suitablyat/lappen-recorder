@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { configSchema, ConfigurationSchema } from 'config/configSchema';
 import { Info, Lock } from 'lucide-react';
 import { AppState, SceneItem } from 'main/types';
@@ -11,6 +18,7 @@ import Switch from './components/Switch/Switch';
 import { Input } from './components/Input/Input';
 import { Phrase } from 'localisation/phrases';
 import Slider from './components/Slider/Slider';
+import { getOverlayCropMax } from 'utils/overlayCropUtils';
 
 const ipc = window.electron.ipcRenderer;
 
@@ -28,14 +36,24 @@ const ChatOverlayControls = (props: IProps) => {
   const [cropMaxX, setCropMaxX] = useState(0);
   const [cropMaxY, setCropMaxY] = useState(0);
 
-  const initCropSliders = async () => {
+  const initCropSliders = useCallback(async () => {
     if (!config.chatOverlayEnabled) return;
     const pos = await ipc.getSourcePosition(SceneItem.OVERLAY);
-    // Don't let them scale to less than 80% of the dimension.
-    // That seems reasonable to avoid weird issues.
-    setCropMaxX(0.8 * Math.round(pos.width / 2));
-    setCropMaxY(0.8 * Math.round(pos.height / 2));
-  };
+    if (!pos || pos.scaleX <= 0 || pos.scaleY <= 0) return;
+
+    const display = await ipc.getDisplayInfo();
+    const previewScale = Math.min(
+      display.previewWidth / display.canvasWidth,
+      display.previewHeight / display.canvasHeight,
+    );
+    if (!Number.isFinite(previewScale) || previewScale <= 0) return;
+
+    // Configured crop values use the original image's pixels. Convert the
+    // preview dimensions back to those same source-pixel units.
+    // Keep at least 20% of each source dimension visible.
+    setCropMaxX(getOverlayCropMax(pos.width, previewScale, pos.scaleX));
+    setCropMaxY(getOverlayCropMax(pos.height, previewScale, pos.scaleY));
+  }, [config.chatOverlayEnabled]);
 
   useEffect(() => {
     if (initialRender.current) return;
@@ -66,7 +84,7 @@ const ChatOverlayControls = (props: IProps) => {
   useEffect(() => {
     initCropSliders();
     initialRender.current = false;
-  }, []);
+  }, [initCropSliders]);
 
   const setOverlayEnabled = (checked: boolean) => {
     setConfig((prevState) => {
@@ -123,7 +141,7 @@ const ChatOverlayControls = (props: IProps) => {
             )}
             side="right"
           >
-            {cloudStatus.authorized ? (
+            {cloudStatus.chat ? (
               <Info size={20} className="inline-flex" />
             ) : (
               <Lock size={20} className="inline-flex" />
@@ -136,7 +154,7 @@ const ChatOverlayControls = (props: IProps) => {
             onCheckedChange={setOwnImage}
             disabled={
               !config.chatOverlayOwnImage &&
-              (!config.chatOverlayEnabled || !cloudStatus.authorized)
+              (!config.chatOverlayEnabled || !cloudStatus.chat)
             }
           />
         </div>
@@ -186,22 +204,16 @@ const ChatOverlayControls = (props: IProps) => {
     );
   };
 
-  const setCropX = async (array: number[]) => {
+  const setCropX = (array: number[]) => {
     const value = array[0];
     setConfig((prev) => ({ ...prev, chatOverlayCropX: value }));
-    const p = await ipc.getSourcePosition(SceneItem.OVERLAY);
-    p.cropLeft = value;
-    p.cropRight = value;
-    await ipc.setSourcePosition(SceneItem.OVERLAY, p);
+    ipc.setOverlayCrop(value, config.chatOverlayCropY);
   };
 
-  const setCropY = async (array: number[]) => {
+  const setCropY = (array: number[]) => {
     const value = array[0];
     setConfig((prev) => ({ ...prev, chatOverlayCropY: value }));
-    const p = await ipc.getSourcePosition(SceneItem.OVERLAY);
-    p.cropTop = value;
-    p.cropBottom = value;
-    await ipc.setSourcePosition(SceneItem.OVERLAY, p);
+    ipc.setOverlayCrop(config.chatOverlayCropX, value);
   };
 
   const getChatOverlayCropSliders = () => {
@@ -226,8 +238,12 @@ const ChatOverlayControls = (props: IProps) => {
               max={cropMaxX}
               step={1}
               onValueChange={setCropX}
+              withTooltip={false}
             />
           </div>
+          <span className="w-12 text-right text-sm tabular-nums text-foreground">
+            {config.chatOverlayCropX}
+          </span>
         </div>
         <div className="flex gap-x-3 items-center">
           <Label className="flex items-center w-[75px] mb-0">
@@ -248,8 +264,12 @@ const ChatOverlayControls = (props: IProps) => {
               max={cropMaxY}
               step={1}
               onValueChange={setCropY}
+              withTooltip={false}
             />
           </div>
+          <span className="w-12 text-right text-sm tabular-nums text-foreground">
+            {config.chatOverlayCropY}
+          </span>
         </div>
       </div>
     );

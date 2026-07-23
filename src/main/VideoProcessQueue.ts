@@ -3,7 +3,6 @@ import { getBaseConfig, shouldUpload } from '../utils/configUtils';
 import DiskSizeMonitor from '../storage/DiskSizeMonitor';
 import ConfigService from '../config/ConfigService';
 import {
-  CloudMetadata,
   DiskStatus,
   KillVideoQueueItem,
   KillVideoStatus,
@@ -16,21 +15,31 @@ import {
   writeMetadataFile,
   getMetadataForVideo,
   rendererVideoToMetadata,
-  getFileInfo,
   fixPathWhenPackaged,
-  logAxiosError,
   buildKillVideoMetadata,
   getOBSFormattedDate,
 } from './util';
-import CloudClient from '../storage/CloudClient';
+import RemoteStorageService from '../storage/RemoteStorageService';
 import { send } from './main';
 import ffmpeg from 'fluent-ffmpeg';
-import axios from 'axios';
 import DiskClient from 'storage/DiskClient';
 import Recorder from './Recorder';
 import { promises as fspromise } from 'fs';
 
 const atomicQueue = require('atomic-queue');
+
+interface QueueEmitter {
+  on<TArguments extends unknown[]>(
+    event: string,
+    listener: (...arguments_: TArguments) => void,
+  ): QueueEmitter;
+}
+
+interface AtomicQueue extends QueueEmitter {
+  pool: QueueEmitter;
+  write(item: unknown): void;
+}
+
 const devMode = process.env.NODE_ENV === 'development';
 const isDebug = devMode || process.env.DEBUG_PROD === 'true';
 
@@ -65,25 +74,25 @@ export default class VideoProcessQueue {
   /**
    * Atomic queue object for queueing cutting of videos.
    */
-  private videoQueue: any;
+  private videoQueue: AtomicQueue;
 
   /**
    * Atomic queue object for queuing upload of videos, seperated from the
    * video queue as this can take a long time and we don't want to block further
    * video cuts behind uploads.
    */
-  private uploadQueue: any;
+  private uploadQueue: AtomicQueue;
 
   /**
    * Atomic queue object for queuing download of videos.
    */
-  private downloadQueue: any;
+  private downloadQueue: AtomicQueue;
 
   /**
    * The kill video queue re-encoder a video from multiple perspectives into a
    * single video file. This is naturally computationally expensive.
    */
-  private killVideoQueue: any;
+  private killVideoQueue: AtomicQueue;
 
   /**
    * Config service handle.
@@ -120,75 +129,81 @@ export default class VideoProcessQueue {
     this.killVideoQueue = this.createKillVideoQueue();
   }
 
-  private createVideoQueue() {
+  private createVideoQueue(): AtomicQueue {
     const worker = this.processVideoQueueItem.bind(this);
     const settings = { concurrency: 1 };
-    const queue = atomicQueue(worker, settings);
+    const queue: AtomicQueue = atomicQueue(worker, settings);
 
-    /* eslint-disable prettier/prettier */
-    queue
-      .on('error', VideoProcessQueue.errorProcessingVideo)
-      .on('idle', () => {this.videoQueueEmpty()});
-         
+    queue.on('error', VideoProcessQueue.errorProcessingVideo).on('idle', () => {
+      this.videoQueueEmpty();
+    });
+
     queue.pool
-      .on('start', (data: VideoQueueItem) => { this.startedProcessingVideo(data) })
-      .on('finish', (_: unknown, data: VideoQueueItem) => { this.finishProcessingVideo(data) });
-    /* eslint-enable prettier/prettier */
-
+      .on('start', (data: VideoQueueItem) => {
+        this.startedProcessingVideo(data);
+      })
+      .on('finish', (_: unknown, data: VideoQueueItem) => {
+        this.finishProcessingVideo(data);
+      });
     return queue;
   }
 
-  private createUploadQueue() {
+  private createUploadQueue(): AtomicQueue {
     const worker = this.processUploadQueueItem.bind(this);
     const settings = { concurrency: 1 };
-    const queue = atomicQueue(worker, settings);
+    const queue: AtomicQueue = atomicQueue(worker, settings);
 
-    /* eslint-disable prettier/prettier */
-    queue
-      .on('error', VideoProcessQueue.errorUploadingVideo)
-      .on('idle', () => { this.uploadQueueEmpty() });
+    queue.on('error', VideoProcessQueue.errorUploadingVideo).on('idle', () => {
+      this.uploadQueueEmpty();
+    });
 
     queue.pool
-      .on('start', (item: UploadQueueItem) => { this.startedUploadingVideo(item) })
-      .on('finish', async (_: unknown, item: UploadQueueItem) => { await this.finishUploadingVideo(item) });
-    /* eslint-enable prettier/prettier */
-
+      .on('start', (item: UploadQueueItem) => {
+        this.startedUploadingVideo(item);
+      })
+      .on('finish', async (_: unknown, item: UploadQueueItem) => {
+        await this.finishUploadingVideo(item);
+      });
     return queue;
   }
 
-  private createDownloadQueue() {
+  private createDownloadQueue(): AtomicQueue {
     const worker = this.processDownloadQueueItem.bind(this);
     const settings = { concurrency: 1 };
-    const queue = atomicQueue(worker, settings);
+    const queue: AtomicQueue = atomicQueue(worker, settings);
 
-    /* eslint-disable prettier/prettier */
     queue
       .on('error', VideoProcessQueue.errorDownloadingVideo)
-      .on('idle', () => { this.downloadQueueEmpty() });
+      .on('idle', () => {
+        this.downloadQueueEmpty();
+      });
 
     queue.pool
-      .on('start', (video: RendererVideo) => { this.startedDownloadingVideo(video) })
-      .on('finish', async (_: unknown, video: RendererVideo) => { await this.finishDownloadingVideo(video) });
-    /* eslint-enable prettier/prettier */
-
+      .on('start', (video: RendererVideo) => {
+        this.startedDownloadingVideo(video);
+      })
+      .on('finish', async (_: unknown, video: RendererVideo) => {
+        await this.finishDownloadingVideo(video);
+      });
     return queue;
   }
 
-  private createKillVideoQueue() {
+  private createKillVideoQueue(): AtomicQueue {
     const worker = this.processKillVideoQueueItem.bind(this);
     const settings = { concurrency: 1 };
-    const queue = atomicQueue(worker, settings);
+    const queue: AtomicQueue = atomicQueue(worker, settings);
 
-    /* eslint-disable prettier/prettier */
-    queue
-      .on('error', VideoProcessQueue.errorKillVideo)
-      .on('idle', () => { this.videoQueueEmpty() });
+    queue.on('error', VideoProcessQueue.errorKillVideo).on('idle', () => {
+      this.videoQueueEmpty();
+    });
 
     queue.pool
-      .on('start', (item: KillVideoQueueItem) => { this.startedProcessingKillVideo(item) })
-      .on('finish', (_: unknown, item: KillVideoQueueItem) => { this.finishProcessingKillVideo(item) });
-    /* eslint-enable prettier/prettier */
-
+      .on('start', (item: KillVideoQueueItem) => {
+        this.startedProcessingKillVideo(item);
+      })
+      .on('finish', (_: unknown, item: KillVideoQueueItem) => {
+        this.finishProcessingKillVideo(item);
+      });
     return queue;
   }
 
@@ -249,6 +264,10 @@ export default class VideoProcessQueue {
     this.killVideoQueue.write(item);
   };
 
+  public hasPendingUploads() {
+    return this.inProgressUploads.length > 0;
+  }
+
   /**
    * Process a video by cutting it to size and saving it to disk, also
    * writes out the metadata JSON file.
@@ -272,7 +291,7 @@ export default class VideoProcessQueue {
 
       await writeMetadataFile(videoPath, data.metadata);
 
-      const readyToUpload = await CloudClient.getInstance().ready();
+      const readyToUpload = await RemoteStorageService.getInstance().ready();
       const upload = readyToUpload && shouldUpload(this.cfg, data.metadata);
 
       if (upload) {
@@ -299,8 +318,8 @@ export default class VideoProcessQueue {
     let lastProgress = 0;
 
     // Decide if we need to use a rate limit or not. Setting to -1 is unlimited.
-    const rateLimit = this.cfg.get<boolean>('cloudUploadRateLimit')
-      ? this.cfg.get<number>('cloudUploadRateLimitMbps')
+    const rateLimit = this.cfg.get<boolean>('remoteStorageUploadRateLimit')
+      ? this.cfg.get<number>('remoteStorageUploadRateLimitMbps')
       : -1;
 
     const progressCallback = (progress: number) => {
@@ -312,51 +331,20 @@ export default class VideoProcessQueue {
       lastProgress = progress;
     };
 
-    const client = CloudClient.getInstance();
+    const client = RemoteStorageService.getInstance();
 
     try {
-      // Upload the video first, this can take a bit of time, and don't want
-      // to confuse the frontend by having metadata without video.
-      await client.putFile(item.path, rateLimit, progressCallback);
-      progressCallback(100);
-
-      // Now add the metadata.
       const metadata = await getMetadataForVideo(item.path);
-
-      const cloudMetadata: CloudMetadata = {
-        ...metadata,
-        start: metadata.start || 0,
-        uniqueHash: metadata.uniqueHash || '',
-        videoName: path.basename(item.path, '.mp4'),
-        videoKey: path.basename(item.path),
-      };
-
-      if (cloudMetadata.level) {
-        // The string "level" isn't a valid SQL column name, in new videos we
-        // use the keystoneLevel entry in the metadata, but if we're uploading
-        // an old video correct it here at the point of upload.
-        cloudMetadata.keystoneLevel = cloudMetadata.level;
-        delete cloudMetadata.level;
-      }
-
-      if (cloudMetadata.start === 0) {
-        // Another "old videos don't have..." bug, this time for the start
-        // parameter, which causes dates to be wrong in the UI. Grab the date
-        // from the video file on disk.
-        const stats = await getFileInfo(item.path);
-        cloudMetadata.start = stats.mtime;
-      }
-
-      await client.postVideo(cloudMetadata);
+      await client.uploadVideo(
+        item.path,
+        metadata,
+        rateLimit,
+        progressCallback,
+      );
+      console.info('[VideoProcessQueue] Upload succeeded', item.path);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const msg = '[CloudClient] Axios error processing video';
-        logAxiosError(msg, error);
-      } else {
-        console.error('[CloudClient] Error processing video', error);
-      }
-
-      progressCallback(100);
+      console.error('[RemoteStorage] Error uploading video', String(error));
+      progressCallback(0);
     }
 
     done();
@@ -371,7 +359,7 @@ export default class VideoProcessQueue {
     done: () => void,
   ): Promise<void> {
     const storageDir = this.cfg.get<string>('storagePath');
-    const { videoName, videoSource } = video;
+    const { videoName } = video;
 
     let lastProgress = 0;
 
@@ -384,15 +372,11 @@ export default class VideoProcessQueue {
       lastProgress = progress;
     };
 
-    const client = CloudClient.getInstance();
+    const client = RemoteStorageService.getInstance();
 
     try {
-      await client.getAsFile(
-        `${videoName}.mp4`,
-        videoSource,
-        storageDir,
-        progressCallback,
-      );
+      const destinationPath = path.join(storageDir, `${videoName}.mp4`);
+      await client.downloadVideo(video, destinationPath, progressCallback);
 
       // Spread to force this to be cloned, avoiding modifying the original input,
       // which is used again later. This manifested as a bug that prevented us clearing
@@ -471,7 +455,7 @@ export default class VideoProcessQueue {
       const metadata = buildKillVideoMetadata(baseMetadata, item.segments);
       await writeMetadataFile(videoPath, metadata);
 
-      const readyToUpload = await CloudClient.getInstance().ready();
+      const readyToUpload = await RemoteStorageService.getInstance().ready();
       const upload = readyToUpload && shouldUpload(this.cfg, metadata);
 
       if (upload) {
@@ -544,6 +528,7 @@ export default class VideoProcessQueue {
    * Actions on starting the processing of a kill video.
    */
   private startedProcessingKillVideo(item: KillVideoQueueItem) {
+    void item;
     console.info('[VideoProcessQueue] Now processing kill video');
 
     const status: KillVideoStatus = {
@@ -587,8 +572,8 @@ export default class VideoProcessQueue {
   /**
    * Called on the end of an upload.
    */
-  private finishUploadingVideo(item: UploadQueueItem) {
-    console.info('[VideoProcessQueue] Finished uploading video', item.path);
+  private async finishUploadingVideo(item: UploadQueueItem) {
+    console.info('[VideoProcessQueue] Upload attempt complete', item.path);
 
     this.inProgressUploads = this.inProgressUploads.filter(
       (p) => p !== item.path,
@@ -596,6 +581,9 @@ export default class VideoProcessQueue {
 
     const queued = Math.max(0, this.inProgressUploads.length);
     send('updateUploadQueueLength', queued);
+    if (queued === 0) {
+      await RemoteStorageService.getInstance().enforceRetention();
+    }
   }
 
   /**

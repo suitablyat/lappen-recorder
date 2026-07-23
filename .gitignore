@@ -19,6 +19,8 @@ node_modules
 
 release/app/dist
 release/build
+release/compliance
+release/downloads
 .erb/dll
 
 .idea
@@ -40,3 +42,5 @@ buffer
 
 # Some stuff OBS window capture creates at runtime?
 win-capture/
+
+AGENTS.md

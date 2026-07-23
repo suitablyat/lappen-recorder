@@ -1,0 +1,87 @@
+name: Publish release compliance artifacts
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing GitHub release tag to update
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-compliance-${{ inputs.tag || github.event.release.tag_name }}
+  cancel-in-progress: false
+
+jobs:
+  publish-source:
+    runs-on: windows-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      RELEASE_TAG: ${{ inputs.tag || github.event.release.tag_name }}
+
+    steps:
+      - name: Check out the released source
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.RELEASE_TAG }}
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependency metadata without running package scripts
+        run: |
+          npm ci --ignore-scripts
+          npm ci --ignore-scripts --prefix release/app
+
+      - name: Generate and verify third-party notices
+        run: |
+          npm run compliance:notices
+          npm run compliance:check
+          git diff --exit-code -- THIRD_PARTY_NOTICES.md
+
+      - name: Download installer artifacts for hashing
+        run: >-
+          gh release download "$env:RELEASE_TAG"
+          --dir release/downloads
+          --pattern "*.exe"
+          --pattern "*.blockmap"
+          --pattern "latest.yml"
+
+      - name: Download retained source and generate the release manifest
+        run: >-
+          node scripts/generate-release-manifest.mjs
+          --tag "$env:RELEASE_TAG"
+          --output-dir release/compliance
+          --artifacts-dir release/downloads
+          --download-sources
+
+      - name: Add notices to the compliance artifact set
+        run: Copy-Item THIRD_PARTY_NOTICES.md release/compliance/THIRD_PARTY_NOTICES.md
+
+      - name: Attach source archives, hashes, and notices to the release
+        run: |
+          $assets = Get-ChildItem release/compliance -File | ForEach-Object { $_.FullName }
+          gh release upload "$env:RELEASE_TAG" $assets --clobber
+
+      - name: Put corresponding-source links in the release notes
+        run: >-
+          node scripts/update-release-source-links.mjs
+          "$env:RELEASE_TAG"
+          release/compliance/RELEASE_MANIFEST.json
+
+      - name: Preserve a workflow copy of the compliance bundle
+        uses: actions/upload-artifact@v6
+        with:
+          name: release-compliance-${{ env.RELEASE_TAG }}
+          path: release/compliance/*
+          if-no-files-found: error
+          retention-days: 90

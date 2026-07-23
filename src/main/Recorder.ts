@@ -57,6 +57,7 @@ import { getNativeWindowHandle, send } from './main';
 import { ipcMain } from 'electron';
 import Poller from 'utils/Poller';
 import AsyncQueue from 'utils/AsyncQueue';
+import { normalizeOverlayCrop } from 'utils/overlayCropUtils';
 import assert from 'assert';
 import { isHighRes } from 'renderer/rendererutils';
 
@@ -66,7 +67,7 @@ const moof = Buffer.from('moof');
 const mdat = Buffer.from('mdat');
 
 /**
- * Class for handing the interface between Warcraft Recorder and OBS.
+ * Class for handling the interface between Lappen Recorder and OBS.
  *
  * This works by constantly recording a "buffer" whenever WoW is open. If an
  * interesting event is spotted in the combatlog (e.g. an ENCOUNTER_START
@@ -257,6 +258,9 @@ export default class Recorder extends EventEmitter {
    */
   private overlayPosDebounceTimer?: NodeJS.Timeout;
 
+  /** Timer to debounce persistence while an overlay crop slider is dragged. */
+  private overlayCropDebounceTimer?: NodeJS.Timeout;
+
   private captureMode = CaptureMode.NONE;
 
   private captureSource?: string;
@@ -359,6 +363,10 @@ export default class Recorder extends EventEmitter {
         // Don't need to redraw here, frontend handles this for us.
       },
     );
+
+    ipcMain.on('setOverlayCrop', (_event, cropX: number, cropY: number) => {
+      this.setOverlayCrop(cropX, cropY);
+    });
 
     ipcMain.on('resetSourcePosition', (_event, item: SceneItem) => {
       const src =
@@ -1772,6 +1780,42 @@ export default class Recorder extends EventEmitter {
   }
 
   /**
+   * Apply overlay cropping in unscaled source pixels. Crop settings are stored
+   * in these same units, unlike the preview-space position and dimensions.
+   */
+  public setOverlayCrop(cropX: number, cropY: number) {
+    if (!this.overlaySource) return;
+    if (!Number.isFinite(cropX) || !Number.isFinite(cropY)) {
+      console.warn('[Recorder] Ignoring invalid overlay crop values');
+      return;
+    }
+
+    const current = noobs.GetSourcePos(this.overlaySource);
+    const normalizedX = normalizeOverlayCrop(cropX, current.width);
+    const normalizedY = normalizeOverlayCrop(cropY, current.height);
+
+    noobs.SetSourcePos(this.overlaySource, {
+      x: current.x,
+      y: current.y,
+      scaleX: current.scaleX,
+      scaleY: current.scaleY,
+      cropLeft: normalizedX,
+      cropRight: normalizedX,
+      cropTop: normalizedY,
+      cropBottom: normalizedY,
+    });
+
+    if (this.overlayCropDebounceTimer) {
+      clearTimeout(this.overlayCropDebounceTimer);
+    }
+    this.overlayCropDebounceTimer = setTimeout(() => {
+      this.cfg.set('chatOverlayCropX', normalizedX);
+      this.cfg.set('chatOverlayCropY', normalizedY);
+      this.overlayCropDebounceTimer = undefined;
+    }, 250);
+  }
+
+  /**
    * Reset the source position to 0, 0 and unscaled.
    */
   public resetSourcePosition(src: string) {
@@ -1791,6 +1835,11 @@ export default class Recorder extends EventEmitter {
     const item = src.startsWith('WCR Chat Overlay')
       ? SceneItem.OVERLAY
       : SceneItem.GAME;
+
+    if (item === SceneItem.OVERLAY && this.overlayCropDebounceTimer) {
+      clearTimeout(this.overlayCropDebounceTimer);
+      this.overlayCropDebounceTimer = undefined;
+    }
 
     if (item === SceneItem.GAME) {
       console.info('[Recorder] Resetting game source so fit to window');

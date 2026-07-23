@@ -47,7 +47,7 @@ RETAIL_LOG_PATH = "C:/Program Files/World of Warcraft/_retail_/Logs"
 CLASSIC_LOG_PATH = "C:/Program Files/World of Warcraft/_classic_/Logs"
 ERA_LOG_PATH = "C:/Program Files/World of Warcraft/_classic_era_/Logs"
 PTR_LOG_PATH = "C:/Program Files/World of Warcraft/_xptr_/Logs"
-STORAGE_PATH = "C:/Users/Alex/Videos/Warcraft Recorder"
+STORAGE_PATH = "C:/Users/YourName/Videos/Lappen Recorder"
 
 CWD = os.path.dirname(__file__)
 
@@ -102,7 +102,7 @@ ERA_TEST_NAMES = list(map(lambda t: t.NAME, ERA_TESTS))
 PTR_TEST_NAMES = list(map(lambda t: t.NAME, PTR_TESTS))
 
 # Define the CLI arguments.
-parser = argparse.ArgumentParser(prog="Warcraft Recorder Tests")
+parser = argparse.ArgumentParser(prog="Lappen Recorder Tests")
 parser.add_argument("-f", help="flavour", choices=["classic", "retail", "era", "ptr"])
 parser.add_argument("-t", help="test", choices=RETAIL_TEST_NAMES + CLASSIC_TEST_NAMES + ERA_TEST_NAMES + PTR_TEST_NAMES)
 args = parser.parse_args()

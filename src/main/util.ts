@@ -23,7 +23,6 @@ import {
   RendererVideo,
   ObsAudioConfig,
   ErrorReport,
-  CloudSignedMetadata,
   KillVideoSegment,
   ActivityStatus,
   InstantReplayData,
@@ -42,7 +41,7 @@ import {
   getPlayerSpecID,
   secToMmSs,
 } from 'renderer/rendererutils';
-import { ZipArchive } from 'archiver';
+import type { ZipArchive } from 'archiver';
 import ChallengeModeDungeon from 'activitys/ChallengeModeDungeon';
 import Activity from 'activitys/Activity';
 import SoloShuffle from 'activitys/SoloShuffle';
@@ -65,7 +64,7 @@ const fixPathWhenPackaged = (p: string) => {
 const setupApplicationLogging = () => {
   const log = require('electron-log');
   const date = new Date().toISOString().slice(0, 10);
-  const logRelativePath = `logs/WarcraftRecorder-${date}.log`;
+  const logRelativePath = `logs/LappenRecorder-${date}.log`;
   const logPath = fixPathWhenPackaged(path.join(__dirname, logRelativePath));
   log.transports.file.resolvePath = () => logPath;
   Object.assign(console, log.functions);
@@ -164,10 +163,8 @@ const getMetadataFileNameForVideo = (video: string) => {
  * this translates them back to english so we can process them. This is
  * purely to bridge the gap, and in theory could be removed in the future.
  */
-const convertKoreanVideoCategory = (
-  metadata: Metadata | CloudSignedMetadata,
-) => {
-  const raw = metadata as any;
+const convertKoreanVideoCategory = (metadata: Metadata) => {
+  const raw = metadata as unknown as { category: string };
 
   if (raw.category === '연습전투') {
     raw.category = VideoCategory.Skirmish;
@@ -386,7 +383,7 @@ const getAvailableDisplays = (): OurDisplayType[] => {
 
 const deferredPromiseHelper = <T>() => {
   let resolveHelper!: (value: T | PromiseLike<T>) => void;
-  let rejectHelper!: (reason?: any) => void;
+  let rejectHelper!: (reason?: unknown) => void;
 
   const promise = new Promise<T>((resolve, reject) => {
     resolveHelper = resolve;
@@ -870,7 +867,7 @@ const markForVideoForDelete = async (videoPath: string) => {
  * videos from cloud to disk.
  */
 const rendererVideoToMetadata = (video: RendererVideo) => {
-  const data = video as any;
+  const data: Partial<RendererVideo> = { ...video };
   delete data.videoSource;
   delete data.videoName;
   delete data.mtime;
@@ -879,31 +876,6 @@ const rendererVideoToMetadata = (video: RendererVideo) => {
   delete data.multiPov;
   delete data.uniqueId;
   return data as Metadata;
-};
-
-/**
- * Convert a CloudSignedMetadata object to a RendererVideo object.
- */
-const cloudSignedMetadataToRendererVideo = (metadata: CloudSignedMetadata) => {
-  // For cloud videos, the signed URLs are the sources.
-  const videoSource = metadata.signedVideoKey;
-  const uniqueId = `${metadata.videoName}-cloud`;
-
-  // We don't want the signed properties themselves.
-  const mutable: any = metadata;
-  delete mutable.signedVideoKey;
-
-  const video: RendererVideo = {
-    ...mutable,
-    videoSource,
-    multiPov: [],
-    cloud: true,
-    isProtected: Boolean(mutable.protected),
-    mtime: 0,
-    uniqueId,
-  };
-
-  return video;
 };
 
 /**
@@ -920,7 +892,7 @@ const exists = async (file: string) => {
 
 /**
  * Check if the folder contains the managed.txt file indicating it is owned
- * by Warcraft Recorder.
+ * by Lappen Recorder.
  */
 const isFolderOwned = async (dir: string) => {
   const file = path.join(dir, 'managed.txt');
@@ -938,15 +910,15 @@ const isFolderOwned = async (dir: string) => {
  * Take ownership of a directory as the storage directory by writing a file to
  * indicate our ownership. This does the necessary checks that it doesn't contain
  * files we don't recognise first, to avoid the case where a user sets a storage
- * path that contains other files which Warcraft Recorder may go on to delete.
+ * path that contains other files which Lappen Recorder may go on to delete.
  * More context: https://github.com/aza547/wow-recorder/issues/400.
  */
 const takeOwnershipStorageDir = async (dir: string) => {
   const helptext =
-    'If you are setting up Warcraft Recorder for the first time, this folder should be empty.';
+    'If you are setting up Lappen Recorder for the first time, this folder should be empty.';
 
   const content =
-    'This folder is managed by Warcraft Recorder, files in it may be automatically created, modified or deleted.';
+    'This folder is managed by Lappen Recorder, files in it may be automatically created, modified or deleted.';
 
   const files = await fs.promises.readdir(dir);
 
@@ -975,7 +947,7 @@ const takeOwnershipStorageDir = async (dir: string) => {
 
   // Ensure that every MP4 file we saw has a corresponding JSON and PNG file,
   // this covers the case that we've seen before where someone was otherwise
-  // recording MP4s to the same directory as they configured Warcraft Recorder
+  // recording MP4s to the same directory as they configured Lappen Recorder
   // to use.
   const mp4s = files.filter((file) => file.endsWith('.mp4'));
 
@@ -999,15 +971,15 @@ const takeOwnershipStorageDir = async (dir: string) => {
  * Take ownership of a directory as the buffer directory by writing a file to
  * indicate our ownership. This does the necessary checks that it doesn't contain
  * files we don't recognise first, to avoid the case where a user sets a buffer
- * storage path that contains other files which Warcraft Recorder may go on to delete.
+ * storage path that contains other files which Lappen Recorder may go on to delete.
  * More context: https://github.com/aza547/wow-recorder/issues/400.
  */
 const takeOwnershipBufferDir = async (dir: string) => {
   const helptext =
-    'If you are setting up Warcraft Recorder for the first time, this folder should be empty.';
+    'If you are setting up Lappen Recorder for the first time, this folder should be empty.';
 
   const content =
-    'This folder is managed by Warcraft Recorder, files in it may be automatically created, modified or deleted.';
+    'This folder is managed by Lappen Recorder, files in it may be automatically created, modified or deleted.';
 
   const files = await fs.promises.readdir(dir);
 
@@ -1216,7 +1188,7 @@ const runFirstTimeSetupActionsNoObs = () => {
 
     const initialStorageDir = path.join(
       baseVideoPath,
-      'Warcraft Recorder Videos',
+      'Lappen Recorder Videos',
     );
 
     fs.mkdirSync(initialStorageDir, { recursive: true });
@@ -1330,7 +1302,6 @@ export {
   areDatesWithinSeconds,
   markForVideoForDelete,
   rendererVideoToMetadata,
-  cloudSignedMetadataToRendererVideo,
   exists,
   isFolderOwned,
   takeOwnershipStorageDir,

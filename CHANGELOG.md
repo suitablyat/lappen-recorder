@@ -5,12 +5,55 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+## [8.0.0-rc.1] - 2026-07-23
+
+### Breaking changes
+
+- Removed the proprietary Warcraft Recorder account, guild, subscription,
+  WebSocket, WCR API, and Cloudflare R2 integrations. Existing cloud
+  credentials are deleted during migration and are never reused as WebDAV
+  credentials.
+- Changed the application identity, installer, update feed, repository, and
+  data directory to Lappen Recorder. This release is maintained independently
+  from Warcraft Recorder.
+
 ### Changed
+
+- Local recording is now the source of truth and works fully offline without
+  an account. Remote failures never delete or block local recordings.
+- Replaced Cloud Settings with optional Remote Storage settings. Remote storage
+  is disabled by default and supports Nextcloud and generic WebDAV.
+- Added provider-neutral upload, download, listing, deletion, authenticated
+  playback, progress reporting, automatic upload filters, bandwidth limits,
+  quota reporting, retention, and retry-safe partial failure behavior.
+- Large Nextcloud uploads now use resumable provider-specific chunks; generic
+  WebDAV uploads remain standards-compatible single-file PUT requests.
+- Legacy cloud configuration is migrated idempotently. Compatible upload
+  filters and limits are retained while obsolete secrets are removed and the
+  user is prompted to configure new credentials.
+- Changed the Windows setup wizard to allow choosing the installation folder.
+
 ### Added
+
+- Added validated, provider-hosted per-video chat without centralized accounts,
+  APIs, or WebSockets. Chat documents are bounded and use conditional writes to
+  avoid silently overwriting concurrent updates.
+- Added capability-gated, read-only public share links for Nextcloud. Generic
+  WebDAV does not expose this action.
+- Added encrypted remote credential storage through Electron safeStorage,
+  normalized URL/path/filename handling, structured connection-test errors,
+  and secret-redacted logging and IPC failures.
+- Added GPL release compliance automation, exact source manifests, third-party
+  notices, retained corresponding-source archives, and fork identity notices.
 - Add the ability to seek to a clip's source, if it is still available.
 - Added some hotkey hints to the video selection table.
 
 ### Fixed
+
+- Fixed authenticated remote playback, seeking, pausing, long-running uploads,
+  remote list refresh after upload, retention around protected recordings, and
+  insufficient-storage reporting.
 - [Issue 855](https://github.com/aza547/wow-recorder/issues/855) - Share log handler timeouts between game modes.
 - Fix an issue where the progress bar on the video player would not be set correctly until it started playing.
 - [Issue 876](https://github.com/aza547/wow-recorder/issues/876) - Fix tag dialog not opening on some categories.

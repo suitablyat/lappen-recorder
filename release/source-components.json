@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "components": [
+    {
+      "id": "noobs",
+      "name": "noobs",
+      "version": "0.0.201",
+      "repository": "https://github.com/aza547/noobs",
+      "sourceCommit": "07a28338a871bdf7e0d24cdae65ce16e9470f2fa",
+      "archiveName": "noobs-0.0.201-source.zip",
+      "packageIntegrity": "sha512-jH+HgGsYmrLcv+9RYC1je5teZuncjSMmVtJnMkZ125BJe1LKIls343ecxYgyzaruwxoZ4e6VR/VJfN0Nd54OMw==",
+      "binaryPath": "release/app/node_modules/noobs/build/Release/noobs.node"
+    },
+    {
+      "id": "obs",
+      "name": "OBS Studio (Warcraft Recorder fork)",
+      "version": "27.2.0-4590-g71eaeafa4",
+      "repository": "https://github.com/aza547/warcraft-recorder-obs-studio",
+      "sourceCommit": "71eaeafa48785c13857a59e147316abad90cc364",
+      "archiveName": "OBS-27.2.0-71eaeafa4-source.zip",
+      "binaryPath": "release/app/node_modules/noobs/dist/bin/obs.dll",
+      "binarySha256": "b58b0b42d0ff46c366e316f7e8f132b444aee3624aaa949e953f73f521626c76"
+    },
+    {
+      "id": "ffmpeg",
+      "name": "FFmpeg",
+      "version": "n7.1.1",
+      "repository": "https://github.com/FFmpeg/FFmpeg",
+      "sourceCommit": "db69d06eeeab4f46da15030a80d539efb4503ca8",
+      "archiveName": "FFmpeg-n7.1.1-source.zip",
+      "binaryPath": "release/app/node_modules/noobs/dist/bin/ffmpeg.exe",
+      "binarySha256": "994a62f862b9fe867d7e4c82eb574be494e9ebae7bb2c874a58c8bbee1576915",
+      "requiredBuildFlags": [
+        "--enable-gpl",
+        "--enable-libx264"
+      ]
+    }
+  ]
+}

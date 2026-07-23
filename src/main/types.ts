@@ -230,26 +230,6 @@ type Metadata = {
 };
 
 /**
- * We mandate some fields are present for cloud videos that are optional for
- * disk based videos.
- */
-type CloudMetadata = Metadata & {
-  videoName: string;
-  videoKey: string;
-  start: number;
-  uniqueHash: string;
-};
-
-/**
- * When we retrieve state from the WCR API, we have a few additional entries
- * in the data, these are signed by the API so that we can read them without
- * the client having credentials.
- */
-type CloudSignedMetadata = CloudMetadata & {
-  signedVideoKey: string;
-};
-
-/**
  * All fields in the raw type can be undefined to force us to check them
  * before use. In theory anything can be present or not present in the
  * metadata files.
@@ -463,14 +443,6 @@ type ObsAudioConfig = {
   pushToTalkModifiers: string;
 };
 
-type CloudConfig = {
-  cloudStorage: boolean;
-  cloudUpload: boolean;
-  cloudAccountName: string;
-  cloudAccountPassword: string;
-  cloudGuildName: string;
-};
-
 enum DeathMarkers {
   NONE = 'None',
   OWN = 'Own',
@@ -507,17 +479,17 @@ type CloudStatus = {
   usage: number;
   limit: number;
   migrated: boolean;
+  shareLinks: boolean;
+  chat: boolean;
+  tags: boolean;
+  protection: boolean;
+  quotaAvailable?: boolean;
+  remoteStorageError?: 'INSUFFICIENT_STORAGE';
 };
 
 type DiskStatus = {
   usage: number;
   limit: number;
-};
-
-type CloudObject = {
-  key: string;
-  size: number;
-  lastMod: Date;
 };
 
 interface IBrowserWindow {
@@ -543,15 +515,6 @@ type KillVideoSegment = {
   video: RendererVideo;
   start: number;
   stop: number;
-};
-
-type CreateMultiPartUploadResponseBody = {
-  urls: string[];
-};
-
-type CompleteMultiPartUploadRequestBody = {
-  etags: string[];
-  key: string;
 };
 
 export interface ISettingsSubCategory {
@@ -729,7 +692,6 @@ export {
   ObsVideoConfig,
   ObsOverlayConfig,
   ObsAudioConfig,
-  CloudConfig,
   DeathMarkers,
   VideoMarker,
   MarkerColors,
@@ -738,13 +700,8 @@ export {
   SliderMark,
   CloudStatus,
   DiskStatus,
-  CloudObject,
   IBrowserWindow,
   UploadQueueItem,
-  CloudMetadata,
-  CloudSignedMetadata,
-  CreateMultiPartUploadResponseBody,
-  CompleteMultiPartUploadRequestBody,
   StorageFilter,
   ObsSourceCallbackInfo,
   ObsVolmeterCallbackInfo,
