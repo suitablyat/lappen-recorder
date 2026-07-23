@@ -1,4 +1,5 @@
 import type { Metadata, RendererVideo } from '../../main/types';
+import type { TChatMessageWithId } from '../../types/api';
 import {
   disabledCapabilities,
   ProgressCallback,
@@ -67,6 +68,28 @@ export default class DisabledStorageProvider implements RemoteStorageProvider {
 
   async createShareLink(videoName: string): Promise<string> {
     void videoName;
+    throw new Error('Remote storage is disabled');
+  }
+
+  async getChatMessages(correlator: string): Promise<TChatMessageWithId[]> {
+    void correlator;
+    throw new Error('Remote storage is disabled');
+  }
+
+  async addChatMessage(
+    correlator: string,
+    userName: string,
+    message: string,
+  ): Promise<TChatMessageWithId> {
+    void correlator;
+    void userName;
+    void message;
+    throw new Error('Remote storage is disabled');
+  }
+
+  async deleteChatMessage(correlator: string, id: number): Promise<void> {
+    void correlator;
+    void id;
     throw new Error('Remote storage is disabled');
   }
 }

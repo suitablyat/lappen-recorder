@@ -39,8 +39,18 @@ const RecorderPreview = (props: {
   const previewDivRef = useRef<HTMLDivElement>(null);
   const draggingOverlay = useRef<SceneInteraction>(SceneInteraction.NONE);
   const draggingGame = useRef<SceneInteraction>(SceneInteraction.NONE);
+  const resizeObserverRef = useRef<ResizeObserver | undefined>(undefined);
+  const resizeFrameRef = useRef<number | undefined>(undefined);
+  const lastPreviewBoundsRef = useRef<
+    | {
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+      }
+    | undefined
+  >(undefined);
   let zIndex = 1;
-  let resizeObserver: ResizeObserver | undefined;
 
   const [previewInfo, setPreviewInfo] = useState<{
     canvasWidth: number;
@@ -205,19 +215,31 @@ const RecorderPreview = (props: {
     setGameBoxDimensions(pos);
   };
 
-  const configurePreview = async () => {
+  const configurePreview = () => {
     const zoomFactor = window.devicePixelRatio; // Windows display scaling.
 
     if (previewDivRef.current) {
       const { width, height, x, y } =
         previewDivRef.current.getBoundingClientRect();
+      const bounds = {
+        x: Math.round(x * zoomFactor),
+        y: Math.round(y * zoomFactor),
+        width: Math.round(width * zoomFactor),
+        height: Math.round(height * zoomFactor),
+      };
+      const previous = lastPreviewBoundsRef.current;
+      if (
+        previous &&
+        previous.x === bounds.x &&
+        previous.y === bounds.y &&
+        previous.width === bounds.width &&
+        previous.height === bounds.height
+      ) {
+        return;
+      }
 
-      ipc.configurePreview(
-        x * zoomFactor,
-        y * zoomFactor,
-        width * zoomFactor,
-        height * zoomFactor,
-      );
+      lastPreviewBoundsRef.current = bounds;
+      ipc.configurePreview(bounds.x, bounds.y, bounds.width, bounds.height);
     }
   };
 
@@ -362,19 +384,29 @@ const RecorderPreview = (props: {
   }, [onMouseMove, onMouseUp]);
 
   const cleanupResizeObserver = () => {
-    if (resizeObserver !== undefined) {
-      resizeObserver.disconnect();
-      resizeObserver = undefined;
+    if (resizeFrameRef.current !== undefined) {
+      window.cancelAnimationFrame(resizeFrameRef.current);
+      resizeFrameRef.current = undefined;
+    }
+    if (resizeObserverRef.current) {
+      resizeObserverRef.current.disconnect();
+      resizeObserverRef.current = undefined;
     }
   };
 
   const setupResizeObserver = () => {
-    if (resizeObserver === undefined) {
-      resizeObserver = new ResizeObserver(() => configurePreview());
+    if (!resizeObserverRef.current) {
+      resizeObserverRef.current = new ResizeObserver(() => {
+        if (resizeFrameRef.current !== undefined) return;
+        resizeFrameRef.current = window.requestAnimationFrame(() => {
+          resizeFrameRef.current = undefined;
+          configurePreview();
+        });
+      });
     }
 
     if (previewDivRef.current) {
-      resizeObserver.observe(previewDivRef.current);
+      resizeObserverRef.current.observe(previewDivRef.current);
     }
   };
 

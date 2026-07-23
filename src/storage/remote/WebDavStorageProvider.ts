@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import fs from 'fs';
 import path from 'path';
 import type { Metadata, RendererVideo } from '../../main/types';
+import { ChatMessageWithId, TChatMessageWithId } from '../../types/api';
 import {
   ProgressCallback,
   RemoteStorageProvider,
@@ -26,6 +27,11 @@ export type WebDavStorageConfig = {
 };
 
 type DavEntry = { href: string; name: string; size: number; modified: number };
+type ChatDocument = {
+  messages: TChatMessageWithId[];
+  etag?: string;
+  exists: boolean;
+};
 
 type NextcloudShare = { share_type?: number; url?: string };
 type NextcloudOcsResponse<T> = {
@@ -54,10 +60,12 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     shareLinks: false,
     tags: false,
     protection: false,
+    chat: true,
   };
 
   private readonly endpoint: string;
   private readonly videosUrl: string;
+  private readonly chatsUrl: string;
   private readonly insecure: boolean;
   private readonly username: string;
   private readonly password: string;
@@ -65,6 +73,8 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
   private readonly provider: 'webdav' | 'nextcloud';
   private readonly basePath: string;
   private readonly nextcloudSharesUrl?: string;
+  private chatMutationQueue: Promise<void> = Promise.resolve();
+  private chatsCollectionReady = false;
 
   constructor(config: WebDavStorageConfig) {
     const normalized = normalizeWebDavEndpoint(
@@ -82,6 +92,7 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     this.password = config.password;
     this.timeoutMs = config.timeoutMs ?? 15000;
     this.videosUrl = new URL(`${basePath}/videos/`, this.endpoint).toString();
+    this.chatsUrl = new URL(`${basePath}/chats/`, this.endpoint).toString();
     this.capabilities.shareLinks = config.provider === 'nextcloud';
 
     if (config.provider === 'nextcloud') {
@@ -118,9 +129,9 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     });
   }
 
-  private async ensureCollection() {
+  private async ensureCollection(collectionUrl = this.videosUrl) {
     const root = new URL(this.endpoint);
-    const relative = new URL(this.videosUrl).pathname.slice(
+    const relative = new URL(collectionUrl).pathname.slice(
       root.pathname.length,
     );
     let current = this.endpoint;
@@ -444,9 +455,132 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
             failures.push(extension);
         }
       }
+      try {
+        await this.request({
+          url: this.chatUrl(videoName),
+          method: 'DELETE',
+        });
+      } catch (error) {
+        if ((error as AxiosError).response?.status !== 404)
+          failures.push('.chat.json');
+      }
     }
     if (failures.length)
       throw new Error('Remote video deletion was only partially successful');
+  }
+
+  private chatUrl(rawCorrelator: string) {
+    const correlator = sanitizeRemoteFileName(rawCorrelator);
+    if (correlator !== rawCorrelator)
+      throw new Error('Invalid chat correlator');
+    return new URL(`${correlator}.json`, this.chatsUrl).toString();
+  }
+
+  private async readChatDocument(correlator: string): Promise<ChatDocument> {
+    if (!this.chatsCollectionReady) {
+      await this.ensureCollection(this.chatsUrl);
+      this.chatsCollectionReady = true;
+    }
+    try {
+      const response = await this.request<unknown>({
+        url: this.chatUrl(correlator),
+        method: 'GET',
+        responseType: 'json',
+      });
+      const parsed = ChatMessageWithId.array().safeParse(response.data);
+      if (!parsed.success) throw new Error('Invalid remote chat data');
+      const etag = response.headers?.etag;
+      return {
+        messages: parsed.data.sort((a, b) => a.timestamp - b.timestamp),
+        etag: typeof etag === 'string' ? etag : undefined,
+        exists: true,
+      };
+    } catch (error) {
+      if ((error as AxiosError).response?.status === 404) {
+        return { messages: [], exists: false };
+      }
+      throw error;
+    }
+  }
+
+  async getChatMessages(correlator: string) {
+    return (await this.readChatDocument(correlator)).messages;
+  }
+
+  private serializeChatMutation<T>(operation: () => Promise<T>): Promise<T> {
+    const result = this.chatMutationQueue.then(operation, operation);
+    this.chatMutationQueue = result.then(
+      () => undefined,
+      () => undefined,
+    );
+    return result;
+  }
+
+  addChatMessage(
+    correlator: string,
+    userName: string,
+    message: string,
+  ): Promise<TChatMessageWithId> {
+    return this.serializeChatMutation(async () => {
+      const chatMessage = ChatMessageWithId.parse({
+        id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+        correlator,
+        userName,
+        message,
+        timestamp: Date.now(),
+      });
+      await this.mutateChatDocument(correlator, (messages) => [
+        ...messages,
+        chatMessage,
+      ]);
+      return chatMessage;
+    });
+  }
+
+  deleteChatMessage(correlator: string, id: number): Promise<void> {
+    return this.serializeChatMutation(async () => {
+      await this.mutateChatDocument(correlator, (messages) =>
+        messages.filter((entry) => entry.id !== id),
+      );
+    });
+  }
+
+  private async mutateChatDocument(
+    correlator: string,
+    mutate: (messages: TChatMessageWithId[]) => TChatMessageWithId[],
+  ) {
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      const document = await this.readChatDocument(correlator);
+      const messages = mutate(document.messages);
+      if (
+        document.exists &&
+        messages.length === document.messages.length &&
+        messages.every((entry, index) => entry === document.messages[index])
+      ) {
+        return;
+      }
+
+      try {
+        await this.request({
+          url: this.chatUrl(correlator),
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(document.etag
+              ? { 'If-Match': document.etag }
+              : document.exists
+                ? {}
+                : { 'If-None-Match': '*' }),
+          },
+          data: JSON.stringify(messages),
+        });
+        return;
+      } catch (error) {
+        const status = (error as AxiosError).response?.status;
+        if (status === 409) this.chatsCollectionReady = false;
+        if ((status !== 409 && status !== 412) || attempt === 2) throw error;
+      }
+    }
   }
 
   private nextcloudFilePath(videoName: string) {

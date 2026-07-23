@@ -1,4 +1,5 @@
 import type { Metadata, RendererVideo } from '../../main/types';
+import type { TChatMessageWithId } from '../../types/api';
 
 export type RemoteStorageCapabilities = {
   list: boolean;
@@ -8,6 +9,7 @@ export type RemoteStorageCapabilities = {
   shareLinks: boolean;
   tags: boolean;
   protection: boolean;
+  chat: boolean;
 };
 
 export type RemoteStorageTestErrorCode =
@@ -55,6 +57,13 @@ export interface RemoteStorageProvider {
   streamVideo(videoName: string, range?: string): Promise<RemoteVideoStream>;
   deleteVideos(videoNames: string[]): Promise<void>;
   createShareLink(videoName: string): Promise<string>;
+  getChatMessages(correlator: string): Promise<TChatMessageWithId[]>;
+  addChatMessage(
+    correlator: string,
+    userName: string,
+    message: string,
+  ): Promise<TChatMessageWithId>;
+  deleteChatMessage(correlator: string, id: number): Promise<void>;
 }
 
 export const disabledCapabilities: RemoteStorageCapabilities = {
@@ -65,4 +74,5 @@ export const disabledCapabilities: RemoteStorageCapabilities = {
   shareLinks: false,
   tags: false,
   protection: false,
+  chat: false,
 };

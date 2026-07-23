@@ -46,6 +46,7 @@ describe('remote storage helpers and factory', () => {
     expect(provider.id).toBe('disabled');
     await expect(provider.ready()).resolves.toBe(false);
     expect(provider.capabilities.upload).toBe(false);
+    expect(provider.capabilities.chat).toBe(false);
   });
 
   test('normalizes Nextcloud base URLs and complete endpoints', () => {
@@ -269,6 +270,56 @@ describe('WebDavStorageProvider', () => {
     const provider = new WebDavStorageProvider(config);
     await expect(provider.deleteVideos(['raid'])).rejects.toThrow(
       'partially successful',
+    );
+  });
+
+  test('stores, reads, and deletes validated per-video chat messages', async () => {
+    let stored: unknown[] | undefined;
+    request.mockImplementation(async (call) => {
+      const url = String(call.url);
+      if (call.method === 'GET' && url.endsWith('/chats/raid.json')) {
+        if (!stored) {
+          const error = new AxiosError('not found');
+          Object.assign(error, { response: { status: 404 } });
+          throw error;
+        }
+        return { data: stored, headers: { etag: '"chat-version"' } };
+      }
+      if (call.method === 'PUT' && url.endsWith('/chats/raid.json')) {
+        stored = JSON.parse(String(call.data));
+      }
+      return { data: '', headers: {} };
+    });
+    const provider = new WebDavStorageProvider(config);
+    expect(provider.capabilities.chat).toBe(true);
+
+    const created = await provider.addChatMessage('raid', 'user', '02:15 nice');
+    expect(created).toMatchObject({
+      correlator: 'raid',
+      userName: 'user',
+      message: '02:15 nice',
+    });
+    await expect(provider.getChatMessages('raid')).resolves.toEqual([created]);
+
+    await provider.deleteChatMessage('raid', created.id);
+    await expect(provider.getChatMessages('raid')).resolves.toEqual([]);
+    expect(
+      request.mock.calls.some(
+        ([call]) =>
+          call.method === 'PUT' &&
+          call.headers?.['If-Match'] === '"chat-version"',
+      ),
+    ).toBe(true);
+  });
+
+  test('rejects malformed remote chat documents', async () => {
+    request.mockImplementation(async (call) => {
+      if (call.method === 'GET') return { data: [{ message: 'incomplete' }] };
+      return { data: '' };
+    });
+    const provider = new WebDavStorageProvider(config);
+    await expect(provider.getChatMessages('raid')).rejects.toThrow(
+      'Invalid remote chat data',
     );
   });
 

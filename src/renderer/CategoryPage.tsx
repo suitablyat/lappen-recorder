@@ -246,10 +246,9 @@ const CategoryPage = (props: IProps) => {
       ? selectedRow.original
       : filteredState[0];
 
-    // Only try to find a chat video if we have a video with cloud storage,
-    // a start time and a hash, else we cannot find the chat correlator.
+    // Chat documents are keyed by the provider-independent remote video name.
     const chatVideo = [activeParentVideo, ...activeParentVideo.multiPov].find(
-      (rv) => rv.cloud && rv.uniqueHash && rv.start,
+      (rv) => rv.cloud,
     );
 
     const renderTextDescr = () => {

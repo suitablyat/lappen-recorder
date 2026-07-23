@@ -26,6 +26,7 @@ const Slider = React.forwardRef<
       <Tooltip
         content={value}
         side="top"
+        allowPointerDown
         onClick={(e) => e.preventDefault()}
         onPointerDownOutside={(e) => e.preventDefault()}
       >

@@ -11,6 +11,7 @@ import {
 import VideoProcessQueue from 'main/VideoProcessQueue';
 import { send } from 'main/main';
 import { getMetadataForVideo } from 'main/util';
+import type { TChatMessageWithId } from 'types/api';
 import StorageClient from './StorageClient';
 import DisabledStorageProvider from './remote/DisabledStorageProvider';
 import { createRemoteStorageProvider } from './remote/RemoteStorageProviderFactory';
@@ -89,7 +90,7 @@ export default class RemoteStorageService implements StorageClient {
       limit: 0,
       migrated: false,
       shareLinks: capabilities.shareLinks,
-      chat: false,
+      chat: ready && capabilities.chat,
       tags: capabilities.tags,
       protection: capabilities.protection,
     };
@@ -150,6 +151,69 @@ export default class RemoteStorageService implements StorageClient {
     onProgress: ProgressCallback,
   ) {
     return this.provider.downloadVideo(video, destinationPath, onProgress);
+  }
+
+  getChatCorrelator(video: RendererVideo) {
+    if (!video?.cloud || typeof video.videoName !== 'string') {
+      throw new Error('Chat requires a remote video');
+    }
+    const correlator = sanitizeRemoteFileName(video.videoName);
+    if (correlator !== video.videoName) throw new Error('Invalid remote video');
+    return correlator;
+  }
+
+  getChatMessages(correlator: string): Promise<TChatMessageWithId[]> {
+    this.validateChatCorrelator(correlator);
+    if (!this.provider.capabilities.chat) {
+      throw new Error(
+        'The active remote storage provider does not support chat',
+      );
+    }
+    return this.provider.getChatMessages(correlator);
+  }
+
+  addChatMessage(
+    correlator: string,
+    message: string,
+  ): Promise<TChatMessageWithId> {
+    this.validateChatCorrelator(correlator);
+    if (
+      typeof message !== 'string' ||
+      !message.trim() ||
+      message.length > 256
+    ) {
+      throw new Error('Invalid chat message');
+    }
+    if (!this.provider.capabilities.chat) {
+      throw new Error(
+        'The active remote storage provider does not support chat',
+      );
+    }
+    const userName =
+      this.cfg.get<string>('webdavUsername').trim().slice(0, 128) ||
+      'Remote user';
+    return this.provider.addChatMessage(correlator, userName, message.trim());
+  }
+
+  deleteChatMessage(correlator: string, id: number): Promise<void> {
+    this.validateChatCorrelator(correlator);
+    if (!Number.isSafeInteger(id) || id < 0) throw new Error('Invalid chat id');
+    if (!this.provider.capabilities.chat) {
+      throw new Error(
+        'The active remote storage provider does not support chat',
+      );
+    }
+    return this.provider.deleteChatMessage(correlator, id);
+  }
+
+  private validateChatCorrelator(correlator: string) {
+    if (
+      typeof correlator !== 'string' ||
+      correlator.length > 240 ||
+      sanitizeRemoteFileName(correlator) !== correlator
+    ) {
+      throw new Error('Invalid chat correlator');
+    }
   }
 
   async handleVideoRequest(request: Request): Promise<Response> {

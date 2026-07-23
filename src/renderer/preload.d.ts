@@ -58,6 +58,7 @@ declare global {
             cropBottom: number;
           },
         ): void;
+        setOverlayCrop(cropX: number, cropY: number): void;
 
         audioSettingsOpen(): Promise<void>;
         audioSettingsClosed(): Promise<void>;
@@ -79,8 +80,11 @@ declare global {
         getSensibleEncoderDefault(): Promise<string>;
         getOrCreateChatCorrelator(video: RendererVideo): Promise<string>;
         getChatMessages(correlator: string): Promise<TChatMessageWithId[]>;
-        postChatMessage(correlator: string, message: string): void;
-        deleteChatMessage(id: number): void;
+        postChatMessage(
+          correlator: string,
+          message: string,
+        ): Promise<TChatMessageWithId>;
+        deleteChatMessage(correlator: string, id: number): Promise<void>;
         toggleManualRecording(): void;
         forceStopRecording(): void;
 

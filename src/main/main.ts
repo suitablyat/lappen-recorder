@@ -484,20 +484,20 @@ ipcMain.handle('getAllDisplays', (): OurDisplayType[] => {
   return getAvailableDisplays();
 });
 
-ipcMain.handle('getOrCreateChatCorrelator', async () => {
-  throw new Error('Remote storage providers do not support video chat');
+ipcMain.handle('getOrCreateChatCorrelator', async (_event, video) => {
+  return RemoteStorageService.getInstance().getChatCorrelator(video);
 });
 
-ipcMain.handle('getChatMessages', async () => {
-  return [];
+ipcMain.handle('getChatMessages', async (_event, correlator) => {
+  return RemoteStorageService.getInstance().getChatMessages(correlator);
 });
 
-ipcMain.on('postChatMessage', () => {
-  console.warn('[Main] Ignoring unsupported remote video chat request');
+ipcMain.handle('postChatMessage', async (_event, correlator, message) => {
+  return RemoteStorageService.getInstance().addChatMessage(correlator, message);
 });
 
-ipcMain.on('deleteChatMessage', () => {
-  console.warn('[Main] Ignoring unsupported remote video chat delete');
+ipcMain.handle('deleteChatMessage', async (_event, correlator, id) => {
+  return RemoteStorageService.getInstance().deleteChatMessage(correlator, id);
 });
 
 /**
