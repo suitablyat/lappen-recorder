@@ -6,12 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [8.0.0-rc.2] - 2026-07-23
+
 ### Added
 
 - Added the SignPath Foundation code-signing policy, privacy disclosure,
   release-signing architecture, and repository-side preparation for a trusted
   GitHub Actions signing workflow. Production signing remains pending SignPath
   enrollment.
+
+### Changed
+
+- Large Nextcloud uploads now use the recommended chunk-upload v2 wire format
+  and upload up to three chunks concurrently. Resumable retries remain isolated
+  per chunk, and configured bandwidth limits apply to the combined traffic.
 
 ## [8.0.0-rc.1] - 2026-07-23
 

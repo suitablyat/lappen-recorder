@@ -23,12 +23,14 @@
   acknowledgement, JSON metadata upload, and remote verification. Request-byte
   progress alone is not treated as a completed remote write.
 - Nextcloud MP4 files of 256 MiB or larger use its provider-specific chunked
-  upload v2 protocol with 64 MiB chunks. Chunk names encode inclusive byte
-  ranges, each transiently failed chunk is attempted at most three times, and
-  `OC-Total-Length` is sent for quota validation. A deterministic temporary
-  upload ID based on the normalized video name, size, and modification time
-  allows a later retry or application restart to validate and skip chunks that
-  Nextcloud still retains. The MP4 becomes visible only after Nextcloud
+  upload v2 protocol with 64 MiB, numerically named chunks and a `Destination`
+  header on v2 requests. Up to three chunks upload in parallel, each transiently
+  failed chunk is attempted at most three times, and `OC-Total-Length` is sent
+  for quota validation. When a bandwidth limit is enabled, each active batch
+  shares that limit so parallel requests cannot multiply it. A deterministic
+  temporary upload ID based on the normalized video name, size, and modification
+  time allows a later retry or application restart to validate and skip chunks
+  that Nextcloud still retains. The MP4 becomes visible only after Nextcloud
   assembles it with `MOVE`; JSON metadata is uploaded afterward.
 - Generic WebDAV continues to use one standards-compatible `PUT`, because
   resumable chunk assembly is not part of the generic WebDAV protocol.
