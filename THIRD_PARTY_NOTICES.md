@@ -48,7 +48,7 @@ combined native recording component as GPL-covered for distribution.
 | `@babel/helper-string-parser@7.29.7` | MIT | [source](https://github.com/babel/babel) |
 | `@babel/helper-validator-identifier@7.29.7` | MIT | [source](https://github.com/babel/babel) |
 | `@babel/parser@7.29.7` | MIT | [source](https://github.com/babel/babel) |
-| `@babel/runtime@7.27.0` | MIT | [source](https://github.com/babel/babel) |
+| `@babel/runtime@7.29.7` | MIT | [source](https://github.com/babel/babel) |
 | `@babel/template@7.29.7` | MIT | [source](https://github.com/babel/babel) |
 | `@babel/traverse@7.29.7` | MIT | [source](https://github.com/babel/babel) |
 | `@babel/types@7.29.7` | MIT | [source](https://github.com/babel/babel) |
@@ -60,17 +60,16 @@ combined native recording component as GPL-covered for distribution.
 | `@chevrotain/types@11.0.3` | Apache-2.0 | [source](https://github.com/Chevrotain/chevrotain) |
 | `@chevrotain/types@11.1.2` | Apache-2.0 | [source](https://github.com/Chevrotain/chevrotain) |
 | `@chevrotain/utils@11.0.3` | Apache-2.0 | [source](https://github.com/Chevrotain/chevrotain) |
-| `@cspotcode/source-map-support@0.8.1` | MIT | [source](https://github.com/cspotcode/node-source-map-support) |
-| `@electron/notarize@3.0.1` | MIT | [source](https://github.com/electron/notarize) |
+| `@electron/notarize@3.1.1` | MIT | [source](https://github.com/electron/notarize) |
 | `@emotion/babel-plugin@11.13.5` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/babel-plugin) |
 | `@emotion/cache@11.14.0` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/cache) |
 | `@emotion/hash@0.9.2` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/hash) |
-| `@emotion/is-prop-valid@1.3.1` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/is-prop-valid) |
+| `@emotion/is-prop-valid@1.4.0` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/is-prop-valid) |
 | `@emotion/memoize@0.9.0` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/memoize) |
 | `@emotion/react@11.14.0` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/react) |
 | `@emotion/serialize@1.3.3` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/serialize) |
 | `@emotion/sheet@1.4.0` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/sheet) |
-| `@emotion/styled@11.14.0` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/styled) |
+| `@emotion/styled@11.14.1` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/styled) |
 | `@emotion/unitless@0.10.0` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/unitless) |
 | `@emotion/use-insertion-effect-with-fallbacks@1.2.0` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/use-insertion-effect-with-fallbacks) |
 | `@emotion/utils@1.4.2` | MIT | [source](https://github.com/emotion-js/emotion/tree/main/packages/utils) |
@@ -80,32 +79,30 @@ combined native recording component as GPL-covered for distribution.
 | `@excalidraw/markdown-to-text@0.1.2` | MIT | [source](https://github.com/danestves/markdown-to-text) |
 | `@excalidraw/mermaid-to-excalidraw@2.2.2` | MIT |  |
 | `@excalidraw/random-username@1.1.0` | MIT | [source](https://github.com/excalidraw/random-username) |
-| `@floating-ui/core@1.7.5` | MIT | [source](https://github.com/floating-ui/floating-ui) |
-| `@floating-ui/dom@1.7.6` | MIT | [source](https://github.com/floating-ui/floating-ui) |
-| `@floating-ui/react-dom@2.1.8` | MIT | [source](https://github.com/floating-ui/floating-ui) |
-| `@floating-ui/utils@0.2.11` | MIT | [source](https://github.com/floating-ui/floating-ui) |
+| `@floating-ui/core@1.8.0` | MIT | [source](https://github.com/floating-ui/floating-ui) |
+| `@floating-ui/dom@1.8.0` | MIT | [source](https://github.com/floating-ui/floating-ui) |
+| `@floating-ui/react-dom@2.1.9` | MIT | [source](https://github.com/floating-ui/floating-ui) |
+| `@floating-ui/utils@0.2.12` | MIT | [source](https://github.com/floating-ui/floating-ui) |
 | `@fortawesome/fontawesome-common-types@6.7.2` | MIT | [source](https://github.com/FortAwesome/Font-Awesome) |
 | `@fortawesome/fontawesome-svg-core@6.7.2` | MIT | [source](https://github.com/FortAwesome/Font-Awesome) |
 | `@fortawesome/free-brands-svg-icons@6.7.2` | (CC-BY-4.0 AND MIT) | [source](https://github.com/FortAwesome/Font-Awesome) |
 | `@fortawesome/free-regular-svg-icons@6.7.2` | (CC-BY-4.0 AND MIT) | [source](https://github.com/FortAwesome/Font-Awesome) |
 | `@fortawesome/free-solid-svg-icons@6.7.2` | (CC-BY-4.0 AND MIT) | [source](https://github.com/FortAwesome/Font-Awesome) |
-| `@fortawesome/react-fontawesome@0.2.2` | MIT | [source](https://github.com/FortAwesome/react-fontawesome) |
+| `@fortawesome/react-fontawesome@0.2.6` | MIT | [source](https://github.com/FortAwesome/react-fontawesome) |
 | `@iconify/types@2.0.0` | MIT | [source](https://github.com/iconify/iconify) |
-| `@iconify/utils@3.1.3` | MIT | [source](https://github.com/iconify/iconify) |
-| `@isaacs/cliui@8.0.2` | ISC | [source](https://github.com/yargs/cliui) |
+| `@iconify/utils@3.1.4` | MIT | [source](https://github.com/iconify/iconify) |
 | `@jridgewell/gen-mapping@0.3.13` | MIT | [source](https://github.com/jridgewell/sourcemaps) |
 | `@jridgewell/resolve-uri@3.1.2` | MIT | [source](https://github.com/jridgewell/resolve-uri) |
-| `@jridgewell/sourcemap-codec@1.5.0` | MIT | [source](https://github.com/jridgewell/sourcemap-codec) |
+| `@jridgewell/sourcemap-codec@1.5.5` | MIT | [source](https://github.com/jridgewell/sourcemaps) |
 | `@jridgewell/trace-mapping@0.3.31` | MIT | [source](https://github.com/jridgewell/sourcemaps) |
-| `@jridgewell/trace-mapping@0.3.9` | MIT | [source](https://github.com/jridgewell/trace-mapping) |
 | `@mermaid-js/parser@0.6.3` | MIT | [source](https://github.com/mermaid-js/mermaid) |
-| `@mermaid-js/parser@1.1.1` | MIT | [source](https://github.com/mermaid-js/mermaid) |
-| `@mui/core-downloads-tracker@5.17.1` | MIT | [source](https://github.com/mui/material-ui) |
-| `@mui/icons-material@5.17.1` | MIT | [source](https://github.com/mui/material-ui) |
-| `@mui/material@5.17.1` | MIT | [source](https://github.com/mui/material-ui) |
+| `@mermaid-js/parser@1.2.0` | MIT | [source](https://github.com/mermaid-js/mermaid) |
+| `@mui/core-downloads-tracker@5.18.0` | MIT | [source](https://github.com/mui/material-ui) |
+| `@mui/icons-material@5.18.0` | MIT | [source](https://github.com/mui/material-ui) |
+| `@mui/material@5.18.0` | MIT | [source](https://github.com/mui/material-ui) |
 | `@mui/private-theming@5.17.1` | MIT | [source](https://github.com/mui/material-ui) |
-| `@mui/styled-engine@5.16.14` | MIT | [source](https://github.com/mui/material-ui) |
-| `@mui/system@5.17.1` | MIT | [source](https://github.com/mui/material-ui) |
+| `@mui/styled-engine@5.18.0` | MIT | [source](https://github.com/mui/material-ui) |
+| `@mui/system@5.18.0` | MIT | [source](https://github.com/mui/material-ui) |
 | `@mui/types@7.2.24` | MIT | [source](https://github.com/mui/material-ui) |
 | `@mui/utils@5.17.1` | MIT | [source](https://github.com/mui/material-ui) |
 | `@mux/mux-data-google-ima@0.3.17` | MIT |  |
@@ -116,85 +113,84 @@ combined native recording component as GPL-covered for distribution.
 | `@nodelib/fs.scandir@2.1.5` | MIT | [source](https://github.com/nodelib/nodelib/tree/master/packages/fs/fs.scandir) |
 | `@nodelib/fs.stat@2.0.5` | MIT | [source](https://github.com/nodelib/nodelib/tree/master/packages/fs/fs.stat) |
 | `@nodelib/fs.walk@1.2.8` | MIT | [source](https://github.com/nodelib/nodelib/tree/master/packages/fs/fs.walk) |
-| `@pkgjs/parseargs@0.11.0` | MIT | [source](git@github.com:pkgjs/parseargs) |
 | `@popperjs/core@2.11.8` | MIT | [source](https://github.com/popperjs/popper-core) |
-| `@radix-ui/number@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/number@1.1.3` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/primitive@1.0.0` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/primitive@1.1.1` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/primitive@1.1.4` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-arrow@1.1.10` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/primitive@1.1.7` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-arrow@1.1.13` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-arrow@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-collection@1.0.1` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-collection@1.1.10` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-collection@1.1.13` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-compose-refs@1.0.0` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-compose-refs@1.1.1` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-compose-refs@1.1.3` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-compose-refs@1.1.4` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-context@1.0.0` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-context@1.1.1` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-context@1.1.4` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-dialog@1.1.17` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-context@1.2.1` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-dialog@1.1.21` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-direction@1.0.0` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-direction@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-dismissable-layer@1.1.13` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-direction@1.1.3` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-dismissable-layer@1.1.17` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-dismissable-layer@1.1.5` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-focus-guards@1.1.1` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-focus-guards@1.1.4` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-focus-scope@1.1.10` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-focus-guards@1.1.5` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-focus-scope@1.1.14` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-focus-scope@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-hover-card@1.1.17` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-hover-card@1.1.21` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-id@1.0.0` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-id@1.1.0` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-id@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-label@2.1.10` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-popover@1.1.17` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-id@1.1.3` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-label@2.1.13` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-popover@1.1.21` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-popover@1.1.6` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-popper@1.2.2` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-popper@1.3.1` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-portal@1.1.12` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-popper@1.3.5` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-portal@1.1.15` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-portal@1.1.4` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-presence@1.0.0` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-presence@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-presence@1.1.6` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-presence@1.1.9` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-primitive@1.0.1` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-primitive@2.0.2` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-primitive@2.1.6` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-progress@1.1.10` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-primitive@2.1.8` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-progress@1.1.14` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-roving-focus@1.0.2` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-roving-focus@1.1.13` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-scroll-area@1.2.12` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-select@2.3.1` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-separator@1.1.10` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-slider@1.4.1` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-roving-focus@1.1.17` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-scroll-area@1.2.16` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-select@2.3.5` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-separator@1.1.13` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-slider@1.4.5` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-slot@1.0.1` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-slot@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-slot@1.3.0` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-switch@1.3.1` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-slot@1.3.1` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-switch@1.3.5` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-tabs@1.0.2` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-tabs@1.1.15` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-toast@1.2.17` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-toggle-group@1.1.13` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-toggle@1.1.12` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-tooltip@1.2.10` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-tabs@1.1.19` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-toast@1.2.21` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-toggle-group@1.1.17` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-toggle@1.1.16` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-tooltip@1.2.14` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-use-callback-ref@1.0.0` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-use-callback-ref@1.1.0` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-use-callback-ref@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-use-callback-ref@1.1.3` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-use-controllable-state@1.0.0` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-use-controllable-state@1.1.0` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-use-controllable-state@1.2.3` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-use-effect-event@0.0.3` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-use-controllable-state@1.2.5` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-use-effect-event@0.0.4` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-use-escape-keydown@1.1.0` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-use-escape-keydown@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-use-is-hydrated@0.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-use-layout-effect@1.0.0` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-use-layout-effect@1.1.0` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-use-layout-effect@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-use-previous@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-use-layout-effect@1.1.3` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-use-previous@1.1.3` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-use-rect@1.1.0` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-use-rect@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-use-rect@1.1.3` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/react-use-size@1.1.0` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-use-size@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/react-visually-hidden@1.2.6` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-use-size@1.1.3` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/react-visually-hidden@1.2.9` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@radix-ui/rect@1.1.0` | MIT | [source](https://github.com/radix-ui/primitives) |
-| `@radix-ui/rect@1.1.2` | MIT | [source](https://github.com/radix-ui/primitives) |
+| `@radix-ui/rect@1.1.3` | MIT | [source](https://github.com/radix-ui/primitives) |
 | `@svta/cml-608@1.0.2` | Apache-2.0 | [source](https://github.com/streaming-video-technology-alliance/common-media-library) |
 | `@svta/cml-cmcd@2.3.2` | Apache-2.0 | [source](https://github.com/streaming-video-technology-alliance/common-media-library) |
 | `@svta/cml-cmsd@1.0.6` | Apache-2.0 | [source](https://github.com/streaming-video-technology-alliance/common-media-library) |
@@ -205,14 +201,10 @@ combined native recording component as GPL-covered for distribution.
 | `@svta/cml-structured-field-values@1.1.3` | Apache-2.0 | [source](https://github.com/streaming-video-technology-alliance/common-media-library) |
 | `@svta/cml-utils@1.5.0` | Apache-2.0 | [source](https://github.com/streaming-video-technology-alliance/common-media-library) |
 | `@svta/cml-xml@1.1.4` | Apache-2.0 | [source](https://github.com/streaming-video-technology-alliance/common-media-library) |
-| `@tanstack/query-core@5.90.7` | MIT | [source](https://github.com/TanStack/query) |
-| `@tanstack/react-query@5.90.7` | MIT | [source](https://github.com/TanStack/query) |
-| `@tanstack/react-table@8.21.2` | MIT | [source](https://github.com/TanStack/table) |
-| `@tanstack/table-core@8.21.2` | MIT | [source](https://github.com/TanStack/table) |
-| `@tsconfig/node10@1.0.11` | MIT | [source](https://github.com/tsconfig/bases) |
-| `@tsconfig/node12@1.0.11` | MIT | [source](https://github.com/tsconfig/bases) |
-| `@tsconfig/node14@1.0.3` | MIT | [source](https://github.com/tsconfig/bases) |
-| `@tsconfig/node16@1.0.4` | MIT | [source](https://github.com/tsconfig/bases) |
+| `@tanstack/query-core@5.101.4` | MIT | [source](https://github.com/TanStack/query) |
+| `@tanstack/react-query@5.101.4` | MIT | [source](https://github.com/TanStack/query) |
+| `@tanstack/react-table@8.21.3` | MIT | [source](https://github.com/TanStack/table) |
+| `@tanstack/table-core@8.21.3` | MIT | [source](https://github.com/TanStack/table) |
 | `@types/d3-array@3.2.2` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/d3-axis@3.0.6` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/d3-brush@3.0.6` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
@@ -233,7 +225,7 @@ combined native recording component as GPL-covered for distribution.
 | `@types/d3-path@3.1.1` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/d3-polygon@3.0.2` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/d3-quadtree@3.0.6` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
-| `@types/d3-random@3.0.3` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
+| `@types/d3-random@3.0.4` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/d3-scale-chromatic@3.1.0` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/d3-scale@4.0.9` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/d3-selection@3.0.11` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
@@ -245,9 +237,8 @@ combined native recording component as GPL-covered for distribution.
 | `@types/d3-zoom@3.0.8` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/d3@7.4.3` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/geojson@7946.0.16` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
-| `@types/node@26.1.1` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/parse-json@4.0.2` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
-| `@types/prop-types@15.7.14` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
+| `@types/prop-types@15.7.15` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/react-dom@19.2.3` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/react-transition-group@4.4.12` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/react@19.2.17` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
@@ -258,45 +249,35 @@ combined native recording component as GPL-covered for distribution.
 | `abstract-leveldown@0.12.4` | MIT | [source](https://github.com/rvagg/node-abstract-leveldown) |
 | `abstract-leveldown@2.6.3` | MIT | [source](https://github.com/level/abstract-leveldown) |
 | `abstract-leveldown@2.7.2` | MIT | [source](https://github.com/level/abstract-leveldown) |
-| `acorn-walk@8.3.4` | MIT | [source](https://github.com/acornjs/acorn) |
 | `acorn@7.4.1` | MIT | [source](https://github.com/acornjs/acorn) |
-| `acorn@8.15.0` | MIT | [source](https://github.com/acornjs/acorn) |
 | `agent-base@6.0.2` | MIT | [source](https://github.com/TooTallNate/node-agent-base) |
 | `ajv-formats@3.0.1` | MIT | [source](https://github.com/ajv-validator/ajv-formats) |
 | `ajv@8.20.0` | MIT | [source](https://github.com/ajv-validator/ajv) |
-| `ansi-regex@5.0.1` | MIT | [source](https://github.com/chalk/ansi-regex) |
-| `ansi-regex@6.1.0` | MIT | [source](https://github.com/chalk/ansi-regex) |
-| `ansi-styles@4.3.0` | MIT | [source](https://github.com/chalk/ansi-styles) |
-| `ansi-styles@6.2.1` | MIT | [source](https://github.com/chalk/ansi-styles) |
 | `any-promise@1.3.0` | MIT | [source](https://github.com/kevinbeaty/any-promise) |
 | `anymatch@3.1.3` | ISC | [source](https://github.com/micromatch/anymatch) |
 | `archiver@8.0.0` | MIT | [source](https://github.com/archiverjs/node-archiver) |
-| `arg@4.1.3` | MIT | [source](https://github.com/zeit/arg) |
 | `arg@5.0.2` | MIT | [source](https://github.com/vercel/arg) |
 | `argparse@2.0.1` | Python-2.0 | [source](https://github.com/nodeca/argparse) |
-| `aria-hidden@1.2.4` | MIT | [source](https://github.com/theKashey/aria-hidden) |
+| `aria-hidden@1.2.6` | MIT | [source](https://github.com/theKashey/aria-hidden) |
 | `async@0.2.10` | MIT | [source](https://github.com/caolan/async) |
 | `async@3.2.6` | MIT | [source](https://github.com/caolan/async) |
 | `asynckit@0.4.0` | MIT | [source](https://github.com/alexindigo/asynckit) |
 | `atomic-queue@5.0.4` | BSD | [source](https://github.com/maxogden/atomic-queue) |
 | `atomically@2.1.1` | MIT | [source](https://github.com/fabiospampinato/atomically) |
-| `axios@1.17.0` | MIT | [source](https://github.com/axios/axios) |
+| `axios@1.18.1` | MIT | [source](https://github.com/axios/axios) |
 | `b4a@1.8.1` | Apache-2.0 | [source](https://github.com/holepunchto/b4a) |
 | `babel-plugin-macros@3.1.0` | MIT | [source](https://github.com/kentcdodds/babel-plugin-macros) |
-| `balanced-match@1.0.2` | MIT | [source](https://github.com/juliangruber/balanced-match) |
 | `balanced-match@4.0.4` | MIT | [source](https://github.com/juliangruber/balanced-match) |
 | `bare-events@2.9.1` | Apache-2.0 | [source](https://github.com/holepunchto/bare-events) |
-| `bare-fs@4.7.2` | Apache-2.0 | [source](https://github.com/holepunchto/bare-fs) |
-| `bare-os@3.9.1` | Apache-2.0 | [source](https://github.com/holepunchto/bare-os) |
-| `bare-path@3.0.1` | Apache-2.0 | [source](https://github.com/holepunchto/bare-path) |
-| `bare-stream@2.13.1` | Apache-2.0 | [source](https://github.com/holepunchto/bare-stream) |
-| `bare-url@2.4.5` | Apache-2.0 | [source](https://github.com/holepunchto/bare-url) |
+| `bare-fs@4.7.4` | Apache-2.0 | [source](https://github.com/holepunchto/bare-fs) |
+| `bare-path@3.1.1` | Apache-2.0 | [source](https://github.com/holepunchto/bare-path) |
+| `bare-stream@2.13.3` | Apache-2.0 | [source](https://github.com/holepunchto/bare-stream) |
+| `bare-url@2.4.6` | Apache-2.0 | [source](https://github.com/holepunchto/bare-url) |
 | `base64-js@1.5.1` | MIT | [source](https://github.com/beatgammit/base64-js) |
 | `bcp-47-match@2.0.3` | MIT | [source](https://github.com/wooorm/bcp-47-match) |
 | `binary-extensions@2.3.0` | MIT | [source](https://github.com/sindresorhus/binary-extensions) |
 | `bl@0.8.2` | MIT | [source](https://github.com/rvagg/bl) |
-| `brace-expansion@2.0.2` | MIT | [source](https://github.com/juliangruber/brace-expansion) |
-| `brace-expansion@5.0.6` | MIT | [source](ssh://git@github.com/juliangruber/brace-expansion) |
+| `brace-expansion@5.0.7` | MIT | [source](https://github.com/juliangruber/brace-expansion) |
 | `braces@3.0.3` | MIT | [source](https://github.com/micromatch/braces) |
 | `brfs@1.6.1` | MIT | [source](https://github.com/substack/brfs) |
 | `browser-fs-access@0.29.1` | Apache-2.0 | [source](https://github.com/GoogleChromeLabs/browser-fs-access) |
@@ -323,8 +304,6 @@ combined native recording component as GPL-covered for distribution.
 | `clsx@2.1.1` | MIT | [source](https://github.com/lukeed/clsx) |
 | `cmdk@1.1.1` | MIT | [source](https://github.com/pacocoursey/cmdk) |
 | `codem-isoboxer@0.3.10` | MIT | [source](https://github.com/madebyhiro/codem-isoboxer) |
-| `color-convert@2.0.1` | MIT | [source](https://github.com/Qix-/color-convert) |
-| `color-name@1.1.4` | MIT | [source](git@github.com:colorjs/color-name) |
 | `combined-stream@1.0.8` | MIT | [source](https://github.com/felixge/node-combined-stream) |
 | `commander@4.1.1` | MIT | [source](https://github.com/tj/commander.js) |
 | `commander@7.2.0` | MIT | [source](https://github.com/tj/commander.js) |
@@ -341,7 +320,6 @@ combined native recording component as GPL-covered for distribution.
 | `crc-32@0.3.0` | Apache-2.0 | [source](https://github.com/SheetJS/js-crc32) |
 | `crc-32@1.2.2` | Apache-2.0 | [source](https://github.com/SheetJS/js-crc32) |
 | `crc32-stream@7.0.1` | MIT | [source](https://github.com/archiverjs/node-crc32-stream) |
-| `create-require@1.1.1` | MIT | [source](https://github.com/nuxt-contrib/create-require) |
 | `cross-env@7.0.3` | MIT | [source](https://github.com/kentcdodds/cross-env) |
 | `cross-spawn@7.0.6` | MIT | [source](git@github.com:moxystudio/node-cross-spawn) |
 | `cssesc@3.0.0` | MIT | [source](https://github.com/mathiasbynens/cssesc) |
@@ -391,7 +369,7 @@ combined native recording component as GPL-covered for distribution.
 | `dayjs@1.11.21` | MIT | [source](https://github.com/iamkun/dayjs) |
 | `debounce-fn@6.0.0` | MIT | [source](https://github.com/sindresorhus/debounce-fn) |
 | `debug@2.6.9` | MIT | [source](https://github.com/visionmedia/debug) |
-| `debug@4.4.0` | MIT | [source](https://github.com/debug-js/debug) |
+| `debug@4.4.3` | MIT | [source](https://github.com/debug-js/debug) |
 | `deep-is@0.1.4` | MIT | [source](http://github.com/thlorenz/deep-is) |
 | `deferred-leveldown@0.2.0` | MIT | [source](https://github.com/Level/deferred-leveldown) |
 | `deferred-leveldown@1.2.2` | MIT | [source](https://github.com/Level/deferred-leveldown) |
@@ -400,15 +378,13 @@ combined native recording component as GPL-covered for distribution.
 | `delayed-stream@1.0.0` | MIT | [source](https://github.com/felixge/node-delayed-stream) |
 | `detect-node-es@1.1.0` | MIT | [source](https://github.com/thekashey/detect-node) |
 | `didyoumean@1.2.2` | Apache-2.0 | [source](https://github.com/dcporter/didyoumean.js) |
-| `diff@4.0.2` | BSD-3-Clause | [source](https://github.com/kpdecker/jsdiff) |
 | `dlv@1.1.3` | MIT | [source](https://github.com/developit/dlv) |
 | `dom-helpers@5.2.1` | MIT | [source](https://github.com/react-bootstrap/dom-helpers) |
-| `dompurify@3.4.8` | (MPL-2.0 OR Apache-2.0) | [source](https://github.com/cure53/DOMPurify) |
-| `dot-prop@10.1.0` | MIT | [source](https://github.com/sindresorhus/dot-prop) |
+| `dompurify@3.4.12` | (MPL-2.0 OR Apache-2.0) | [source](https://github.com/cure53/DOMPurify) |
+| `dot-prop@10.2.0` | MIT | [source](https://github.com/sindresorhus/dot-prop) |
 | `dunder-proto@1.0.1` | MIT | [source](https://github.com/es-shims/dunder-proto) |
 | `duplexer2@0.1.4` | BSD-3-Clause | [source](https://github.com/deoxxa/duplexer2) |
 | `duplexify@3.7.1` | MIT | [source](https://github.com/mafintosh/duplexify) |
-| `eastasianwidth@0.2.0` | MIT | [source](https://github.com/komagata/eastasianwidth) |
 | `electron-debug@4.1.0` | MIT | [source](https://github.com/sindresorhus/electron-debug) |
 | `electron-is-accelerator@0.1.2` | MIT | [source](https://github.com/brrd/electron-is-accelerator) |
 | `electron-is-dev@3.0.1` | MIT | [source](https://github.com/sindresorhus/electron-is-dev) |
@@ -416,18 +392,17 @@ combined native recording component as GPL-covered for distribution.
 | `electron-log@5.4.4` | MIT | [source](https://github.com/megahertz/electron-log) |
 | `electron-store@11.0.2` | MIT | [source](https://github.com/sindresorhus/electron-store) |
 | `electron-updater@6.8.9` | MIT | [source](https://github.com/electron-userland/electron-builder) |
-| `emoji-regex@8.0.0` | MIT | [source](https://github.com/mathiasbynens/emoji-regex) |
-| `emoji-regex@9.2.2` | MIT | [source](https://github.com/mathiasbynens/emoji-regex) |
 | `end-of-stream@1.4.4` | MIT | [source](https://github.com/mafintosh/end-of-stream) |
+| `end-of-stream@1.4.5` | MIT | [source](https://github.com/mafintosh/end-of-stream) |
 | `env-paths@3.0.0` | MIT | [source](https://github.com/sindresorhus/env-paths) |
 | `err-code@2.0.3` | MIT | [source](https://github.com/IndigoUnited/js-err-code) |
 | `errno@0.1.8` | MIT | [source](https://github.com/rvagg/node-errno) |
-| `error-ex@1.3.2` | MIT | [source](https://github.com/qix-/node-error-ex) |
+| `error-ex@1.3.4` | MIT | [source](https://github.com/qix-/node-error-ex) |
 | `es-define-property@1.0.1` | MIT | [source](https://github.com/ljharb/es-define-property) |
 | `es-errors@1.3.0` | MIT | [source](https://github.com/ljharb/es-errors) |
-| `es-object-atoms@1.1.1` | MIT | [source](https://github.com/ljharb/es-object-atoms) |
+| `es-object-atoms@1.1.2` | MIT | [source](https://github.com/ljharb/es-object-atoms) |
 | `es-set-tostringtag@2.1.0` | MIT | [source](https://github.com/es-shims/es-set-tostringtag) |
-| `es-toolkit@1.47.0` | MIT | [source](https://github.com/toss/es-toolkit) |
+| `es-toolkit@1.49.0` | MIT | [source](https://github.com/toss/es-toolkit) |
 | `es6-promise-pool@2.5.0` | MIT | [source](https://github.com/timdp/es6-promise-pool) |
 | `escape-string-regexp@4.0.0` | MIT | [source](https://github.com/sindresorhus/escape-string-regexp) |
 | `escodegen@1.14.3` | BSD-2-Clause | [source](http://github.com/estools/escodegen) |
@@ -446,14 +421,14 @@ combined native recording component as GPL-covered for distribution.
 | `fast-fifo@1.3.2` | MIT | [source](https://github.com/mafintosh/fast-fifo) |
 | `fast-glob@3.3.3` | MIT | [source](https://github.com/mrmlnc/fast-glob) |
 | `fast-levenshtein@2.0.6` | MIT | [source](https://github.com/hiddentao/fast-levenshtein) |
-| `fast-uri@3.0.6` | BSD-3-Clause | [source](https://github.com/fastify/fast-uri) |
-| `fastq@1.19.1` | ISC | [source](https://github.com/mcollina/fastq) |
+| `fast-uri@3.1.4` | BSD-3-Clause | [source](https://github.com/fastify/fast-uri) |
+| `fastq@1.20.1` | ISC | [source](https://github.com/mcollina/fastq) |
+| `fdir@6.5.0` | MIT | [source](https://github.com/thecodrr/fdir) |
 | `fill-range@7.1.1` | MIT | [source](https://github.com/jonschlinkert/fill-range) |
 | `find-root@1.1.0` | MIT | [source](git@github.com:js-n/find-root) |
 | `fluent-ffmpeg@2.1.3` | MIT | [source](https://github.com/fluent-ffmpeg/node-fluent-ffmpeg) |
 | `follow-redirects@1.16.0` | MIT | [source](ssh://git@github.com/follow-redirects/follow-redirects) |
-| `foreground-child@3.3.1` | ISC | [source](https://github.com/tapjs/foreground-child) |
-| `form-data@4.0.5` | MIT | [source](https://github.com/form-data/form-data) |
+| `form-data@4.0.6` | MIT | [source](https://github.com/form-data/form-data) |
 | `fractional-indexing@3.2.0` | CC0-1.0 | [source](https://github.com/rocicorp/fractional-indexing) |
 | `from2@1.3.0` | MIT | [source](https://github.com/hughsk/from2) |
 | `fs-extra@10.1.0` | MIT | [source](https://github.com/jprichardson/node-fs-extra) |
@@ -468,7 +443,6 @@ combined native recording component as GPL-covered for distribution.
 | `get-proto@1.0.1` | MIT | [source](https://github.com/ljharb/get-proto) |
 | `glob-parent@5.1.2` | ISC | [source](https://github.com/gulpjs/glob-parent) |
 | `glob-parent@6.0.2` | ISC | [source](https://github.com/gulpjs/glob-parent) |
-| `glob@10.4.5` | ISC | [source](https://github.com/isaacs/node-glob) |
 | `glur@1.1.2` | MIT | [source](https://github.com/nodeca/glur) |
 | `gopd@1.2.0` | MIT | [source](https://github.com/ljharb/gopd) |
 | `graceful-fs@4.2.11` | ISC | [source](https://github.com/isaacs/node-graceful-fs) |
@@ -477,7 +451,7 @@ combined native recording component as GPL-covered for distribution.
 | `has-tostringtag@1.0.2` | MIT | [source](https://github.com/inspect-js/has-tostringtag) |
 | `has@1.0.3` | MIT | [source](https://github.com/tarruda/has) |
 | `has@1.0.4` | MIT | [source](https://github.com/tarruda/has) |
-| `hasown@2.0.2` | MIT | [source](https://github.com/inspect-js/hasOwn) |
+| `hasown@2.0.4` | MIT | [source](https://github.com/inspect-js/hasOwn) |
 | `hat@0.0.3` | MIT/X11 | [source](http://github.com/substack/node-hat) |
 | `history@5.3.0` | MIT | [source](https://github.com/remix-run/history) |
 | `hls-video-element@1.5.11` | MIT | [source](https://github.com/muxinc/media-elements) |
@@ -489,7 +463,7 @@ combined native recording component as GPL-covered for distribution.
 | `ieee754@1.2.1` | BSD-3-Clause | [source](https://github.com/feross/ieee754) |
 | `image-blob-reduce@3.0.1` | MIT | [source](https://github.com/nodeca/image-blob-reduce) |
 | `immediate@3.0.6` | MIT | [source](https://github.com/calvinmetcalf/immediate) |
-| `immutable@4.3.7` | MIT | [source](https://github.com/immutable-js/immutable-js) |
+| `immutable@4.3.9` | MIT | [source](https://github.com/immutable-js/immutable-js) |
 | `import-fresh@3.3.1` | MIT | [source](https://github.com/sindresorhus/import-fresh) |
 | `import-meta-resolve@4.2.0` | MIT | [source](https://github.com/wooorm/import-meta-resolve) |
 | `imsc@1.1.5` | BSD-2-Clause | [source](https://github.com/sandflow/imscJS) |
@@ -500,9 +474,8 @@ combined native recording component as GPL-covered for distribution.
 | `is-arrayish@0.2.1` | MIT | [source](https://github.com/qix-/node-is-arrayish) |
 | `is-binary-path@2.1.0` | MIT | [source](https://github.com/sindresorhus/is-binary-path) |
 | `is-core-module@2.11.0` | MIT | [source](https://github.com/inspect-js/is-core-module) |
-| `is-core-module@2.16.1` | MIT | [source](https://github.com/inspect-js/is-core-module) |
+| `is-core-module@2.16.2` | MIT | [source](https://github.com/inspect-js/is-core-module) |
 | `is-extglob@2.1.1` | MIT | [source](https://github.com/jonschlinkert/is-extglob) |
-| `is-fullwidth-code-point@3.0.0` | MIT | [source](https://github.com/sindresorhus/is-fullwidth-code-point) |
 | `is-glob@4.0.3` | MIT | [source](https://github.com/micromatch/is-glob) |
 | `is-number@7.0.0` | MIT | [source](https://github.com/jonschlinkert/is-number) |
 | `is-property@1.0.2` | MIT | [source](https://github.com/mikolalysenko/is-property) |
@@ -511,17 +484,17 @@ combined native recording component as GPL-covered for distribution.
 | `isarray@1.0.0` | MIT | [source](https://github.com/juliangruber/isarray) |
 | `isarray@2.0.5` | MIT | [source](https://github.com/juliangruber/isarray) |
 | `isexe@2.0.0` | ISC | [source](https://github.com/isaacs/isexe) |
-| `jackspeak@3.4.3` | BlueOak-1.0.0 | [source](https://github.com/isaacs/jackspeak) |
 | `jiti@1.21.7` | MIT | [source](https://github.com/unjs/jiti) |
+| `jiti@2.7.0` | MIT | [source](https://github.com/unjs/jiti) |
 | `jotai-scope@0.7.2` | MIT | [source](https://github.com/jotaijs/jotai-scope) |
 | `jotai@2.11.0` | MIT | [source](https://github.com/pmndrs/jotai) |
 | `js-tokens@4.0.0` | MIT | [source](https://github.com/lydell/js-tokens) |
-| `js-yaml@4.1.0` | MIT | [source](https://github.com/nodeca/js-yaml) |
+| `js-yaml@4.3.0` | MIT | [source](https://github.com/nodeca/js-yaml) |
 | `jsesc@3.1.0` | MIT | [source](https://github.com/mathiasbynens/jsesc) |
 | `json-parse-even-better-errors@2.3.1` | MIT | [source](https://github.com/npm/json-parse-even-better-errors) |
 | `json-schema-traverse@1.0.0` | MIT | [source](https://github.com/epoberezkin/json-schema-traverse) |
 | `json-schema-typed@8.0.2` | BSD-2-Clause | [source](https://github.com/RemyRylan/json-schema-typed) |
-| `jsonfile@6.1.0` | MIT | [source](git@github.com:jprichardson/node-jsonfile) |
+| `jsonfile@6.2.1` | MIT | [source](git@github.com:jprichardson/node-jsonfile) |
 | `katex@0.16.47` | MIT | [source](https://github.com/KaTeX/KaTeX) |
 | `keyboardevent-from-electron-accelerator@2.0.0` | MIT | [source](https://github.com/parro-it/keyboardevent-from-electron-accelerator) |
 | `keyboardevents-areequal@0.2.2` | MIT | [source](https://github.com/parro-it/keyboardevents-areequal) |
@@ -549,42 +522,38 @@ combined native recording component as GPL-covered for distribution.
 | `lodash.escaperegexp@4.1.2` | MIT | [source](https://github.com/lodash/lodash) |
 | `lodash.isequal@4.5.0` | MIT | [source](https://github.com/lodash/lodash) |
 | `lodash.throttle@4.1.1` | MIT | [source](https://github.com/lodash/lodash) |
-| `lodash@4.17.21` | MIT | [source](https://github.com/lodash/lodash) |
+| `lodash@4.18.1` | MIT | [source](https://github.com/lodash/lodash) |
 | `loose-envify@1.4.0` | MIT | [source](https://github.com/zertosh/loose-envify) |
-| `lru-cache@10.4.3` | ISC | [source](https://github.com/isaacs/node-lru-cache) |
 | `lucide-react@0.428.0` | ISC | [source](https://github.com/lucide-icons/lucide) |
 | `magic-string@0.22.5` | MIT | [source](https://github.com/rich-harris/magic-string) |
-| `make-error@1.3.6` | ISC | [source](https://github.com/JsCommunity/make-error) |
 | `marked@16.4.2` | MIT | [source](https://github.com/markedjs/marked) |
 | `math-intrinsics@1.1.0` | MIT | [source](https://github.com/es-shims/math-intrinsics) |
-| `media-chrome@4.19.1` | MIT | [source](https://github.com/muxinc/media-chrome) |
+| `media-chrome@4.19.2` | MIT | [source](https://github.com/muxinc/media-chrome) |
 | `media-played-ranges-mixin@0.1.0` | MIT | [source](https://github.com/muxinc/media-elements) |
 | `media-tracks@0.3.5` | MIT | [source](https://github.com/muxinc/media-elements) |
 | `memdb@0.2.0` | MIT | [source](https://github.com/juliangruber/memdb) |
 | `memdown@0.8.0` | MIT | [source](https://github.com/rvagg/node-memdown) |
 | `merge-source-map@1.0.4` | MIT | [source](https://github.com/keik/merge-source-map) |
 | `merge2@1.4.1` | MIT | [source](git@github.com:teambition/merge2) |
-| `mermaid@11.15.0` | MIT | [source](https://github.com/mermaid-js/mermaid) |
+| `mermaid@11.16.0` | MIT | [source](https://github.com/mermaid-js/mermaid) |
 | `micromatch@4.0.8` | MIT | [source](https://github.com/micromatch/micromatch) |
 | `mime-db@1.52.0` | MIT | [source](https://github.com/jshttp/mime-db) |
 | `mime-types@2.1.35` | MIT | [source](https://github.com/jshttp/mime-types) |
 | `mimic-function@5.0.1` | MIT | [source](https://github.com/sindresorhus/mimic-function) |
 | `minimatch@10.2.5` | BlueOak-1.0.0 | [source](git@github.com:isaacs/minimatch) |
-| `minimatch@9.0.5` | ISC | [source](https://github.com/isaacs/minimatch) |
 | `minimist@1.2.7` | MIT | [source](https://github.com/minimistjs/minimist) |
 | `minimist@1.2.8` | MIT | [source](https://github.com/minimistjs/minimist) |
-| `minipass@7.1.3` | BlueOak-1.0.0 | [source](https://github.com/isaacs/minipass) |
 | `ms@2.0.0` | MIT | [source](https://github.com/zeit/ms) |
 | `ms@2.1.3` | MIT | [source](https://github.com/vercel/ms) |
 | `multimath@2.0.0` | MIT | [source](https://github.com/nodeca/multimath) |
 | `mutexify@1.4.0` | MIT | [source](https://github.com/mafintosh/mutexify) |
 | `mux-embed@5.18.1` | MIT |  |
 | `mz@2.7.0` | MIT | [source](https://github.com/normalize/mz) |
-| `nanoid@3.3.11` | MIT | [source](https://github.com/ai/nanoid) |
+| `nanoid@3.3.16` | MIT | [source](https://github.com/ai/nanoid) |
 | `nanoid@3.3.3` | MIT | [source](https://github.com/ai/nanoid) |
 | `nanoid@4.0.2` | MIT | [source](https://github.com/ai/nanoid) |
 | `native-promise-only@0.8.1` | MIT | [source](https://github.com/getify/native-promise-only) |
-| `node-abi@4.31.0` | MIT | [source](https://github.com/electron/node-abi) |
+| `node-abi@4.33.0` | MIT | [source](https://github.com/electron/node-abi) |
 | `node-addon-api@8.5.0` | MIT | [source](https://github.com/nodejs/node-addon-api) |
 | `node-gyp-build@4.6.1` | MIT | [source](https://github.com/prebuild/node-gyp-build) |
 | `noobs@0.0.201` | LGPL-2.0 | [source](https://github.com/aza547/noobs) |
@@ -595,8 +564,7 @@ combined native recording component as GPL-covered for distribution.
 | `once@1.4.0` | ISC | [source](https://github.com/isaacs/once) |
 | `open-color@1.9.1` | MIT | [source](https://github.com/yeun/open-color) |
 | `optionator@0.8.3` | MIT | [source](https://github.com/gkz/optionator) |
-| `package-json-from-dist@1.0.1` | BlueOak-1.0.0 | [source](https://github.com/isaacs/package-json-from-dist) |
-| `package-manager-detector@1.6.0` | MIT | [source](https://github.com/antfu-collective/package-manager-detector) |
+| `package-manager-detector@1.8.0` | MIT | [source](https://github.com/antfu-collective/package-manager-detector) |
 | `pako@2.0.3` | (MIT AND Zlib) | [source](https://github.com/nodeca/pako) |
 | `parent-module@1.0.1` | MIT | [source](https://github.com/sindresorhus/parent-module) |
 | `parse-json@5.2.0` | MIT | [source](https://github.com/sindresorhus/parse-json) |
@@ -604,13 +572,13 @@ combined native recording component as GPL-covered for distribution.
 | `path-data-parser@0.1.0` | MIT | [source](https://github.com/pshihn/path-data-parser) |
 | `path-key@3.1.1` | MIT | [source](https://github.com/sindresorhus/path-key) |
 | `path-parse@1.0.7` | MIT | [source](https://github.com/jbgutierrez/path-parse) |
-| `path-scurry@1.11.1` | BlueOak-1.0.0 | [source](https://github.com/isaacs/path-scurry) |
 | `path-type@4.0.0` | MIT | [source](https://github.com/sindresorhus/path-type) |
 | `path@0.12.7` | MIT | [source](https://github.com/jinder/path) |
 | `perfect-freehand@1.2.0` | MIT | [source](https://github.com/steveruizok/perfect-freehand) |
 | `pica@7.1.1` | MIT | [source](https://github.com/nodeca/pica) |
 | `picocolors@1.1.1` | ISC | [source](https://github.com/alexeyraspopov/picocolors) |
-| `picomatch@2.3.1` | MIT | [source](https://github.com/micromatch/picomatch) |
+| `picomatch@2.3.2` | MIT | [source](https://github.com/micromatch/picomatch) |
+| `picomatch@4.0.5` | MIT | [source](https://github.com/micromatch/picomatch) |
 | `pify@2.3.0` | MIT | [source](https://github.com/sindresorhus/pify) |
 | `pirates@4.0.7` | MIT | [source](https://github.com/danez/pirates) |
 | `player.style@0.3.4` | MIT | [source](https://github.com/muxinc/player.style) |
@@ -621,12 +589,12 @@ combined native recording component as GPL-covered for distribution.
 | `points-on-curve@1.0.1` | MIT | [source](https://github.com/pshihn/bezier-points) |
 | `points-on-path@0.2.1` | MIT | [source](https://github.com/pshihn/points-on-path) |
 | `postcss-import@15.1.0` | MIT | [source](https://github.com/postcss/postcss-import) |
-| `postcss-js@4.0.1` | MIT | [source](https://github.com/postcss/postcss-js) |
-| `postcss-load-config@4.0.2` | MIT | [source](https://github.com/postcss/postcss-load-config) |
+| `postcss-js@4.1.0` | MIT | [source](https://github.com/postcss/postcss-js) |
+| `postcss-load-config@6.0.1` | MIT | [source](https://github.com/postcss/postcss-load-config) |
 | `postcss-nested@6.2.0` | MIT | [source](https://github.com/postcss/postcss-nested) |
-| `postcss-selector-parser@6.1.2` | MIT | [source](https://github.com/postcss/postcss-selector-parser) |
+| `postcss-selector-parser@6.1.4` | MIT | [source](https://github.com/postcss/postcss-selector-parser) |
 | `postcss-value-parser@4.2.0` | MIT | [source](https://github.com/TrySound/postcss-value-parser) |
-| `postcss@8.5.3` | MIT | [source](https://github.com/postcss/postcss) |
+| `postcss@8.5.22` | MIT | [source](https://github.com/postcss/postcss) |
 | `prelude-ls@1.1.2` | MIT | [source](https://github.com/gkz/prelude-ls) |
 | `process-nextick-args@2.0.1` | MIT | [source](https://github.com/calvinmetcalf/process-nextick-args) |
 | `process@0.11.10` | MIT | [source](https://github.com/shtylman/node-process) |
@@ -645,20 +613,20 @@ combined native recording component as GPL-covered for distribution.
 | `queue-tick@1.0.1` | MIT | [source](https://github.com/mafintosh/queue-tick) |
 | `quote-stream@1.0.2` | MIT | [source](https://github.com/substack/quote-stream) |
 | `re-resizable@6.11.2` | MIT | [source](https://github.com/bokuweb/react-resizable-box) |
-| `react-dom@19.2.7` | MIT | [source](https://github.com/facebook/react) |
+| `react-dom@19.2.8` | MIT | [source](https://github.com/react/react) |
 | `react-error-boundary@5.0.0` | MIT | [source](https://github.com/bvaughn/react-error-boundary) |
 | `react-is@16.13.1` | MIT | [source](https://github.com/facebook/react) |
-| `react-is@19.2.7` | MIT | [source](https://github.com/facebook/react) |
+| `react-is@19.2.8` | MIT | [source](https://github.com/react/react) |
 | `react-player@3.4.0` | MIT | [source](https://github.com/cookpete/react-player) |
 | `react-remove-scroll-bar@2.3.8` | MIT | [source](https://github.com/theKashey/react-remove-scroll-bar) |
 | `react-remove-scroll@2.7.2` | MIT | [source](https://github.com/theKashey/react-remove-scroll) |
-| `react-router-dom@7.17.0` | MIT | [source](https://github.com/remix-run/react-router) |
-| `react-router@7.17.0` | MIT | [source](https://github.com/remix-run/react-router) |
+| `react-router-dom@7.18.1` | MIT | [source](https://github.com/remix-run/react-router) |
+| `react-router@7.18.1` | MIT | [source](https://github.com/remix-run/react-router) |
 | `react-style-singleton@2.2.3` | MIT | [source](https://github.com/theKashey/react-style-singleton) |
-| `react-tag-autocomplete@7.5.0` | ISC | [source](https://github.com/i-like-robots/react-tag-autocomplete) |
+| `react-tag-autocomplete@7.5.1` | ISC | [source](https://github.com/i-like-robots/react-tag-autocomplete) |
 | `react-tailwindcss-datepicker@2.0.0` | MIT | [source](https://github.com/onesine/react-tailwindcss-datepicker) |
 | `react-transition-group@4.4.5` | BSD-3-Clause | [source](https://github.com/reactjs/react-transition-group) |
-| `react@19.2.7` | MIT | [source](https://github.com/facebook/react) |
+| `react@19.2.8` | MIT | [source](https://github.com/react/react) |
 | `read-cache@1.0.0` | MIT | [source](https://github.com/TrySound/read-cache) |
 | `readable-stream@1.0.34` | MIT | [source](https://github.com/isaacs/readable-stream) |
 | `readable-stream@1.1.14` | MIT | [source](https://github.com/isaacs/readable-stream) |
@@ -667,12 +635,11 @@ combined native recording component as GPL-covered for distribution.
 | `readable-stream@4.7.0` | MIT | [source](https://github.com/nodejs/readable-stream) |
 | `readdir-glob@3.0.0` | Apache-2.0 | [source](https://github.com/Yqnn/node-readdir-glob) |
 | `readdirp@3.6.0` | MIT | [source](https://github.com/paulmillr/readdirp) |
-| `regenerator-runtime@0.14.1` | MIT | [source](https://github.com/facebook/regenerator/tree/main/packages/runtime) |
 | `require-from-string@2.0.2` | MIT | [source](https://github.com/floatdrop/require-from-string) |
 | `resolve-from@4.0.0` | MIT | [source](https://github.com/sindresorhus/resolve-from) |
 | `resolve-protobuf-schema@1.0.2` | MIT | [source](https://github.com/mafintosh/resolve-protobuf-schema) |
 | `resolve@1.22.1` | MIT | [source](https://github.com/browserify/resolve) |
-| `resolve@1.22.10` | MIT | [source](https://github.com/browserify/resolve) |
+| `resolve@1.22.12` | MIT | [source](ssh://github.com/browserify/resolve) |
 | `retry@0.12.0` | MIT | [source](https://github.com/tim-kos/node-retry) |
 | `reusify@1.1.0` | MIT | [source](https://github.com/mcollina/reusify) |
 | `robust-predicates@3.0.3` | Unlicense | [source](https://github.com/mourner/robust-predicates) |
@@ -685,7 +652,7 @@ combined native recording component as GPL-covered for distribution.
 | `safer-buffer@2.1.2` | MIT | [source](https://github.com/ChALkeR/safer-buffer) |
 | `sass@1.51.0` | MIT | [source](https://github.com/sass/dart-sass) |
 | `sax@1.2.1` | ISC | [source](https://github.com/isaacs/sax-js) |
-| `sax@1.4.1` | ISC | [source](https://github.com/isaacs/sax-js) |
+| `sax@1.6.0` | BlueOak-1.0.0 | [source](ssh://git@github.com/isaacs/sax-js) |
 | `scheduler@0.27.0` | MIT | [source](https://github.com/facebook/react) |
 | `screenfull@6.0.2` | MIT | [source](https://github.com/sindresorhus/screenfull) |
 | `semver@2.3.2` | BSD | [source](https://github.com/isaacs/node-semver) |
@@ -697,7 +664,6 @@ combined native recording component as GPL-covered for distribution.
 | `shallow-copy@0.0.1` | MIT | [source](https://github.com/substack/shallow-copy) |
 | `shebang-command@2.0.0` | MIT | [source](https://github.com/kevva/shebang-command) |
 | `shebang-regex@3.0.0` | MIT | [source](https://github.com/sindresorhus/shebang-regex) |
-| `signal-exit@4.1.0` | ISC | [source](https://github.com/tapjs/signal-exit) |
 | `signed-varint@2.0.1` | MIT | [source](https://github.com/dominictarr/signed-varint) |
 | `sliced@1.0.1` | MIT | [source](https://github.com/aheckmann/sliced) |
 | `source-map-js@1.2.1` | BSD-3-Clause | [source](https://github.com/7rulnik/source-map-js) |
@@ -710,27 +676,23 @@ combined native recording component as GPL-covered for distribution.
 | `stream-collector@1.0.1` | MIT | [source](https://github.com/mafintosh/stream-collector) |
 | `stream-shift@1.0.1` | MIT | [source](https://github.com/mafintosh/stream-shift) |
 | `stream-shift@1.0.3` | MIT | [source](https://github.com/mafintosh/stream-shift) |
-| `streamx@2.27.0` | MIT | [source](https://github.com/mafintosh/streamx) |
+| `streamx@2.28.0` | MIT | [source](https://github.com/mafintosh/streamx) |
 | `string_decoder@0.10.31` | MIT | [source](https://github.com/rvagg/string_decoder) |
 | `string_decoder@1.1.1` | MIT | [source](https://github.com/nodejs/string_decoder) |
 | `string_decoder@1.3.0` | MIT | [source](https://github.com/nodejs/string_decoder) |
-| `string-width@4.2.3` | MIT | [source](https://github.com/sindresorhus/string-width) |
-| `string-width@5.1.2` | MIT | [source](https://github.com/sindresorhus/string-width) |
-| `strip-ansi@6.0.1` | MIT | [source](https://github.com/chalk/strip-ansi) |
-| `strip-ansi@7.1.0` | MIT | [source](https://github.com/chalk/strip-ansi) |
 | `stubborn-fs@2.0.0` | MIT | [source](https://github.com/fabiospampinato/stubborn-fs) |
 | `stubborn-utils@1.0.2` | MIT | [source](https://github.com/fabiospampinato/stubborn-utils) |
 | `stylis@4.2.0` | MIT | [source](https://github.com/thysultan/stylis.js) |
 | `stylis@4.4.0` | MIT | [source](https://github.com/thysultan/stylis.js) |
 | `subleveldown@1.1.0` | MIT | [source](https://github.com/mafintosh/subleveldown) |
 | `subleveldown@2.1.0` | MIT | [source](https://github.com/mafintosh/subleveldown) |
-| `sucrase@3.35.0` | MIT | [source](https://github.com/alangpierce/sucrase) |
+| `sucrase@3.35.1` | MIT | [source](https://github.com/alangpierce/sucrase) |
 | `super-media-element@1.4.2` | MIT | [source](https://github.com/muxinc/media-elements) |
 | `supports-preserve-symlinks-flag@1.0.0` | MIT | [source](https://github.com/inspect-js/node-supports-preserve-symlinks-flag) |
 | `tagged-tag@1.0.0` | MIT | [source](https://github.com/sindresorhus/tagged-tag) |
-| `tailwind-merge@2.6.0` | MIT | [source](https://github.com/dcastil/tailwind-merge) |
+| `tailwind-merge@2.6.1` | MIT | [source](https://github.com/dcastil/tailwind-merge) |
 | `tailwindcss-animate@1.0.7` | MIT |  |
-| `tailwindcss@3.4.17` | MIT | [source](https://github.com/tailwindlabs/tailwindcss) |
+| `tailwindcss@3.4.19` | MIT | [source](https://github.com/tailwindlabs/tailwindcss.git#v3) |
 | `tar-stream@3.2.0` | MIT | [source](https://github.com/mafintosh/tar-stream) |
 | `teex@1.0.1` | MIT | [source](https://github.com/mafintosh/teex) |
 | `text-decoder@1.2.7` | Apache-2.0 | [source](https://github.com/holepunchto/text-decoder) |
@@ -741,30 +703,27 @@ combined native recording component as GPL-covered for distribution.
 | `tiktok-video-element@0.1.2` | MIT | [source](https://github.com/muxinc/media-elements) |
 | `tiny-typed-emitter@2.1.0` | MIT | [source](https://github.com/binier/tiny-typed-emitter) |
 | `tinyexec@1.2.4` | MIT | [source](https://github.com/tinylibs/tinyexec) |
+| `tinyglobby@0.2.17` | MIT | [source](https://github.com/SuperchupuDev/tinyglobby) |
 | `to-regex-range@5.0.1` | MIT | [source](https://github.com/micromatch/to-regex-range) |
-| `ts-dedent@2.2.0` | MIT | [source](https://github.com/tamino-martinius/node-ts-dedent) |
+| `ts-dedent@2.3.0` | MIT | [source](https://github.com/tamino-martinius/node-ts-dedent) |
 | `ts-interface-checker@0.1.13` | Apache-2.0 | [source](https://github.com/gristlabs/ts-interface-checker) |
-| `ts-node@10.9.2` | MIT | [source](https://github.com/TypeStrong/ts-node) |
 | `tsc@2.0.4` | MIT | [source](https://github.com/basarat/tsc) |
 | `tslib@2.8.1` | 0BSD | [source](https://github.com/Microsoft/tslib) |
-| `tss-react@4.9.16` | MIT | [source](https://github.com/garronej/tss-react) |
+| `tss-react@4.9.21` | MIT | [source](https://github.com/garronej/tss-react) |
 | `tunnel-rat@0.1.2` | MIT | [source](https://github.com/pmndrs/tunnel-rat) |
 | `twitch-video-element@0.1.6` | MIT | [source](https://github.com/muxinc/media-elements) |
 | `type-check@0.3.2` | MIT | [source](https://github.com/gkz/type-check) |
-| `type-fest@5.7.0` | (MIT OR CC0-1.0) | [source](https://github.com/sindresorhus/type-fest) |
+| `type-fest@5.8.0` | (MIT OR CC0-1.0) | [source](https://github.com/sindresorhus/type-fest) |
 | `typedarray@0.0.6` | MIT | [source](https://github.com/substack/typedarray) |
-| `typescript@5.8.3` | Apache-2.0 | [source](https://github.com/microsoft/TypeScript) |
 | `uint8array-extras@1.5.0` | MIT | [source](https://github.com/sindresorhus/uint8array-extras) |
 | `uiohook-napi@1.5.2` | MIT | [source](https://github.com/SnosMe/uiohook-napi) |
-| `undici-types@8.3.0` | MIT | [source](https://github.com/nodejs/undici) |
 | `universalify@2.0.1` | MIT | [source](https://github.com/RyanZim/universalify) |
 | `use-callback-ref@1.3.3` | MIT | [source](https://github.com/theKashey/use-callback-ref/) |
 | `use-sidecar@1.1.3` | MIT | [source](https://github.com/theKashey/use-sidecar) |
-| `use-sync-external-store@1.5.0` | MIT | [source](https://github.com/facebook/react) |
+| `use-sync-external-store@1.6.0` | MIT | [source](https://github.com/facebook/react) |
 | `util-deprecate@1.0.2` | MIT | [source](https://github.com/TooTallNate/util-deprecate) |
 | `util@0.10.4` | MIT | [source](https://github.com/defunctzombie/node-util) |
-| `uuid@11.1.0` | MIT | [source](https://github.com/uuidjs/uuid) |
-| `v8-compile-cache-lib@3.0.1` | MIT | [source](https://github.com/cspotcode/v8-compile-cache-lib) |
+| `uuid@11.1.1` | MIT | [source](https://github.com/uuidjs/uuid) |
 | `varint@4.0.1` | MIT | [source](https://github.com/chrisdickinson/varint) |
 | `varint@5.0.2` | MIT | [source](https://github.com/chrisdickinson/varint) |
 | `vimeo-video-element@1.7.2` | MIT | [source](https://github.com/muxinc/media-elements) |
@@ -784,24 +743,20 @@ combined native recording component as GPL-covered for distribution.
 | `wistia-video-element@1.4.0` | MIT | [source](https://github.com/muxinc/media-elements) |
 | `word-wrap@1.2.3` | MIT | [source](https://github.com/jonschlinkert/word-wrap) |
 | `word-wrap@1.2.5` | MIT | [source](https://github.com/jonschlinkert/word-wrap) |
-| `wrap-ansi@7.0.0` | MIT | [source](https://github.com/chalk/wrap-ansi) |
-| `wrap-ansi@8.1.0` | MIT | [source](https://github.com/chalk/wrap-ansi) |
 | `wrappy@1.0.2` | ISC | [source](https://github.com/npm/wrappy) |
 | `xtend@3.0.0` | MIT | [source](https://github.com/Raynos/xtend) |
 | `xtend@4.0.2` | MIT | [source](https://github.com/Raynos/xtend) |
-| `yaml@1.10.2` | ISC | [source](https://github.com/eemeli/yaml) |
-| `yaml@2.7.1` | ISC | [source](https://github.com/eemeli/yaml) |
-| `yn@3.1.1` | MIT | [source](https://github.com/sindresorhus/yn) |
+| `yaml@1.10.3` | ISC | [source](https://github.com/eemeli/yaml) |
 | `youtube-video-element@1.9.0` | MIT | [source](https://github.com/muxinc/media-elements) |
 | `zip-stream@7.0.5` | MIT | [source](https://github.com/archiverjs/node-zip-stream) |
-| `zod@3.24.2` | MIT | [source](https://github.com/colinhacks/zod) |
-| `zustand@4.5.6` | MIT | [source](https://github.com/pmndrs/zustand) |
+| `zod@3.25.76` | MIT | [source](https://github.com/colinhacks/zod) |
+| `zustand@4.5.7` | MIT | [source](https://github.com/pmndrs/zustand) |
 
 ## Included license and notice texts
 
 ### Notice c9808a775260
 
-Applies to: `@alloc/quick-lru@5.2.0`, `ansi-regex@5.0.1`, `ansi-styles@4.3.0`, `callsites@3.1.0`, `is-fullwidth-code-point@3.0.0`, `parent-module@1.0.1`, `path-key@3.1.1`, `path-type@4.0.0`, `resolve-from@4.0.0`, `shebang-regex@3.0.0`, `string-width@4.2.3`, `strip-ansi@6.0.1`, `yn@3.1.1`
+Applies to: `@alloc/quick-lru@5.2.0`, `callsites@3.1.0`, `parent-module@1.0.1`, `path-key@3.1.1`, `path-type@4.0.0`, `resolve-from@4.0.0`, `shebang-regex@3.0.0`
 
 ```text
 MIT License
@@ -845,7 +800,7 @@ SOFTWARE.
 
 ### Notice 8f08c824b2bb
 
-Applies to: `@babel/code-frame@7.29.7`, `@babel/generator@7.29.7`, `@babel/helper-globals@7.29.7`, `@babel/helper-module-imports@7.29.7`, `@babel/helper-string-parser@7.29.7`, `@babel/helper-validator-identifier@7.29.7`, `@babel/runtime@7.27.0`, `@babel/template@7.29.7`, `@babel/traverse@7.29.7`, `@babel/types@7.29.7`
+Applies to: `@babel/code-frame@7.29.7`, `@babel/generator@7.29.7`, `@babel/helper-globals@7.29.7`, `@babel/helper-module-imports@7.29.7`, `@babel/helper-string-parser@7.29.7`, `@babel/helper-validator-identifier@7.29.7`, `@babel/runtime@7.29.7`, `@babel/template@7.29.7`, `@babel/traverse@7.29.7`, `@babel/types@7.29.7`
 
 ```text
 MIT License
@@ -928,7 +883,7 @@ SOFTWARE.
 
 ### Notice 283ea6cc2997
 
-Applies to: `@chevrotain/cst-dts-gen@11.0.3`, `@chevrotain/gast@11.0.3`, `@chevrotain/regexp-to-ast@11.0.3`, `@chevrotain/types@11.0.3`, `@chevrotain/types@11.1.2`, `@chevrotain/utils@11.0.3`, `@pkgjs/parseargs@0.11.0`, `b4a@1.8.1`, `bare-events@2.9.1`, `bare-fs@4.7.2`, `bare-os@3.9.1`, `bare-path@3.0.1`, `bare-stream@2.13.1`, `bare-url@2.4.5`, `browser-fs-access@0.29.1`, `chevrotain@11.0.3`, `dompurify@3.4.8`, `events-universal@1.0.1`, `text-decoder@1.2.7`
+Applies to: `@chevrotain/cst-dts-gen@11.0.3`, `@chevrotain/gast@11.0.3`, `@chevrotain/regexp-to-ast@11.0.3`, `@chevrotain/types@11.0.3`, `@chevrotain/types@11.1.2`, `@chevrotain/utils@11.0.3`, `b4a@1.8.1`, `bare-events@2.9.1`, `bare-fs@4.7.4`, `bare-path@3.1.1`, `bare-stream@2.13.3`, `bare-url@2.4.6`, `browser-fs-access@0.29.1`, `chevrotain@11.0.3`, `dompurify@3.4.12`, `events-universal@1.0.1`, `text-decoder@1.2.7`
 
 ```text
 Apache License
@@ -1134,37 +1089,9 @@ Apache License
    limitations under the License.
 ```
 
-### Notice e9441dd383ee
-
-Applies to: `@cspotcode/source-map-support@0.8.1`
-
-```text
-The MIT License (MIT)
-
-Copyright (c) 2014 Evan Wallace
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
 ### Notice 01c660479cfa
 
-Applies to: `@electron/notarize@3.0.1`
+Applies to: `@electron/notarize@3.1.1`
 
 ```text
 Copyright 2018 Samuel Attard and contributors
@@ -1178,7 +1105,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### Notice 719058ae8dbd
 
-Applies to: `@emotion/babel-plugin@11.13.5`, `@emotion/cache@11.14.0`, `@emotion/hash@0.9.2`, `@emotion/is-prop-valid@1.3.1`, `@emotion/memoize@0.9.0`, `@emotion/react@11.14.0`, `@emotion/serialize@1.3.3`, `@emotion/sheet@1.4.0`, `@emotion/styled@11.14.0`, `@emotion/unitless@0.10.0`, `@emotion/use-insertion-effect-with-fallbacks@1.2.0`, `@emotion/utils@1.4.2`, `@emotion/weak-memoize@0.4.0`
+Applies to: `@emotion/babel-plugin@11.13.5`, `@emotion/cache@11.14.0`, `@emotion/hash@0.9.2`, `@emotion/is-prop-valid@1.4.0`, `@emotion/memoize@0.9.0`, `@emotion/react@11.14.0`, `@emotion/serialize@1.3.3`, `@emotion/sheet@1.4.0`, `@emotion/styled@11.14.1`, `@emotion/unitless@0.10.0`, `@emotion/use-insertion-effect-with-fallbacks@1.2.0`, `@emotion/utils@1.4.2`, `@emotion/weak-memoize@0.4.0`
 
 ```text
 MIT License
@@ -1290,7 +1217,7 @@ SOFTWARE.
 
 ### Notice 6c1117dc530c
 
-Applies to: `@floating-ui/core@1.7.5`, `@floating-ui/dom@1.7.6`, `@floating-ui/react-dom@2.1.8`, `@floating-ui/utils@0.2.11`
+Applies to: `@floating-ui/core@1.8.0`, `@floating-ui/dom@1.8.0`, `@floating-ui/react-dom@2.1.9`, `@floating-ui/utils@0.2.12`
 
 ```text
 MIT License
@@ -1489,7 +1416,7 @@ to represent the company, product, or service to which they refer.**
 
 ### Notice ad3e8508eaf5
 
-Applies to: `@fortawesome/react-fontawesome@0.2.2`
+Applies to: `@fortawesome/react-fontawesome@0.2.6`
 
 ```text
 Copyright 2018 Fonticons, Inc.
@@ -1543,7 +1470,7 @@ SOFTWARE.
 
 ### Notice a86793ac0231
 
-Applies to: `@iconify/utils@3.1.3`
+Applies to: `@iconify/utils@3.1.4`
 
 ```text
 MIT License
@@ -1569,30 +1496,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-### Notice a6eaa92256a7
-
-Applies to: `@isaacs/cliui@8.0.2`
-
-```text
-Copyright (c) 2015, Contributors
-
-Permission to use, copy, modify, and/or distribute this software
-for any purpose with or without fee is hereby granted, provided
-that the above copyright notice and this permission notice
-appear in all copies.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES
-OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE
-LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES
-OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
-WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
-ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-```
-
 ### Notice 928e59141142
 
-Applies to: `@jridgewell/gen-mapping@0.3.13`, `@jridgewell/trace-mapping@0.3.31`
+Applies to: `@jridgewell/gen-mapping@0.3.13`, `@jridgewell/sourcemap-codec@1.5.5`, `@jridgewell/trace-mapping@0.3.31`
 
 ```text
 Copyright 2024 Justin Ridgewell <justin@ridgewell.name>
@@ -1642,63 +1548,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-### Notice 3551ad60c599
-
-Applies to: `@jridgewell/sourcemap-codec@1.5.0`
-
-```text
-The MIT License
-
-Copyright (c) 2015 Rich Harris
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-```
-
-### Notice c216320ffa9b
-
-Applies to: `@jridgewell/trace-mapping@0.3.9`
-
-```text
-Copyright 2022 Justin Ridgewell <justin@ridgewell.name>
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
 ### Notice d872b89e34b7
 
-Applies to: `@mermaid-js/parser@0.6.3`, `@mermaid-js/parser@1.1.1`
+Applies to: `@mermaid-js/parser@0.6.3`, `@mermaid-js/parser@1.2.0`
 
 ```text
 The MIT License (MIT)
@@ -1726,7 +1578,7 @@ SOFTWARE.
 
 ### Notice 4d05ad765ed4
 
-Applies to: `@mui/core-downloads-tracker@5.17.1`, `@mui/icons-material@5.17.1`, `@mui/material@5.17.1`, `@mui/private-theming@5.17.1`, `@mui/styled-engine@5.16.14`, `@mui/system@5.17.1`, `@mui/types@7.2.24`, `@mui/utils@5.17.1`
+Applies to: `@mui/core-downloads-tracker@5.18.0`, `@mui/icons-material@5.18.0`, `@mui/material@5.18.0`, `@mui/private-theming@5.17.1`, `@mui/styled-engine@5.18.0`, `@mui/system@5.18.0`, `@mui/types@7.2.24`, `@mui/utils@5.17.1`
 
 ```text
 The MIT License (MIT)
@@ -1754,7 +1606,7 @@ SOFTWARE.
 
 ### Notice 8b6824a01148
 
-Applies to: `@mui/icons-material@5.17.1`
+Applies to: `@mui/icons-material@5.18.0`
 
 ```text
 export { default } from '@mui/material/SvgIcon';
@@ -1762,7 +1614,7 @@ export { default } from '@mui/material/SvgIcon';
 
 ### Notice 2f405d1fdff0
 
-Applies to: `@mui/icons-material@5.17.1`
+Applies to: `@mui/icons-material@5.18.0`
 
 ```text
 "use strict";
@@ -1837,7 +1689,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### Notice 74144f6a3a6c
 
-Applies to: `@radix-ui/number@1.1.2`, `@radix-ui/primitive@1.1.4`, `@radix-ui/react-arrow@1.1.10`, `@radix-ui/react-collection@1.1.10`, `@radix-ui/react-compose-refs@1.1.3`, `@radix-ui/react-context@1.1.4`, `@radix-ui/react-dialog@1.1.17`, `@radix-ui/react-direction@1.1.2`, `@radix-ui/react-dismissable-layer@1.1.13`, `@radix-ui/react-focus-guards@1.1.4`, `@radix-ui/react-focus-scope@1.1.10`, `@radix-ui/react-hover-card@1.1.17`, `@radix-ui/react-id@1.1.2`, `@radix-ui/react-label@2.1.10`, `@radix-ui/react-popover@1.1.17`, `@radix-ui/react-popper@1.3.1`, `@radix-ui/react-portal@1.1.12`, `@radix-ui/react-presence@1.1.6`, `@radix-ui/react-primitive@2.1.6`, `@radix-ui/react-progress@1.1.10`, `@radix-ui/react-roving-focus@1.1.13`, `@radix-ui/react-scroll-area@1.2.12`, `@radix-ui/react-select@2.3.1`, `@radix-ui/react-separator@1.1.10`, `@radix-ui/react-slider@1.4.1`, `@radix-ui/react-slot@1.3.0`, `@radix-ui/react-switch@1.3.1`, `@radix-ui/react-tabs@1.1.15`, `@radix-ui/react-toast@1.2.17`, `@radix-ui/react-toggle-group@1.1.13`, `@radix-ui/react-toggle@1.1.12`, `@radix-ui/react-tooltip@1.2.10`, `@radix-ui/react-use-callback-ref@1.1.2`, `@radix-ui/react-use-controllable-state@1.2.3`, `@radix-ui/react-use-effect-event@0.0.3`, `@radix-ui/react-use-escape-keydown@1.1.2`, `@radix-ui/react-use-layout-effect@1.1.2`, `@radix-ui/react-use-previous@1.1.2`, `@radix-ui/react-use-rect@1.1.2`, `@radix-ui/react-use-size@1.1.2`, `@radix-ui/react-visually-hidden@1.2.6`, `@radix-ui/rect@1.1.2`
+Applies to: `@radix-ui/number@1.1.3`, `@radix-ui/primitive@1.1.7`, `@radix-ui/react-arrow@1.1.13`, `@radix-ui/react-collection@1.1.13`, `@radix-ui/react-compose-refs@1.1.4`, `@radix-ui/react-context@1.2.1`, `@radix-ui/react-dialog@1.1.21`, `@radix-ui/react-direction@1.1.3`, `@radix-ui/react-dismissable-layer@1.1.17`, `@radix-ui/react-focus-guards@1.1.5`, `@radix-ui/react-focus-scope@1.1.14`, `@radix-ui/react-hover-card@1.1.21`, `@radix-ui/react-id@1.1.3`, `@radix-ui/react-label@2.1.13`, `@radix-ui/react-popover@1.1.21`, `@radix-ui/react-popper@1.3.5`, `@radix-ui/react-portal@1.1.15`, `@radix-ui/react-presence@1.1.9`, `@radix-ui/react-primitive@2.1.8`, `@radix-ui/react-progress@1.1.14`, `@radix-ui/react-roving-focus@1.1.17`, `@radix-ui/react-scroll-area@1.2.16`, `@radix-ui/react-select@2.3.5`, `@radix-ui/react-separator@1.1.13`, `@radix-ui/react-slider@1.4.5`, `@radix-ui/react-slot@1.3.1`, `@radix-ui/react-switch@1.3.5`, `@radix-ui/react-tabs@1.1.19`, `@radix-ui/react-toast@1.2.21`, `@radix-ui/react-toggle-group@1.1.17`, `@radix-ui/react-toggle@1.1.16`, `@radix-ui/react-tooltip@1.2.14`, `@radix-ui/react-use-callback-ref@1.1.3`, `@radix-ui/react-use-controllable-state@1.2.5`, `@radix-ui/react-use-effect-event@0.0.4`, `@radix-ui/react-use-is-hydrated@0.1.2`, `@radix-ui/react-use-layout-effect@1.1.3`, `@radix-ui/react-use-previous@1.1.3`, `@radix-ui/react-use-rect@1.1.3`, `@radix-ui/react-use-size@1.1.3`, `@radix-ui/react-visually-hidden@1.2.9`, `@radix-ui/rect@1.1.3`
 
 ```text
 MIT License
@@ -2281,7 +2133,7 @@ Apache License
 
 ### Notice 277d2a8e4597
 
-Applies to: `@tanstack/query-core@5.90.7`, `@tanstack/react-query@5.90.7`
+Applies to: `@tanstack/query-core@5.101.4`, `@tanstack/react-query@5.101.4`
 
 ```text
 MIT License
@@ -2309,7 +2161,7 @@ SOFTWARE.
 
 ### Notice 805138dc29bb
 
-Applies to: `@tanstack/react-table@8.21.2`, `@tanstack/table-core@8.21.2`
+Applies to: `@tanstack/react-table@8.21.3`, `@tanstack/table-core@8.21.3`
 
 ```text
 MIT License
@@ -2335,37 +2187,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-### Notice 18d3bb3458bb
-
-Applies to: `@tsconfig/node10@1.0.11`, `@tsconfig/node12@1.0.11`, `@tsconfig/node14@1.0.3`, `@tsconfig/node16@1.0.4`
-
-```text
-MIT License
-
-Copyright (c) Microsoft Corporation.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE
-```
-
 ### Notice ff82c90f8494
 
-Applies to: `@types/d3-array@3.2.2`, `@types/d3-axis@3.0.6`, `@types/d3-brush@3.0.6`, `@types/d3-chord@3.0.6`, `@types/d3-color@3.1.3`, `@types/d3-contour@3.0.6`, `@types/d3-delaunay@6.0.4`, `@types/d3-dispatch@3.0.7`, `@types/d3-drag@3.0.7`, `@types/d3-dsv@3.0.7`, `@types/d3-ease@3.0.2`, `@types/d3-fetch@3.0.7`, `@types/d3-force@3.0.10`, `@types/d3-format@3.0.4`, `@types/d3-geo@3.1.0`, `@types/d3-hierarchy@3.1.7`, `@types/d3-interpolate@3.0.4`, `@types/d3-path@3.1.1`, `@types/d3-polygon@3.0.2`, `@types/d3-quadtree@3.0.6`, `@types/d3-random@3.0.3`, `@types/d3-scale-chromatic@3.1.0`, `@types/d3-scale@4.0.9`, `@types/d3-selection@3.0.11`, `@types/d3-shape@3.1.8`, `@types/d3-time-format@4.0.3`, `@types/d3-time@3.0.4`, `@types/d3-timer@3.0.2`, `@types/d3-transition@3.0.9`, `@types/d3-zoom@3.0.8`, `@types/d3@7.4.3`, `@types/geojson@7946.0.16`, `@types/node@26.1.1`, `@types/parse-json@4.0.2`, `@types/prop-types@15.7.14`, `@types/react-dom@19.2.3`, `@types/react-transition-group@4.4.12`, `@types/react@19.2.17`, `@types/trusted-types@2.0.7`
+Applies to: `@types/d3-array@3.2.2`, `@types/d3-axis@3.0.6`, `@types/d3-brush@3.0.6`, `@types/d3-chord@3.0.6`, `@types/d3-color@3.1.3`, `@types/d3-contour@3.0.6`, `@types/d3-delaunay@6.0.4`, `@types/d3-dispatch@3.0.7`, `@types/d3-drag@3.0.7`, `@types/d3-dsv@3.0.7`, `@types/d3-ease@3.0.2`, `@types/d3-fetch@3.0.7`, `@types/d3-force@3.0.10`, `@types/d3-format@3.0.4`, `@types/d3-geo@3.1.0`, `@types/d3-hierarchy@3.1.7`, `@types/d3-interpolate@3.0.4`, `@types/d3-path@3.1.1`, `@types/d3-polygon@3.0.2`, `@types/d3-quadtree@3.0.6`, `@types/d3-random@3.0.4`, `@types/d3-scale-chromatic@3.1.0`, `@types/d3-scale@4.0.9`, `@types/d3-selection@3.0.11`, `@types/d3-shape@3.1.8`, `@types/d3-time-format@4.0.3`, `@types/d3-time@3.0.4`, `@types/d3-timer@3.0.2`, `@types/d3-transition@3.0.9`, `@types/d3-zoom@3.0.8`, `@types/d3@7.4.3`, `@types/geojson@7946.0.16`, `@types/parse-json@4.0.2`, `@types/prop-types@15.7.15`, `@types/react-dom@19.2.3`, `@types/react-transition-group@4.4.12`, `@types/react@19.2.17`, `@types/trusted-types@2.0.7`
 
 ```text
 MIT License
@@ -2498,34 +2322,6 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-### Notice 873744a6dc0c
-
-Applies to: `acorn-walk@8.3.4`
-
-```text
-MIT License
-
-Copyright (C) 2012-2020 by various contributors (see AUTHORS)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-```
-
 ### Notice 3626fbf89a30
 
 Applies to: `acorn@7.4.1`
@@ -2534,34 +2330,6 @@ Applies to: `acorn@7.4.1`
 MIT License
 
 Copyright (C) 2012-2018 by various contributors (see AUTHORS)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-```
-
-### Notice cdf8603d8d39
-
-Applies to: `acorn@8.15.0`
-
-```text
-MIT License
-
-Copyright (C) 2012-2022 by various contributors (see AUTHORS)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2636,22 +2404,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
-
-### Notice 1529f88b3675
-
-Applies to: `ansi-regex@6.1.0`, `ansi-styles@6.2.1`, `conf@15.1.0`, `debounce-fn@6.0.0`, `dot-prop@10.1.0`, `electron-debug@4.1.0`, `electron-is-dev@3.0.1`, `electron-store@11.0.2`, `env-paths@3.0.0`, `escape-string-regexp@4.0.0`, `import-fresh@3.3.1`, `is-stream@4.0.1`, `mimic-function@5.0.1`, `parse-json@5.2.0`, `screenfull@6.0.2`, `string-width@5.1.2`, `strip-ansi@7.1.0`, `tagged-tag@1.0.0`, `uint8array-extras@1.5.0`, `wrap-ansi@7.0.0`, `wrap-ansi@8.1.0`
-
-```text
-MIT License
-
-Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
 ### Notice 7b3e0db83c00
@@ -2729,34 +2481,6 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
-```
-
-### Notice 07661967e388
-
-Applies to: `arg@4.1.3`
-
-```text
-MIT License
-
-Copyright (c) 2017-2019 Zeit, Inc.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 ```
 
 ### Notice bce93741cc2c
@@ -3050,7 +2774,7 @@ OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 ### Notice 07dfb46d2e36
 
-Applies to: `aria-hidden@1.2.4`, `react-remove-scroll@2.7.2`, `react-style-singleton@2.2.3`, `use-callback-ref@1.3.3`, `use-sidecar@1.1.3`
+Applies to: `aria-hidden@1.2.6`, `react-remove-scroll@2.7.2`, `react-style-singleton@2.2.3`, `use-callback-ref@1.3.3`, `use-sidecar@1.1.3`
 
 ```text
 MIT License
@@ -3186,7 +2910,7 @@ DEALINGS IN THE SOFTWARE.
 
 ### Notice e1ccba0a4e7d
 
-Applies to: `axios@1.17.0`
+Applies to: `axios@1.18.1`
 
 ```text
 # Copyright (c) 2014-present Matt Zabriskie & Collaborators
@@ -3212,34 +2936,6 @@ in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-### Notice 3a7c107a9e62
-
-Applies to: `balanced-match@1.0.2`
-
-```text
-(MIT)
-
-Copyright (c) 2013 Julian Gruber &lt;julian@juliangruber.com&gt;
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
@@ -3285,7 +2981,7 @@ SOFTWARE.
 
 ### Notice 903658253f55
 
-Applies to: `bare-path@3.0.1`
+Applies to: `bare-path@3.1.1`
 
 ```text
 Copyright 2023 Holepunch Inc
@@ -3438,37 +3134,9 @@ programs and associated documentation files created by the
 Original Author, when distributed with the Software.
 ```
 
-### Notice cfe46dde9d4b
-
-Applies to: `brace-expansion@2.0.2`, `isarray@2.0.5`
-
-```text
-MIT License
-
-Copyright (c) 2013 Julian Gruber <julian@juliangruber.com>
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
 ### Notice f36e2da26df2
 
-Applies to: `brace-expansion@5.0.6`
+Applies to: `brace-expansion@5.0.7`
 
 ```text
 MIT License
@@ -3661,7 +3329,7 @@ SOFTWARE.
 
 ### Notice 3df72862fb6d
 
-Applies to: `call-bind-apply-helpers@1.0.2`, `es-define-property@1.0.1`, `es-errors@1.3.0`, `es-object-atoms@1.1.1`
+Applies to: `call-bind-apply-helpers@1.0.2`, `es-define-property@1.0.1`, `es-errors@1.3.0`, `es-object-atoms@1.1.2`
 
 ```text
 MIT License
@@ -4155,48 +3823,6 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-### Notice 4dfe9982abdf
-
-Applies to: `color-convert@2.0.1`
-
-```text
-Copyright (c) 2011-2016 Heather Arthur <fayearthur@gmail.com>
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-```
-
-### Notice 7357445bac39
-
-Applies to: `color-name@1.1.4`
-
-```text
-The MIT License (MIT)
-Copyright (c) 2015 Dmitry Ivanov
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-```
-
 ### Notice d69f53f4975f
 
 Applies to: `combined-stream@1.0.8`, `delayed-stream@1.0.0`
@@ -4310,6 +3936,22 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
 ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
+
+### Notice 1529f88b3675
+
+Applies to: `conf@15.1.0`, `debounce-fn@6.0.0`, `dot-prop@10.2.0`, `electron-debug@4.1.0`, `electron-is-dev@3.0.1`, `electron-store@11.0.2`, `env-paths@3.0.0`, `escape-string-regexp@4.0.0`, `import-fresh@3.3.1`, `is-stream@4.0.1`, `mimic-function@5.0.1`, `parse-json@5.2.0`, `screenfull@6.0.2`, `tagged-tag@1.0.0`, `uint8array-extras@1.5.0`
+
+```text
+MIT License
+
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
 ### Notice e66591b0b153
@@ -4680,38 +4322,6 @@ Apache License
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-```
-
-### Notice 3ff62a7390af
-
-Applies to: `create-require@1.1.1`
-
-```text
-MIT License
-
-Copyright (c) 2020
-
-Maël Nison <nison.mael@gmail.com>
-Paul Soporan <paul.soporan@gmail.com>
-Pooya Parsa <pyapar@gmail.com>
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 ```
 
 ### Notice 745048d8eb46
@@ -5406,7 +5016,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### Notice d9e5aa2747f3
 
-Applies to: `debug@4.4.0`
+Applies to: `debug@4.4.3`
 
 ```text
 (The MIT License)
@@ -5530,44 +5140,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-### Notice 152f0fb43e95
-
-Applies to: `diff@4.0.2`
-
-```text
-Software License Agreement (BSD License)
-
-Copyright (c) 2009-2015, Kevin Decker <kpdecker@gmail.com>
-
-All rights reserved.
-
-Redistribution and use of this software in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
-
-* Redistributions of source code must retain the above
-  copyright notice, this list of conditions and the
-  following disclaimer.
-
-* Redistributions in binary form must reproduce the above
-  copyright notice, this list of conditions and the
-  following disclaimer in the documentation and/or other
-  materials provided with the distribution.
-
-* Neither the name of Kevin Decker nor the names of its
-  contributors may be used to endorse or promote products
-  derived from this software without specific prior
-  written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
-IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
-IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
-OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-```
-
 ### Notice 1b0a9ba95a67
 
 Applies to: `dom-helpers@5.2.1`
@@ -5659,7 +5231,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### Notice 3fe8d55a98db
 
-Applies to: `duplexify@3.7.1`, `end-of-stream@1.4.4`, `generate-function@2.3.1`, `generate-object-property@1.2.0`, `mutexify@1.4.0`, `protobuf-schema@1.5.1`, `protocol-buffers@2.7.0`, `pump@1.0.3`, `pump@2.0.1`, `pumpify@1.5.1`, `resolve-protobuf-schema@1.0.2`, `stream-collector@1.0.1`, `subleveldown@1.1.0`, `subleveldown@2.1.0`, `tar-stream@3.2.0`
+Applies to: `duplexify@3.7.1`, `end-of-stream@1.4.4`, `end-of-stream@1.4.5`, `generate-function@2.3.1`, `generate-object-property@1.2.0`, `mutexify@1.4.0`, `protobuf-schema@1.5.1`, `protocol-buffers@2.7.0`, `pump@1.0.3`, `pump@2.0.1`, `pumpify@1.5.1`, `resolve-protobuf-schema@1.0.2`, `stream-collector@1.0.1`, `subleveldown@1.1.0`, `subleveldown@2.1.0`, `tar-stream@3.2.0`
 
 ```text
 The MIT License (MIT)
@@ -5771,7 +5343,7 @@ SOFTWARE.
 
 ### Notice 849dffdc5103
 
-Applies to: `error-ex@1.3.2`, `is-arrayish@0.2.1`
+Applies to: `error-ex@1.3.4`, `is-arrayish@0.2.1`
 
 ```text
 The MIT License (MIT)
@@ -5825,18 +5397,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-### Notice 0f1aa7b4194b
+### Notice 02f3b7dba54e
 
-Applies to: `es-toolkit@1.47.0`
+Applies to: `es-toolkit@1.49.0`
 
 ```text
 MIT License
 
-Copyright (c) 2024 Viva Republica, Inc
-
-Copyright OpenJS Foundation and other contributors
-
-Parts of the test suite and compatibility layer in `es-toolkit/compat` are derived from Lodash (https://github.com/lodash/lodash) by the OpenJS Foundation (https://openjsf.org/) and Underscore.js by Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors (http://underscorejs.org/)
+Copyright (c) 2024 Viva Republica, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -6024,7 +5592,7 @@ USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### Notice c955faf4959d
 
-Applies to: `falafel@2.2.5`, `resolve@1.22.1`, `resolve@1.22.10`
+Applies to: `falafel@2.2.5`, `resolve@1.22.1`, `resolve@1.22.12`
 
 ```text
 MIT License
@@ -6080,7 +5648,7 @@ SOFTWARE.
 
 ### Notice 534b9a28dc55
 
-Applies to: `fast-fifo@1.3.2`, `streamx@2.27.0`
+Applies to: `fast-fifo@1.3.2`, `streamx@2.28.0`
 
 ```text
 The MIT License (MIT)
@@ -6137,13 +5705,13 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-### Notice bf13d2149c77
+### Notice b010b0dfdfdb
 
-Applies to: `fast-uri@3.0.6`
+Applies to: `fast-uri@3.1.4`
 
 ```text
-Copyright (c) 2021 The Fastify Team
 Copyright (c) 2011-2021, Gary Court until https://github.com/garycourt/uri-js/commit/a1acf730b4bba3f1097c9f52e7d9d3aba8cdcaae
+Copyright (c) 2021-present The Fastify team <https://github.com/fastify/fastify#team>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -6176,7 +5744,7 @@ The complete list of contributors can be found at:
 
 ### Notice 61817d32cf2c
 
-Applies to: `fastq@1.19.1`
+Applies to: `fastq@1.20.1`
 
 ```text
 Copyright (c) 2015-2020, Matteo Collina <matteo.collina@gmail.com>
@@ -6192,6 +5760,20 @@ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
 WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+```
+
+### Notice 15e7786c7e68
+
+Applies to: `fdir@6.5.0`
+
+```text
+Copyright 2023 Abdullah Atta
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
 ### Notice c3b7834a1587
@@ -6249,31 +5831,9 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
 IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-### Notice 6048b5a4bf0b
-
-Applies to: `foreground-child@3.3.1`
-
-```text
-The ISC License
-
-Copyright (c) 2015-2023 Isaac Z. Schlueter and Contributors
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted, provided that the above
-copyright notice and this permission notice appear in all copies.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
-IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-```
-
 ### Notice 8c492ab98495
 
-Applies to: `form-data@4.0.5`
+Applies to: `form-data@4.0.6`
 
 ```text
 Copyright (c) 2012 Felix Geisendörfer (felix@debuggable.com) and contributors
@@ -6629,28 +6189,6 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
 IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ```
 
-### Notice 3085107a6544
-
-Applies to: `glob@10.4.5`
-
-```text
-The ISC License
-
-Copyright (c) 2009-2023 Isaac Z. Schlueter and Contributors
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted, provided that the above
-copyright notice and this permission notice appear in all copies.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
-IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-```
-
 ### Notice d8399b3e089d
 
 Applies to: `glur@1.1.2`
@@ -6815,7 +6353,7 @@ SOFTWARE.
 
 ### Notice 928a86b1d298
 
-Applies to: `hasown@2.0.2`
+Applies to: `hasown@2.0.4`
 
 ```text
 MIT License
@@ -7069,7 +6607,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### Notice d196bd75b751
 
-Applies to: `immutable@4.3.7`
+Applies to: `immutable@4.3.9`
 
 ```text
 MIT License
@@ -7266,7 +6804,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### Notice 5c496ce5ae47
 
-Applies to: `is-core-module@2.11.0`, `is-core-module@2.16.1`
+Applies to: `is-core-module@2.11.0`, `is-core-module@2.16.2`
 
 ```text
 The MIT License (MIT)
@@ -7375,6 +6913,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
 
+### Notice cfe46dde9d4b
+
+Applies to: `isarray@2.0.5`
+
+```text
+MIT License
+
+Copyright (c) 2013 Julian Gruber <julian@juliangruber.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
 ### Notice 0ae52fe329cc
 
 Applies to: `isexe@2.0.0`, `once@1.4.0`, `semver@5.1.1`, `semver@5.4.1`, `semver@7.7.4`, `semver@7.8.5`, `which@1.3.1`, `which@2.0.2`, `wrappy@1.0.2`
@@ -7397,71 +6963,9 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
 IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ```
 
-### Notice aa4c6585f201
-
-Applies to: `jackspeak@3.4.3`, `minimatch@10.2.5`
-
-```text
-# Blue Oak Model License
-
-Version 1.0.0
-
-## Purpose
-
-This license gives everyone as much permission to work with
-this software as possible, while protecting contributors
-from liability.
-
-## Acceptance
-
-In order to receive this license, you must agree to its
-rules. The rules of this license are both obligations
-under that agreement and conditions to your license.
-You must not do anything with this software that triggers
-a rule that you cannot or will not follow.
-
-## Copyright
-
-Each contributor licenses you to do everything with this
-software that would otherwise infringe that contributor's
-copyright in it.
-
-## Notices
-
-You must ensure that everyone who gets a copy of
-any part of this software from you, with or without
-changes, also gets the text of this license or a link to
-<https://blueoakcouncil.org/license/1.0.0>.
-
-## Excuse
-
-If anyone notifies you in writing that you have not
-complied with [Notices](#notices), you can keep your
-license by taking all practical steps to comply within 30
-days after the notice. If you do not do so, your license
-ends immediately.
-
-## Patent
-
-Each contributor licenses you to do everything with this
-software that would otherwise infringe any patent claims
-they can license or become able to license.
-
-## Reliability
-
-No contributor can revoke this license.
-
-## No Liability
-
-**_As far as the law allows, this software comes as is,
-without any warranty or condition, and no contributor
-will be liable to anyone for any damages related to this
-software or this license, under any kind of legal claim._**
-```
-
 ### Notice f7673e959327
 
-Applies to: `jiti@1.21.7`
+Applies to: `jiti@1.21.7`, `jiti@2.7.0`
 
 ```text
 MIT License
@@ -7573,7 +7077,7 @@ THE SOFTWARE.
 
 ### Notice bd470a9114ff
 
-Applies to: `js-yaml@4.1.0`
+Applies to: `js-yaml@4.3.0`
 
 ```text
 (The MIT License)
@@ -7697,7 +7201,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### Notice 7b022446e9cf
 
-Applies to: `jsonfile@6.1.0`
+Applies to: `jsonfile@6.2.1`
 
 ```text
 (The MIT License)
@@ -8298,7 +7802,7 @@ Apache License
 
 ### Notice 2314aa0e2bae
 
-Applies to: `lodash-es@4.17.21`, `lodash@4.17.21`
+Applies to: `lodash-es@4.17.21`, `lodash@4.18.1`
 
 ```text
 Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
@@ -8486,28 +7990,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
 
-### Notice 9647e3a9f366
-
-Applies to: `lru-cache@10.4.3`
-
-```text
-The ISC License
-
-Copyright (c) 2010-2023 Isaac Z. Schlueter and Contributors
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted, provided that the above
-copyright notice and this permission notice appear in all copies.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
-IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-```
-
 ### Notice 092a9de2ea14
 
 Applies to: `lucide-react@0.428.0`
@@ -8528,18 +8010,6 @@ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
 WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-```
-
-### Notice c8a6d2dfa960
-
-Applies to: `make-error@1.3.6`
-
-```text
-Copyright 2014 Julien Fontanet
-
-Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ```
 
 ### Notice dd923de97698
@@ -8595,7 +8065,7 @@ This software is provided by the copyright holders and contributors “as is” 
 
 ### Notice 761afbd786b4
 
-Applies to: `media-chrome@4.19.1`
+Applies to: `media-chrome@4.19.2`
 
 ```text
 Copyright (c) 2020 Mux, Inc.
@@ -8677,7 +8147,7 @@ SOFTWARE.
 
 ### Notice 94228ab8fc0b
 
-Applies to: `mermaid@11.15.0`
+Applies to: `mermaid@11.16.0`
 
 ```text
 The MIT License (MIT)
@@ -8763,31 +8233,9 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-### Notice 5ca1040a186f
+### Notice aa4c6585f201
 
-Applies to: `minimatch@9.0.5`
-
-```text
-The ISC License
-
-Copyright (c) 2011-2023 Isaac Z. Schlueter and Contributors
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted, provided that the above
-copyright notice and this permission notice appear in all copies.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
-IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-```
-
-### Notice 1a9975c75cfc
-
-Applies to: `minipass@7.1.3`, `path-scurry@1.11.1`
+Applies to: `minimatch@10.2.5`
 
 ```text
 # Blue Oak Model License
@@ -8803,7 +8251,7 @@ from liability.
 ## Acceptance
 
 In order to receive this license, you must agree to its
-rules.  The rules of this license are both obligations
+rules. The rules of this license are both obligations
 under that agreement and conditions to your license.
 You must not do anything with this software that triggers
 a rule that you cannot or will not follow.
@@ -8826,7 +8274,7 @@ changes, also gets the text of this license or a link to
 If anyone notifies you in writing that you have not
 complied with [Notices](#notices), you can keep your
 license by taking all practical steps to comply within 30
-days after the notice.  If you do not do so, your license
+days after the notice. If you do not do so, your license
 ends immediately.
 
 ## Patent
@@ -8841,10 +8289,10 @@ No contributor can revoke this license.
 
 ## No Liability
 
-***As far as the law allows, this software comes as is,
+**_As far as the law allows, this software comes as is,
 without any warranty or condition, and no contributor
 will be liable to anyone for any damages related to this
-software or this license, under any kind of legal claim.***
+software or this license, under any kind of legal claim._**
 ```
 
 ### Notice d2f44f572d99
@@ -8989,7 +8437,7 @@ THE SOFTWARE.
 
 ### Notice 33dc6a453e22
 
-Applies to: `nanoid@3.3.11`, `nanoid@3.3.3`, `nanoid@4.0.2`
+Applies to: `nanoid@3.3.16`, `nanoid@3.3.3`, `nanoid@4.0.2`
 
 ```text
 The MIT License (MIT)
@@ -9016,7 +8464,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### Notice e2e31f442f03
 
-Applies to: `node-abi@4.31.0`
+Applies to: `node-abi@4.33.0`
 
 ```text
 MIT License
@@ -9544,79 +8992,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-### Notice e80af3fc4109
-
-Applies to: `package-json-from-dist@1.0.1`
-
-```text
-All packages under `src/` are licensed according to the terms in
-their respective `LICENSE` or `LICENSE.md` files.
-
-The remainder of this project is licensed under the Blue Oak
-Model License, as follows:
-
------
-
-# Blue Oak Model License
-
-Version 1.0.0
-
-## Purpose
-
-This license gives everyone as much permission to work with
-this software as possible, while protecting contributors
-from liability.
-
-## Acceptance
-
-In order to receive this license, you must agree to its
-rules.  The rules of this license are both obligations
-under that agreement and conditions to your license.
-You must not do anything with this software that triggers
-a rule that you cannot or will not follow.
-
-## Copyright
-
-Each contributor licenses you to do everything with this
-software that would otherwise infringe that contributor's
-copyright in it.
-
-## Notices
-
-You must ensure that everyone who gets a copy of
-any part of this software from you, with or without
-changes, also gets the text of this license or a link to
-<https://blueoakcouncil.org/license/1.0.0>.
-
-## Excuse
-
-If anyone notifies you in writing that you have not
-complied with [Notices](#notices), you can keep your
-license by taking all practical steps to comply within 30
-days after the notice.  If you do not do so, your license
-ends immediately.
-
-## Patent
-
-Each contributor licenses you to do everything with this
-software that would otherwise infringe any patent claims
-they can license or become able to license.
-
-## Reliability
-
-No contributor can revoke this license.
-
-## No Liability
-
-***As far as the law allows, this software comes as is,
-without any warranty or condition, and no contributor
-will be liable to anyone for any damages related to this
-software or this license, under any kind of legal claim.***
-```
-
 ### Notice ac1f2978a646
 
-Applies to: `package-manager-detector@1.6.0`
+Applies to: `package-manager-detector@1.8.0`
 
 ```text
 MIT License
@@ -9858,7 +9236,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 ### Notice 9219a3ebed1d
 
-Applies to: `picomatch@2.3.1`
+Applies to: `picomatch@2.3.2`, `picomatch@4.0.5`
 
 ```text
 The MIT License (MIT)
@@ -10022,7 +9400,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### Notice 60ddde7fca5d
 
-Applies to: `postcss-js@4.0.1`
+Applies to: `postcss-js@4.1.0`
 
 ```text
 The MIT License (MIT)
@@ -10049,7 +9427,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### Notice 713541ad7d78
 
-Applies to: `postcss-load-config@4.0.2`
+Applies to: `postcss-load-config@6.0.1`
 
 ```text
 The MIT License (MIT)
@@ -10130,14 +9508,14 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-### Notice b02d6103a91d
+### Notice a2764f26c504
 
-Applies to: `postcss@8.5.3`
+Applies to: `postcss@8.5.22`
 
 ```text
 The MIT License (MIT)
 
-Copyright 2013 Andrey Sitnik <andrey@sitnik.ru>
+Copyright 2013 Andrey Sitnik <andrey@sitnik.es>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -10586,7 +9964,7 @@ SOFTWARE.
 
 ### Notice cf9b17822d1f
 
-Applies to: `react-dom@19.2.7`, `react-is@19.2.7`, `react@19.2.7`, `scheduler@0.27.0`, `use-sync-external-store@1.5.0`
+Applies to: `react-dom@19.2.8`, `react-is@19.2.8`, `react@19.2.8`, `scheduler@0.27.0`, `use-sync-external-store@1.6.0`
 
 ```text
 MIT License
@@ -10697,7 +10075,7 @@ THE SOFTWARE.
 
 ### Notice 9bd42e9ab2f8
 
-Applies to: `react-router-dom@7.17.0`, `react-router@7.17.0`
+Applies to: `react-router-dom@7.18.1`, `react-router@7.18.1`
 
 ```text
 MIT License
@@ -10727,7 +10105,7 @@ SOFTWARE.
 
 ### Notice 00624a0aef3d
 
-Applies to: `react-tag-autocomplete@7.5.0`
+Applies to: `react-tag-autocomplete@7.5.1`
 
 ```text
 ISC License
@@ -11109,34 +10487,6 @@ Applies to: `readdirp@3.6.0`
 MIT License
 
 Copyright (c) 2012-2019 Thorsten Lorenz, Paul Miller (https://paulmillr.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-### Notice 1bd3149b744f
-
-Applies to: `regenerator-runtime@0.14.1`
-
-```text
-MIT License
-
-Copyright (c) 2014-present, Facebook, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -12976,52 +12326,66 @@ License, as follows:
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-### Notice 619c97df4042
+### Notice 1a9975c75cfc
 
-Applies to: `sax@1.4.1`
+Applies to: `sax@1.6.0`
 
 ```text
-The ISC License
+# Blue Oak Model License
 
-Copyright (c) 2010-2024 Isaac Z. Schlueter and Contributors
+Version 1.0.0
 
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted, provided that the above
-copyright notice and this permission notice appear in all copies.
+## Purpose
 
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
-IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+This license gives everyone as much permission to work with
+this software as possible, while protecting contributors
+from liability.
 
-====
+## Acceptance
 
-`String.fromCodePoint` by Mathias Bynens used according to terms of MIT
-License, as follows:
+In order to receive this license, you must agree to its
+rules.  The rules of this license are both obligations
+under that agreement and conditions to your license.
+You must not do anything with this software that triggers
+a rule that you cannot or will not follow.
 
-Copyright (c) 2010-2024 Mathias Bynens <https://mathiasbynens.be/>
+## Copyright
 
-    Permission is hereby granted, free of charge, to any person obtaining
-    a copy of this software and associated documentation files (the
-    "Software"), to deal in the Software without restriction, including
-    without limitation the rights to use, copy, modify, merge, publish,
-    distribute, sublicense, and/or sell copies of the Software, and to
-    permit persons to whom the Software is furnished to do so, subject to
-    the following conditions:
+Each contributor licenses you to do everything with this
+software that would otherwise infringe that contributor's
+copyright in it.
 
-    The above copyright notice and this permission notice shall be
-    included in all copies or substantial portions of the Software.
+## Notices
 
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-    LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+You must ensure that everyone who gets a copy of
+any part of this software from you, with or without
+changes, also gets the text of this license or a link to
+<https://blueoakcouncil.org/license/1.0.0>.
+
+## Excuse
+
+If anyone notifies you in writing that you have not
+complied with [Notices](#notices), you can keep your
+license by taking all practical steps to comply within 30
+days after the notice.  If you do not do so, your license
+ends immediately.
+
+## Patent
+
+Each contributor licenses you to do everything with this
+software that would otherwise infringe any patent claims
+they can license or become able to license.
+
+## Reliability
+
+No contributor can revoke this license.
+
+## No Liability
+
+***As far as the law allows, this software comes as is,
+without any warranty or condition, and no contributor
+will be liable to anyone for any damages related to this
+software or this license, under any kind of legal claim.***
 ```
 
 ### Notice d6036b68ceaa
@@ -13100,29 +12464,6 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-```
-
-### Notice 9db336a14e18
-
-Applies to: `signal-exit@4.1.0`
-
-```text
-The ISC License
-
-Copyright (c) 2015-2023 Benjamin Coe, Isaac Z. Schlueter, and Contributors
-
-Permission to use, copy, modify, and/or distribute this software
-for any purpose with or without fee is hereby granted, provided
-that the above copyright notice and this permission notice
-appear in all copies.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES
-OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE
-LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES
-OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
-WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
-ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ```
 
 ### Notice 2cd23ef7d5d5
@@ -13358,7 +12699,7 @@ SOFTWARE.
 
 ### Notice 1b31e7ac2b89
 
-Applies to: `sucrase@3.35.0`
+Applies to: `sucrase@3.35.1`
 
 ```text
 The MIT License (MIT)
@@ -13414,7 +12755,7 @@ SOFTWARE.
 
 ### Notice b25c1d68b353
 
-Applies to: `tailwind-merge@2.6.0`
+Applies to: `tailwind-merge@2.6.1`
 
 ```text
 MIT License
@@ -13470,7 +12811,7 @@ SOFTWARE.
 
 ### Notice fdd854c84f36
 
-Applies to: `tailwindcss@3.4.17`
+Applies to: `tailwindcss@3.4.19`
 
 ```text
 MIT License
@@ -13652,6 +12993,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
+### Notice 4918b99deb04
+
+Applies to: `tinyglobby@0.2.17`
+
+```text
+MIT License
+
+Copyright (c) 2024 Madeline Gurriarán
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
 ### Notice f6355b305c68
 
 Applies to: `to-regex-range@5.0.1`
@@ -13682,7 +13051,7 @@ THE SOFTWARE.
 
 ### Notice 1078bbb5b87d
 
-Applies to: `ts-dedent@2.2.0`
+Applies to: `ts-dedent@2.3.0`
 
 ```text
 MIT License
@@ -13708,34 +13077,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-### Notice e257f36bcf5e
-
-Applies to: `ts-node@10.9.2`
-
-```text
-The MIT License (MIT)
-
-Copyright (c) 2014 Blake Embrey (hello@blakeembrey.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-```
-
 ### Notice 0e8d2550baea
 
 Applies to: `tslib@2.8.1`
@@ -13757,7 +13098,7 @@ PERFORMANCE OF THIS SOFTWARE.
 
 ### Notice d40d4fbdf63e
 
-Applies to: `tss-react@4.9.16`
+Applies to: `tss-react@4.9.21`
 
 ```text
 MIT License
@@ -13853,68 +13194,6 @@ Applies to: `typedarray@0.0.6`
 //  * Allows typed_array.get/set() as alias for subscripts (typed_array[])
 ```
 
-### Notice d446a8c73d7b
-
-Applies to: `typescript@5.8.3`
-
-```text
-Apache License
-
-Version 2.0, January 2004
-
-http://www.apache.org/licenses/
-
-TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
-
-1. Definitions.
-
-"License" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.
-
-"Licensor" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.
-
-"Legal Entity" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, "control" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.
-
-"You" (or "Your") shall mean an individual or Legal Entity exercising permissions granted by this License.
-
-"Source" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.
-
-"Object" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.
-
-"Work" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).
-
-"Derivative Works" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.
-
-"Contribution" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, "submitted" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as "Not a Contribution."
-
-"Contributor" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.
-
-2. Grant of Copyright License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.
-
-3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.
-
-4. Redistribution. You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:
-
-You must give any other recipients of the Work or Derivative Works a copy of this License; and
-
-You must cause any modified files to carry prominent notices stating that You changed the files; and
-
-You must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and
-
-If the Work includes a "NOTICE" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License. You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.
-
-5. Submission of Contributions. Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.
-
-6. Trademarks. This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.
-
-7. Disclaimer of Warranty. Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.
-
-8. Limitation of Liability. In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.
-
-9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.
-
-END OF TERMS AND CONDITIONS
-```
-
 ### Notice 071c22737c45
 
 Applies to: `uiohook-napi@1.5.2`
@@ -13923,34 +13202,6 @@ Applies to: `uiohook-napi@1.5.2`
 MIT License
 
 Copyright (c) 2020 Alexander Drozdov
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-### Notice fe64958bfaef
-
-Applies to: `undici-types@8.3.0`
-
-```text
-MIT License
-
-Copyright (c) Matteo Collina and Undici contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -14031,7 +13282,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 ### Notice 19f9e00b8c98
 
-Applies to: `uuid@11.1.0`
+Applies to: `uuid@11.1.1`
 
 ```text
 The MIT License (MIT)
@@ -14043,34 +13294,6 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-```
-
-### Notice 7967ecb65455
-
-Applies to: `v8-compile-cache-lib@3.0.1`
-
-```text
-The MIT License (MIT)
-
-Copyright (c) 2019 Andres Suarez
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 ```
 
 ### Notice c183063ec6f2
@@ -14260,7 +13483,7 @@ THE SOFTWARE.
 
 ### Notice b98c7fcf09a5
 
-Applies to: `yaml@1.10.2`
+Applies to: `yaml@1.10.3`
 
 ```text
 Copyright 2018 Eemeli Aro <eemeli@gmail.com>
@@ -14278,34 +13501,14 @@ TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
 THIS SOFTWARE.
 ```
 
-### Notice cf12d35c36ba
+### Notice f61cacc2acb8
 
-Applies to: `yaml@2.7.1`
-
-```text
-Copyright Eemeli Aro <eemeli@gmail.com>
-
-Permission to use, copy, modify, and/or distribute this software for any purpose
-with or without fee is hereby granted, provided that the above copyright notice
-and this permission notice appear in all copies.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
-FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
-OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
-TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
-THIS SOFTWARE.
-```
-
-### Notice 217e99e94e5d
-
-Applies to: `zod@3.24.2`
+Applies to: `zod@3.25.76`
 
 ```text
 MIT License
 
-Copyright (c) 2020 Colin McDonnell
+Copyright (c) 2025 Colin McDonnell
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -14328,7 +13531,7 @@ SOFTWARE.
 
 ### Notice 384a8fa756d4
 
-Applies to: `zustand@4.5.6`
+Applies to: `zustand@4.5.7`
 
 ```text
 MIT License
