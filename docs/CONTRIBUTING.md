@@ -30,26 +30,33 @@ Development mode benefits from the infrastructure offered by [electron-react-boi
 1. Run `npm start` to launch the application in development mode.
 
 ## Building, Packaging and Releasing
-CI verifies license compliance and production builds for pushes and pull requests to `main`. Release installers are built by a maintainer from an exact clean commit.
+CI verifies license compliance and production builds for pushes and pull requests to `main`. Release installers are built from an exact clean commit. The SignPath workflow described below is present but cannot sign until SignPath Foundation accepts and provisions the project.
 1. Build the electron application.
     1. Update the version number in `./release/app/package.json` if appropriate.  
     1. Update `./release/source-components.json` whenever the packaged `noobs`, OBS, or FFmpeg revision changes.
     1. Commit the exact source that will be released. Release manifests deliberately reject dirty worktrees because an uncommitted build cannot be matched to a source commit.
     1. Run `npm run compliance:release` and review `THIRD_PARTY_NOTICES.md` and `release/compliance/RELEASE_MANIFEST.json`.
-    1. Run `npm run package` to build the electron application. 
+    1. Run `npm run package` to build the electron application when preparing an unsigned local test or SignPath artifact sample.
 1. Install the .exe and run the tests to make sure you've not broken something crass.
     1. With Lappen Recorder open, run: `python .\resources\test-scripts\all_tests.py`.
     1. Manually check the app behaves as expected while this runs.
         1. Recordings are created.
         1. Appropriate metadata is created.
         1. User experience has not degraded.
+1. Sign the release after SignPath enrollment.
+    1. Push the exact release commit to `main` and create a version tag matching `release/app/package.json`, for example `v8.0.0`.
+    1. Manually run the `Build and sign Windows release` workflow with that tag.
+    1. Approve the request in SignPath after reviewing its verified repository, commit, tag, workflow, version, and artifact metadata.
+    1. Download the `signed-release-<tag>` workflow artifact.
+    1. Run `scripts/verify-windows-signature.ps1` against the downloaded installer and confirm the publisher contains `SignPath Foundation` and a timestamp authority is present.
+    1. Confirm `latest.yml` and the `.blockmap` came from the same workflow. Never reuse update metadata generated for the unsigned installer because signing changes its bytes.
 1. Share the application.
     1. Update the CHANGELOG.md with the new version number and change details. 
     1. Commit and push all changes.
-    1. Tag the exact clean commit and create a **draft** GitHub release. Attach the built files:
-      - `./release/build/LappenRecorder-Setup-X.Y.Z.exe` to enable installation.
-      - `./release/build/latest.yml` to allow the auto updater to function. 
-      - `./release/build/LappenRecorder-Setup-X.Y.Z.exe.blockmap` to allow the auto updater to function.
+    1. Create a **draft** GitHub release for the exact signed tag. Attach the three files from the reviewed signed workflow artifact:
+      - `LappenRecorder-Setup-X.Y.Z.exe` to enable installation.
+      - `latest.yml` to allow the auto updater to function.
+      - `LappenRecorder-Setup-X.Y.Z.exe.blockmap` to allow the auto updater to function.
     1. Manually run the `Publish release compliance artifacts` workflow for the draft's tag. It attaches the exact Lappen Recorder, `noobs`, OBS, and FFmpeg source archives, `THIRD_PARTY_NOTICES.md`, and `RELEASE_MANIFEST.json`, then places matching-source links beside every installer in the release notes.
     1. Confirm the draft installer has matching source links and hashes on the same release page, then publish it. Publishing runs the workflow again as an idempotent verification/repair step. If either run fails, keep the release as a draft until it is corrected.
 
@@ -102,8 +109,16 @@ Below are various additional OSN resources:
 - [AdvancedRecordingFactory API](https://github.com/stream-labs/obs-studio-node/pull/1128)
 - [OSN Tests](https://github.com/stream-labs/obs-studio-node/tree/staging/tests/osn-tests/src)
 
-## Microsoft Stamp of Approval
-If an unsigned `.exe` is released, Windows may warn that it is unrecognized. Fork maintainers must use only a signing certificate they control and must never configure or claim the upstream signing identity.
+## Windows reputation and unsigned emergency builds
+
+The production signing design and policy are documented in
+[`CODE_SIGNING_POLICY.md`](CODE_SIGNING_POLICY.md) and
+[`ReleaseSigningArchitecture.md`](ReleaseSigningArchitecture.md). Fork
+maintainers must use only a signing identity authorized for this fork and must
+never configure or claim the upstream signing identity. Until SignPath
+enrollment is complete, or if an explicitly documented emergency forces an
+unsigned build, Windows may warn that the installer is unrecognized.
+
 1. Submit it for analysis [here](https://www.microsoft.com/en-us/wdsi/filesubmission) after releasing it to make that warning go away.
     1. Select "Microsoft Defender Smartscreen" as the security product. 
     1. "Company name" - just put your own name. 

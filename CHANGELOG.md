@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Added the SignPath Foundation code-signing policy, privacy disclosure,
+  release-signing architecture, and repository-side preparation for a trusted
+  GitHub Actions signing workflow. Production signing remains pending SignPath
+  enrollment.
+
 ## [8.0.0-rc.1] - 2026-07-23
 
 ### Breaking changes

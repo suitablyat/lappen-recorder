@@ -17,6 +17,10 @@ This file is the prominent modification notice for Lappen Recorder, a modified d
 - Added a non-destructive, one-time migration of compatible configuration files into the fork's separate application-data directory.
 - Removed upstream donation and community links from the fork UI and documentation.
 - Added GPL compliance automation, third-party notices, exact source manifests, release-source links, source-retention policy, contribution licensing terms, and fork/trademark notices.
+- Prepared a SignPath Foundation release-signing policy and trusted GitHub
+  Actions design with manual approval, signature verification, and signed-file
+  update-metadata regeneration. Production signing remains disabled until the
+  project is accepted and provisioned by SignPath Foundation.
 
 ## Release records
 

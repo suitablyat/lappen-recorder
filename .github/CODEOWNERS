@@ -1,0 +1,6 @@
+# Release-signing controls require maintainer review.
+/.github/workflows/signpath-release.yml @suitablyat
+/docs/CODE_SIGNING_POLICY.md @suitablyat
+/docs/ReleaseSigningArchitecture.md @suitablyat
+/scripts/regenerate-signed-update-metadata.mjs @suitablyat
+/scripts/verify-windows-signature.ps1 @suitablyat

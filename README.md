@@ -70,6 +70,16 @@ No `.env` file or account is required. Application settings are created at runti
 
 Report fork issues at [suitablyat/lappen-recorder](https://github.com/suitablyat/lappen-recorder/issues). Do not use upstream support channels for fork-specific problems. Contributions are accepted under `GPL-2.0-only`; see [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md).
 
+## Code signing policy
+
+Free code signing is provided by [SignPath.io](https://about.signpath.io/),
+certificate by [SignPath Foundation](https://signpath.org/). Signing is pending
+project enrollment; unsigned builds must not claim a SignPath publisher. See
+the [code signing policy](docs/CODE_SIGNING_POLICY.md),
+[release signing architecture](docs/ReleaseSigningArchitecture.md), and
+[application checklist](docs/SignPathApplication.md), as well as the
+[privacy statement](PRIVACY.md).
+
 ## License and trademarks
 
 Lappen Recorder is distributed under GNU General Public License version 2 only (`GPL-2.0-only`). See [LICENSE](LICENSE) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
