@@ -185,7 +185,10 @@ export default class RemoteStorageService implements StorageClient {
         onProgress,
       );
       this.remoteStorageError = undefined;
-      await this.refreshStatus();
+      // Publishing the updated remote list is what changes a correlated local
+      // video into a local + remote video in the renderer. Without this refresh,
+      // upload-dependent actions remain stale until the next full refresh.
+      await Promise.all([this.refreshStatus(), this.refreshVideos()]);
     } catch (error) {
       if (
         error instanceof RemoteStorageError &&
