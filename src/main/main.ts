@@ -1,4 +1,5 @@
 import path from 'path';
+import { copyFileSync, existsSync, mkdirSync } from 'fs';
 import {
   app,
   BrowserWindow,
@@ -37,6 +38,41 @@ import Poller from 'utils/Poller';
 import Recorder from './Recorder';
 import AsyncQueue from 'utils/AsyncQueue';
 
+/**
+ * Give existing fork users a one-time configuration migration after the
+ * application identity changes. Files are copied, never moved or overwritten,
+ * so an installed upstream application remains independent and recoverable.
+ */
+const migrateLegacyApplicationData = () => {
+  if (!app.isPackaged) return;
+
+  const legacyDirectory = path.join(app.getPath('appData'), 'WarcraftRecorder');
+  const targetDirectory = app.getPath('userData');
+  const storeNames = ['config-v3.json', 'remote-storage-secrets.json'];
+  const hasNewConfiguration = storeNames.some((name) =>
+    existsSync(path.join(targetDirectory, name)),
+  );
+
+  if (hasNewConfiguration || !existsSync(legacyDirectory)) return;
+
+  try {
+    mkdirSync(targetDirectory, { recursive: true });
+    for (const name of storeNames) {
+      const source = path.join(legacyDirectory, name);
+      if (existsSync(source)) {
+        copyFileSync(source, path.join(targetDirectory, name));
+      }
+    }
+    console.info(
+      '[Main] Copied compatible settings from the legacy application profile',
+    );
+  } catch (error) {
+    console.warn('[Main] Unable to copy the legacy application profile', error);
+  }
+};
+
+migrateLegacyApplicationData();
+
 const logDir = setupApplicationLogging();
 const appVersion = app.getVersion();
 const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -56,7 +92,7 @@ const manager = new Manager();
 /**
  * Create a settings store to handle the config.
  * This defaults to a path like:
- *   - (prod) "C:\Users\alexa\AppData\Roaming\WarcraftRecorder\config-v3.json"
+ *   - (prod) "C:\Users\user\AppData\Roaming\Lappen Recorder\config-v3.json"
  *   - (dev)  "C:\Users\alexa\AppData\Roaming\Electron\config-v3.json"
  */
 const cfg = ConfigService.getInstance();
@@ -173,7 +209,7 @@ const setupTray = () => {
     },
   ]);
 
-  tray.setToolTip('Warcraft Recorder');
+  tray.setToolTip('Lappen Recorder');
   tray.setContextMenu(contextMenu);
 
   tray.on('double-click', () => {
@@ -199,7 +235,7 @@ const createWindow = async () => {
     width: 1980 * 0.8,
     icon: getAssetPath('./icon/small-icon.png'),
     frame: false,
-    title: `Warcraft Recorder v${appVersion}`,
+    title: `Lappen Recorder v${appVersion}`,
     webPreferences: {
       sandbox: true, // Good security practice.
       preload: app.isPackaged
@@ -236,7 +272,7 @@ const createWindow = async () => {
     // This shows the correct version on a release build, not during development.
     window.webContents.send(
       'updateVersionDisplay',
-      `Warcraft Recorder v${appVersion}`,
+      `Lappen Recorder v${appVersion}`,
     );
 
     const startMinimized = cfg.get<boolean>('startMinimized');
@@ -390,7 +426,7 @@ ipcMain.handle('selectImage', async () => {
 });
 
 /**
- * Listener to open the folder containing the Warcraft Recorder logs.
+ * Listener to open the folder containing the Lappen Recorder logs.
  */
 ipcMain.on('logPath', (_event, args) => {
   if (args[0] === 'open') {

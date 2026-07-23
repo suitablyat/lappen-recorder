@@ -66,7 +66,7 @@ const moof = Buffer.from('moof');
 const mdat = Buffer.from('mdat');
 
 /**
- * Class for handing the interface between Warcraft Recorder and OBS.
+ * Class for handling the interface between Lappen Recorder and OBS.
  *
  * This works by constantly recording a "buffer" whenever WoW is open. If an
  * interesting event is spotted in the combatlog (e.g. an ENCOUNTER_START

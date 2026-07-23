@@ -32,7 +32,7 @@ export const normalizeBasePath = (value: string): string => {
 
   return parts.length
     ? parts.map(encodeURIComponent).join('/')
-    : 'WarcraftRecorder';
+    : 'LappenRecorder';
 };
 
 export const normalizeWebDavEndpoint = (

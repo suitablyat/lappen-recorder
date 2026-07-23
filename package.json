@@ -1,6 +1,6 @@
 {
-  "name": "WarcraftRecorder",
-  "description": "Warcraft Recorder",
+  "name": "lappen-recorder",
+  "description": "Lappen Recorder - an unofficial World of Warcraft gameplay recorder",
   "keywords": [
     "world",
     "of",
@@ -8,19 +8,18 @@
     "screen",
     "recorder"
   ],
-  "homepage": "https://www.warcraftrecorder.com/",
+  "homepage": "https://github.com/suitablyat/lappen-recorder",
   "bugs": {
-    "url": "https://github.com/aza547/wow-recorder/issues"
+    "url": "https://github.com/suitablyat/lappen-recorder/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aza547/wow-recorder.git"
+    "url": "git+https://github.com/suitablyat/lappen-recorder.git"
   },
-  "license": "Creative Commons Attribution-NonCommercial",
+  "license": "GPL-2.0-only",
   "author": {
-    "name": "Alex K",
-    "email": "warcraftrecorder@gmail.com",
-    "url": "https://www.warcraftrecorder.com/"
+    "name": "Lappen Recorder contributors",
+    "url": "https://github.com/suitablyat/lappen-recorder"
   },
   "main": "./.erb/dll/main.bundle.dev.js",
   "scripts": {
@@ -31,7 +30,11 @@
     "postinstall": "ts-node .erb/scripts/check-native-dep.js && electron-builder install-app-deps && npm run build:dll",
     "lint": "cross-env NODE_ENV=development eslint ./src",
     "lint:fix": "cross-env NODE_ENV=development eslint ./src --fix",
-    "package": "ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build --publish never && npm run build:dll",
+    "compliance:check": "node ./scripts/check-license-compliance.mjs",
+    "compliance:manifest": "node ./scripts/generate-release-manifest.mjs",
+    "compliance:notices": "node ./scripts/generate-third-party-notices.mjs",
+    "compliance:release": "npm run compliance:notices && npm run compliance:check && npm run compliance:manifest -- --require-clean --download-sources",
+    "package": "npm run compliance:release && ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build --publish never && npm run build:dll",
     "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir release/app",
     "prestart": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.main.dev.ts",
     "start": "ts-node ./.erb/scripts/check-port-in-use.js && npm run prestart && npm run start:renderer",
@@ -63,8 +66,8 @@
     "logLevel": "quiet"
   },
   "build": {
-    "productName": "WarcraftRecorder",
-    "appId": "org.WarcraftRecorder",
+    "productName": "Lappen Recorder",
+    "appId": "io.github.suitablyat.lappenrecorder",
     "asar": true,
     "asarUnpack": "**\\**",
     "files": [
@@ -79,10 +82,7 @@
     },
     "win": {
       "icon": "assets/icon.png",
-      "signtoolOptions": {
-        "certificateSubjectName": "Warcraft Recorder LTD"
-      },
-      "artifactName": "WarcraftRecorder-Setup-${version}.exe",
+      "artifactName": "LappenRecorder-Setup-${version}.exe",
       "target": [
         "nsis"
       ]
@@ -94,12 +94,32 @@
     },
     "extraResources": [
       "./assets/**",
-      "./binaries/*"
+      "./binaries/*",
+      {
+        "from": "LICENSE",
+        "to": "LICENSE"
+      },
+      {
+        "from": "THIRD_PARTY_NOTICES.md",
+        "to": "THIRD_PARTY_NOTICES.md"
+      },
+      {
+        "from": "FORK_NOTICE.md",
+        "to": "FORK_NOTICE.md"
+      },
+      {
+        "from": "MODIFICATIONS.md",
+        "to": "MODIFICATIONS.md"
+      },
+      {
+        "from": "release/compliance/RELEASE_MANIFEST.json",
+        "to": "RELEASE_MANIFEST.json"
+      }
     ],
     "publish": {
       "provider": "github",
-      "owner": "aza547",
-      "repo": "wow-recorder"
+      "owner": "suitablyat",
+      "repo": "lappen-recorder"
     }
   },
   "jest": {

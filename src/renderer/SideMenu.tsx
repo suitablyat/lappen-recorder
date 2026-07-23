@@ -46,13 +46,11 @@ import { getCategoryIndex } from './rendererutils';
 import Menu from './components/Menu';
 import Separator from './components/Separator/Separator';
 import TestButton from './TestButton';
-import DiscordButton from './DiscordButton';
 import ApplicationStatusCard from './containers/ApplicationStatusCard/ApplicationStatusCard';
 import { ScrollArea } from './components/ScrollArea/ScrollArea';
 import UpdateNotifier from './containers/UpdateNotifier/UpdateNotifier';
 import CloudStatusCard from './containers/ApplicationStatusCard/CloudStatusCard';
 import { Phrase } from 'localisation/phrases';
-import PatreonButton from './PatreonButton';
 import { Button } from './components/Button/Button';
 import { Tooltip } from './components/Tooltip/Tooltip';
 import DiagnosticsDialog from './DiagnosticsDialog';
@@ -378,8 +376,6 @@ const SideMenu = (props: IProps) => {
             </Button>
           </DiagnosticsDialog>
           <TestButton recorderStatus={recorderStatus} appState={appState} />
-          <DiscordButton appState={appState} />
-          <PatreonButton appState={appState} />
         </div>
         {!!appVersion && (
           <div className="w-full mt-1 text-foreground font-sans text-[11px] font-bold text-center opacity-75">

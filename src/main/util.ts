@@ -64,7 +64,7 @@ const fixPathWhenPackaged = (p: string) => {
 const setupApplicationLogging = () => {
   const log = require('electron-log');
   const date = new Date().toISOString().slice(0, 10);
-  const logRelativePath = `logs/WarcraftRecorder-${date}.log`;
+  const logRelativePath = `logs/LappenRecorder-${date}.log`;
   const logPath = fixPathWhenPackaged(path.join(__dirname, logRelativePath));
   log.transports.file.resolvePath = () => logPath;
   Object.assign(console, log.functions);
@@ -892,7 +892,7 @@ const exists = async (file: string) => {
 
 /**
  * Check if the folder contains the managed.txt file indicating it is owned
- * by Warcraft Recorder.
+ * by Lappen Recorder.
  */
 const isFolderOwned = async (dir: string) => {
   const file = path.join(dir, 'managed.txt');
@@ -910,15 +910,15 @@ const isFolderOwned = async (dir: string) => {
  * Take ownership of a directory as the storage directory by writing a file to
  * indicate our ownership. This does the necessary checks that it doesn't contain
  * files we don't recognise first, to avoid the case where a user sets a storage
- * path that contains other files which Warcraft Recorder may go on to delete.
+ * path that contains other files which Lappen Recorder may go on to delete.
  * More context: https://github.com/aza547/wow-recorder/issues/400.
  */
 const takeOwnershipStorageDir = async (dir: string) => {
   const helptext =
-    'If you are setting up Warcraft Recorder for the first time, this folder should be empty.';
+    'If you are setting up Lappen Recorder for the first time, this folder should be empty.';
 
   const content =
-    'This folder is managed by Warcraft Recorder, files in it may be automatically created, modified or deleted.';
+    'This folder is managed by Lappen Recorder, files in it may be automatically created, modified or deleted.';
 
   const files = await fs.promises.readdir(dir);
 
@@ -947,7 +947,7 @@ const takeOwnershipStorageDir = async (dir: string) => {
 
   // Ensure that every MP4 file we saw has a corresponding JSON and PNG file,
   // this covers the case that we've seen before where someone was otherwise
-  // recording MP4s to the same directory as they configured Warcraft Recorder
+  // recording MP4s to the same directory as they configured Lappen Recorder
   // to use.
   const mp4s = files.filter((file) => file.endsWith('.mp4'));
 
@@ -971,15 +971,15 @@ const takeOwnershipStorageDir = async (dir: string) => {
  * Take ownership of a directory as the buffer directory by writing a file to
  * indicate our ownership. This does the necessary checks that it doesn't contain
  * files we don't recognise first, to avoid the case where a user sets a buffer
- * storage path that contains other files which Warcraft Recorder may go on to delete.
+ * storage path that contains other files which Lappen Recorder may go on to delete.
  * More context: https://github.com/aza547/wow-recorder/issues/400.
  */
 const takeOwnershipBufferDir = async (dir: string) => {
   const helptext =
-    'If you are setting up Warcraft Recorder for the first time, this folder should be empty.';
+    'If you are setting up Lappen Recorder for the first time, this folder should be empty.';
 
   const content =
-    'This folder is managed by Warcraft Recorder, files in it may be automatically created, modified or deleted.';
+    'This folder is managed by Lappen Recorder, files in it may be automatically created, modified or deleted.';
 
   const files = await fs.promises.readdir(dir);
 
@@ -1188,7 +1188,7 @@ const runFirstTimeSetupActionsNoObs = () => {
 
     const initialStorageDir = path.join(
       baseVideoPath,
-      'Warcraft Recorder Videos',
+      'Lappen Recorder Videos',
     );
 
     fs.mkdirSync(initialStorageDir, { recursive: true });

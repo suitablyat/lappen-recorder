@@ -457,7 +457,7 @@ export const configSchema = {
   webdavBasePath: {
     description: Phrase.WebDavBasePathDescription,
     type: 'string',
-    default: 'WarcraftRecorder',
+    default: 'LappenRecorder',
   },
   remoteStorageAutoUpload: {
     description: Phrase.RemoteStorageAutoUploadDescription,

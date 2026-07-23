@@ -183,7 +183,7 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
         url: markerUrl,
         method: 'PUT',
         headers: { 'Content-Type': 'application/octet-stream' },
-        data: Buffer.from('Warcraft Recorder connection test'),
+        data: Buffer.from('Lappen Recorder connection test'),
       });
       await this.request({
         url: markerUrl,

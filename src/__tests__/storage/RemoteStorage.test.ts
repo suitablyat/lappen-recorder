@@ -27,7 +27,7 @@ const config = {
   serverUrl: 'https://dav.example.test/root/',
   username: 'user',
   password: 'secret',
-  basePath: 'WarcraftRecorder',
+  basePath: 'LappenRecorder',
   timeoutMs: 50,
 };
 
@@ -155,9 +155,9 @@ describe('WebDavStorageProvider', () => {
 
   test('lists only complete MP4 and valid JSON pairs', async () => {
     const xml = `<?xml version="1.0"?><d:multistatus xmlns:d="DAV:">
-      <d:response><d:href>/root/WarcraftRecorder/videos/raid.mp4</d:href><d:propstat><d:prop><d:getcontentlength>100</d:getcontentlength></d:prop></d:propstat></d:response>
-      <d:response><d:href>/root/WarcraftRecorder/videos/raid.json</d:href><d:propstat><d:prop><d:getlastmodified>Wed, 22 Jul 2026 12:00:00 GMT</d:getlastmodified></d:prop></d:propstat></d:response>
-      <d:response><d:href>/root/WarcraftRecorder/videos/orphan.json</d:href></d:response>
+      <d:response><d:href>/root/LappenRecorder/videos/raid.mp4</d:href><d:propstat><d:prop><d:getcontentlength>100</d:getcontentlength></d:prop></d:propstat></d:response>
+      <d:response><d:href>/root/LappenRecorder/videos/raid.json</d:href><d:propstat><d:prop><d:getlastmodified>Wed, 22 Jul 2026 12:00:00 GMT</d:getlastmodified></d:prop></d:propstat></d:response>
+      <d:response><d:href>/root/LappenRecorder/videos/orphan.json</d:href></d:response>
     </d:multistatus>`;
     request.mockImplementation(async (call) => {
       if (call.method === 'PROPFIND' && call.headers?.Depth === '1') {
@@ -197,7 +197,7 @@ describe('WebDavStorageProvider', () => {
     });
     expect(request).toHaveBeenCalledWith(
       expect.objectContaining({
-        url: 'https://dav.example.test/root/WarcraftRecorder/videos/raid.mp4',
+        url: 'https://dav.example.test/root/LappenRecorder/videos/raid.mp4',
         method: 'GET',
         headers: { Range: 'bytes=0-2' },
         auth: { username: 'user', password: 'secret' },

@@ -690,7 +690,7 @@ const CategoryPage = (props: IProps) => {
 
   const openSetupInstructions = () => {
     window.electron.ipcRenderer.sendMessage('openURL', [
-      'https://www.warcraftrecorder.com/setup',
+      'https://github.com/suitablyat/lappen-recorder#how-to-use',
     ]);
   };
 

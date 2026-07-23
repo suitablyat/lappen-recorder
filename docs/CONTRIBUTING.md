@@ -2,6 +2,19 @@
 
 The below steps describe development on Windows. The app is currently not supported on other operating systems. 
 
+## Contribution license
+
+Lappen Recorder is licensed under GNU GPL version 2 only
+(`GPL-2.0-only`). By submitting a contribution, you represent that you have the
+right to submit it and agree to license it under `GPL-2.0-only`, without adding
+terms that would prevent the project from distributing the combined work under
+that license. Preserve existing copyright, license, attribution, and modification
+notices. Identify third-party code or assets and their licenses in the pull
+request; do not submit material whose redistribution rights are unclear.
+Contributors must update `MODIFICATIONS.md` when a change materially alters the
+fork's behavior, distribution, branding, or license-compliance process. Do not
+remove the upstream provenance recorded in `FORK_NOTICE.md`.
+
 ## Architecture
 Once I drew the structure of the application in Excalidraw. You can see that below. It's a rough overview of the key parts and may be a useful overview for any interested developers.
 ![](https://i.imgur.com/UbZ0aWY.png)
@@ -10,20 +23,22 @@ You can find the source in the `design.excalidraw` file in this directory.
 ## Start in Development Mode
 Development mode benefits from the infrastructure offered by [electron-react-boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate). You can read more about it on their [docs](https://electron-react-boilerplate.js.org/). It allows for a very quick development cycle, access to chrome dev tools, and hot reloading of the app on saving new changes. 
 
-1. Install the latest version of Node.js version (latest at time of writing is 20.4.0) from [here](https://nodejs.org/en/).
-1. Clone a copy of the [wow-recorder](https://github.com/aza547/wow-recorder) codebase.
+1. Install Node.js 24 and npm 10, matching the CI environment, from [nodejs.org](https://nodejs.org/).
+1. Clone a copy of the [Lappen Recorder](https://github.com/suitablyat/lappen-recorder) codebase.
 1. Change into the checkout directory. 
 1. Run `npm install` on the command line to install required node packages.
 1. Run `npm start` to launch the application in development mode.
 
 ## Building, Packaging and Releasing
-> As of 3.3.1, we have CI builds for all commits to main.
-> As of 6.8.2, only the tests run in the CI. Can't build in the CI now that we're signing the exe.
+CI verifies license compliance and production builds for pushes and pull requests to `main`. Release installers are built by a maintainer from an exact clean commit.
 1. Build the electron application.
     1. Update the version number in `./release/app/package.json` if appropriate.  
+    1. Update `./release/source-components.json` whenever the packaged `noobs`, OBS, or FFmpeg revision changes.
+    1. Commit the exact source that will be released. Release manifests deliberately reject dirty worktrees because an uncommitted build cannot be matched to a source commit.
+    1. Run `npm run compliance:release` and review `THIRD_PARTY_NOTICES.md` and `release/compliance/RELEASE_MANIFEST.json`.
     1. Run `npm run package` to build the electron application. 
 1. Install the .exe and run the tests to make sure you've not broken something crass.
-    1. With WarcraftRecorder open, run: `python .\resources\test-scripts\all_tests.py`.
+    1. With Lappen Recorder open, run: `python .\resources\test-scripts\all_tests.py`.
     1. Manually check the app behaves as expected while this runs.
         1. Recordings are created.
         1. Appropriate metadata is created.
@@ -31,10 +46,21 @@ Development mode benefits from the infrastructure offered by [electron-react-boi
 1. Share the application.
     1. Update the CHANGELOG.md with the new version number and change details. 
     1. Commit and push all changes.
-    1. Tag a release on GitHub and attach the built files:
-      - `./release/build/WarcraftRecorder-Setup-X.Y.Z.exe` to enable installation.
+    1. Tag the exact clean commit and create a **draft** GitHub release. Attach the built files:
+      - `./release/build/LappenRecorder-Setup-X.Y.Z.exe` to enable installation.
       - `./release/build/latest.yml` to allow the auto updater to function. 
-      - `./release/build/WarcraftRecorder-Setup-6.8.0.exe.blockmap` to allow the auto updater to function. 
+      - `./release/build/LappenRecorder-Setup-X.Y.Z.exe.blockmap` to allow the auto updater to function.
+    1. Manually run the `Publish release compliance artifacts` workflow for the draft's tag. It attaches the exact Lappen Recorder, `noobs`, OBS, and FFmpeg source archives, `THIRD_PARTY_NOTICES.md`, and `RELEASE_MANIFEST.json`, then places matching-source links beside every installer in the release notes.
+    1. Confirm the draft installer has matching source links and hashes on the same release page, then publish it. Publishing runs the workflow again as an idempotent verification/repair step. If either run fails, keep the release as a draft until it is corrected.
+
+### Source retention policy
+
+Corresponding-source archives and the release manifest must remain downloadable
+for at least as long as any installer or update artifact from that release is
+available. Do not delete or replace a source archive independently. If source can
+no longer be retained, remove the corresponding installer, blockmap, and update
+metadata as well. The release workflow can be run manually with an existing tag
+to restore or verify compliance assets for an older release.
 
 ## Tests
 1. Run `npm test` to run the UTs. 
@@ -77,7 +103,7 @@ Below are various additional OSN resources:
 - [OSN Tests](https://github.com/stream-labs/obs-studio-node/tree/staging/tests/osn-tests/src)
 
 ## Microsoft Stamp of Approval
-If we just build a .exe and release it Windows will warn it may be dangerous. Could resolve this buy purchasing a certificate from a CA, but it costs a fortune. Read more about it in this [issue](https://github.com/aza547/wow-recorder/issues/11).
+If an unsigned `.exe` is released, Windows may warn that it is unrecognized. Fork maintainers must use only a signing certificate they control and must never configure or claim the upstream signing identity.
 1. Submit it for analysis [here](https://www.microsoft.com/en-us/wdsi/filesubmission) after releasing it to make that warning go away.
     1. Select "Microsoft Defender Smartscreen" as the security product. 
     1. "Company name" - just put your own name. 
@@ -85,6 +111,6 @@ If we just build a .exe and release it Windows will warn it may be dangerous. Co
     1. Leave next few fields blank/unchanged. 
     1. Select & upload the .exe. 
     1. "What do you believe this file is?" - Incorrectly detected as malware/malicious
-    1. Detection name - "WarcraftRecorder.Setup.2.0.1.exe"
+    1. Detection name - "LappenRecorder-Setup-X.Y.Z.exe"
     1. "Additional information" - whatever, I'm sure no one will read it. 
 1. This isn't instant but seems to get resolved within 24 hours, that seems good enough. 

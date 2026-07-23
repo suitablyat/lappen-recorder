@@ -1,113 +1,81 @@
-# Warcraft Recorder
-![GitHub all releases](https://img.shields.io/github/downloads/aza547/wow-recorder/total)
-![Version](https://img.shields.io/github/package-json/v/aza547/wow-recorder?filename=release%2Fapp%2Fpackage.json)
-![Discord](https://img.shields.io/discord/1004860808737591326)
+# Lappen Recorder
 
-Warcraft Recorder is a desktop screen recorder. It watches the WoW combat log file for interesting events, records them, and presents a user interface in which the recordings can be viewed. 
+![GitHub all releases](https://img.shields.io/github/downloads/suitablyat/lappen-recorder/total)
+![Version](https://img.shields.io/github/package-json/v/suitablyat/lappen-recorder?filename=release%2Fapp%2Fpackage.json)
 
-## Development setup
+Lappen Recorder is a Windows desktop recorder for World of Warcraft gameplay. It watches the combat log for interesting events, records them with OBS, and provides a local interface for viewing recordings. The application works offline by default; optional remote storage supports Nextcloud and generic WebDAV.
 
-### Prerequisites
+## Fork and upstream
 
-- Windows x64 (macOS and Linux are not supported).
-- Node.js 24 and npm 10, matching the current CI environment.
-- Git. Python 3 is only required for the optional integration tests in `tests/`.
-- World of Warcraft is required for end-to-end recording tests, but not for unit tests or production builds.
+This project is an independently maintained fork of [Warcraft Recorder](https://github.com/aza547/wow-recorder). It is not an official Warcraft Recorder release and is not maintained, supported, or endorsed by the upstream project or its maintainers. See [FORK_NOTICE.md](FORK_NOTICE.md) and [MODIFICATIONS.md](MODIFICATIONS.md) for provenance and a summary of fork changes.
 
-The npm postinstall step installs and rebuilds the Electron-native OBS and global-input dependencies. Prebuilt binaries are normally used; a supported Visual Studio C++ build environment may be required if a native dependency must compile locally.
+Existing upstream copyrights and attribution are preserved. The fork's source history begins from upstream commit `5d17d0281ccd8bf7a1aa74a556e9ca5715783ad4`.
 
-### Installation
+## Download and source
 
-```powershell
-npm install
-```
+Download the latest [Lappen Recorder release](https://github.com/suitablyat/lappen-recorder/releases/latest). Every installer release must include links to the exact corresponding source archives, `RELEASE_MANIFEST.json`, hashes, and `THIRD_PARTY_NOTICES.md` on the same release page. Do not install a release if those source links are missing.
 
-If PowerShell execution policy blocks `npm.ps1`, use `npm.cmd` in place of `npm`.
+Changing the application identity gives Lappen Recorder its own Windows installation and application-data directory. It does not overwrite an installed upstream Warcraft Recorder copy. On first packaged launch, if the new profile has no configuration, compatible settings and encrypted remote-storage credentials are copied from the legacy `WarcraftRecorder` profile; the old files remain untouched. Existing recording folders and explicitly configured WebDAV base paths are not renamed.
 
-### Environment setup
+## How to use
 
-No `.env` file or environment variables are required for normal development. Application settings are created at runtime with `electron-store`; do not commit generated configuration or credentials. Remote storage is disabled by default. To exercise it, configure a Nextcloud or generic WebDAV server in the application's Remote Storage settings; passwords are entered in the UI and protected with Electron `safeStorage`.
+1. Install and launch Lappen Recorder.
+2. Open Settings, select an empty local storage folder, enable the desired game modes, and set the World of Warcraft log directories.
+3. Open Scene and configure the OBS scene, resolution, encoder, speakers, and microphone.
+4. Install a combat logging addon and enable advanced combat logging when prompted:
+   - Retail: SimpleCombatLogger ([CurseForge](https://www.curseforge.com/wow/addons/simplecombatlogger), [Wago](https://addons.wago.io/addons/simplecombatlogger)).
+   - Classic and Classic Era: AutoCombatLogger ([CurseForge](https://www.curseforge.com/wow/addons/autocombatlogger), [Wago](https://addons.wago.io/addons/autocombatlogger)).
+5. With World of Warcraft running, use the test button to verify recording.
 
-### Development command
-
-```powershell
-npm start
-```
-
-### Test command
-
-```powershell
-npm test
-```
-
-Linting is available separately with `npm run lint`. The integration suite is documented in [`tests/README.md`](tests/README.md) and requires a running Warcraft Recorder instance, World of Warcraft, configured local paths, and Python 3.
-
-### Build command
-
-```powershell
-npm run build
-```
-
-Use `npm run package` only when creating a Windows installer; release signing is maintainer-specific.
-
-### Known limitations
-
-- Development and runtime support are Windows-only.
-- Recording depends on the packaged native OBS (`noobs`) binaries, supported capture hardware/drivers, and a valid WoW combat-log directory.
-- The standalone TypeScript compiler is not currently a supported check: Webpack builds use transpile-only mode, and dependency declarations do not pass the repository's current TypeScript module-resolution settings.
-- The existing lint configuration reports legacy violations that do not prevent the application from building or running.
-
-<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/aea579e3-5a7f-477d-bea0-273556a3ef9b" />
-
-#  How to Use
-1. Download and run the most recent [Warcraft Recorder installer](https://github.com/aza547/wow-recorder/releases/latest).
-2. Launch the application and click the Settings button.
-    - Create a folder on your PC to store the recordings.
-    - Set the Storage Path to the folder you just created.
-    - Enable recording and set the location of your World of Warcraft logs folder.
-    - Modify any other settings as desired.
-3. Click the Scene button and configure the OBS scene and recording settings.
-    - Select your desired output resolution.
-    - Add your speakers and/or microphone if you want to include audio.
-    - Recommend selecting a hardware encoder, if available.
-    - Modify any other settings as desired.
-5. Install the required combat logging addon, enabling advanced combat logging when prompted.
-    - Retail: SimpleCombatLogger ([CurseForge](https://www.curseforge.com/wow/addons/simplecombatlogger), [Wago](https://addons.wago.io/addons/simplecombatlogger)).
-    - Classic: AutoCombatLogger ([CurseForge](https://www.curseforge.com/wow/addons/autocombatlogger), [Wago](https://addons.wago.io/addons/autocombatlogger)). 
-    - Classic Era: AutoCombatLogger ([CurseForge](https://www.curseforge.com/wow/addons/autocombatlogger), [Wago](https://addons.wago.io/addons/autocombatlogger)). 
-
-# Supported Platforms
+## Supported platforms
 
 | OS | Support |
 |---|---|
 | Windows | Yes |
-| Mac | No |
+| macOS | No |
 | Linux | No |
 
-| Flavour | Support |
+| Game flavour | Support |
 |---|---|
 | Retail | Yes |
 | MoP Classic | Yes |
-| Classic Anniversary | Best Effort |
-| Classic Era | SoD Raids Only |
+| Classic Anniversary | Best effort |
+| Classic Era | SoD raids only |
 
-# Testing It Works
-You can test that Warcraft Recorder works by clicking the test icon with World of Warcraft running after you have completed the above setup steps. This runs a short test of the recording function.
+## Development
 
-# Bug Reports & Suggestions
+Prerequisites are Windows x64, Git, Node.js 24, and npm 10. Python 3 and World of Warcraft are required only for the optional integration tests.
 
-Please create an issue, I will get to it eventually. Bear in mind maintaining this is a hobby for me, so it may take me some time to comment. If you think you can improve something, feel free to submit a PR.
+```powershell
+git clone https://github.com/suitablyat/lappen-recorder.git
+cd lappen-recorder
+npm install
+npm start
+```
 
-I've created a dedicated discord for this project, feel free to join [here](https://discord.gg/NPha7KdjVk).
+Useful checks:
 
-# Contributing
+```powershell
+npm test
+npm run lint
+npm run build
+npm run compliance:check
+```
 
-If you're interested in getting involved please drop me a message on discord and I can give you access to our development channel. Also see [contributing](https://github.com/aza547/wow-recorder/blob/main/docs/CONTRIBUTING.md) docs.
+Use `npm run package` only for a Windows release build. It regenerates third-party notices, checks license compliance, creates the release manifest, and rejects a dirty source tree before packaging. See [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for the release process.
 
-# Mentions
+No `.env` file or account is required. Application settings are created at runtime. Remote storage is disabled by default; passwords entered for WebDAV are protected with Electron `safeStorage`.
 
-The recording done by Warcraft Recorder is made possible by packaging up [OBS](https://obsproject.com/). We wouldn't stand a chance at providing something useful without it. Big thanks to the OBS developers.
+## Issues and contributions
 
-The app is built with [Electron](https://www.electronjs.org/) and [React](https://react.dev/), using the boilerplate provided by the [ERB](https://electron-react-boilerplate.js.org/) project. 
+Report fork issues at [suitablyat/lappen-recorder](https://github.com/suitablyat/lappen-recorder/issues). Do not use upstream support channels for fork-specific problems. Contributions are accepted under `GPL-2.0-only`; see [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md).
 
-Drawing overlay created using [Excalidraw](https://github.com/excalidraw/excalidraw).
+## License and trademarks
+
+Lappen Recorder is distributed under GNU General Public License version 2 only (`GPL-2.0-only`). See [LICENSE](LICENSE) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+Lappen Recorder is an unofficial community project and is not endorsed by or affiliated with Blizzard Entertainment. It is also not sponsored, approved, maintained, or endorsed by the Warcraft Recorder project or its maintainers. Warcraft, World of Warcraft, Blizzard Entertainment, and related names, logos, and assets are trademarks or property of their respective owners. Their use is solely to identify compatibility and does not imply endorsement.
+
+## Acknowledgements
+
+Recording is provided by packaged [OBS](https://obsproject.com/) components. The app uses [Electron](https://www.electronjs.org/), [React](https://react.dev/), [Electron React Boilerplate](https://electron-react-boilerplate.js.org/), and [Excalidraw](https://github.com/excalidraw/excalidraw). Full dependency attribution is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

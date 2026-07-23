@@ -51,7 +51,7 @@ Helptext:
 ```
 PS D:\checkouts\warcraft-recorder\integration-tests> python .\src\test.py -h
 
-usage: Warcraft Recorder Tests [-h] [-f {classic,retail}]
+usage: Lappen Recorder Tests [-h] [-f {classic,retail}]
                                [-t {mythic_plus_drop_go,mythic_plus,raid_reset,raid_unknown_encounter,raid_wipe,rated_2v2_afk_out,rated_2v2,rated_3v3,rated_battleground,skirmish,rated_solo_shuffle,wargame_3v3,zone_changes,battleground,raid,rated_2v2,rated_2v2_double,rated_3v3,rated_5v5}]
 
 options:

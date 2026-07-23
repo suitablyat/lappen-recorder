@@ -1,6 +1,6 @@
 # How to Filter Recorded Audio
 
-The below is a method to allow Warcraft Recorder to record the system audio while ignoring discord audio. Thanks to Maxi for submitting these instructions. 
+The below is a method to allow Lappen Recorder to record the system audio while ignoring Discord audio. Thanks to Maxi for submitting these instructions.
 
 ## Instructions
 1. Download the latest version of [Voicemeeter Banana](https://vb-audio.com/Voicemeeter/banana.htm).
@@ -23,7 +23,7 @@ The below is a method to allow Warcraft Recorder to record the system audio whil
 1. Open Discord settings and go to Voice and Video tab. 
     - Choose 'Voice Meeter Aux Input' as your 'Output Device'.
     <img src="https://i.imgur.com/JHU4yof.png"  width="500">
-1. Open Warcraft Recorder settings and set the audio device to VoiceMeeter. 
+1. Open Lappen Recorder settings and set the audio device to VoiceMeeter.
     <img src="https://i.imgur.com/rS39pGv.png"  width="500">
 1. Enjoy!
 
@@ -39,4 +39,3 @@ The below is a method to allow Warcraft Recorder to record the system audio whil
     
 
     
-
