@@ -669,6 +669,29 @@ describe('WebDavStorageProvider', () => {
     );
   });
 
+  test('rejects oversized remote chat documents', async () => {
+    request.mockResolvedValue({
+      data: Array.from({ length: 1001 }, (_, id) => ({
+        id,
+        correlator: 'raid',
+        userName: 'user',
+        message: 'message',
+        timestamp: id,
+      })),
+      headers: {},
+    });
+    const provider = new WebDavStorageProvider(config);
+
+    await expect(provider.getChatMessages('raid')).rejects.toThrow(
+      'Invalid remote chat data',
+    );
+    const chatRead = request.mock.calls.find(
+      ([call]) =>
+        call.method === 'GET' && String(call.url).endsWith('/chats/raid.json'),
+    );
+    expect(chatRead?.[0].maxContentLength).toBe(1024 * 1024);
+  });
+
   test('creates and reuses read-only Nextcloud public share links', async () => {
     const provider = new WebDavStorageProvider({
       ...config,
@@ -720,6 +743,19 @@ describe('WebDavStorageProvider', () => {
     expect(provider.capabilities.shareLinks).toBe(false);
     await expect(provider.createShareLink('raid')).rejects.toThrow(
       'does not support share links',
+    );
+    expect(request).not.toHaveBeenCalled();
+  });
+
+  test('rejects non-normalized Nextcloud share-link video names', async () => {
+    const provider = new WebDavStorageProvider({
+      ...config,
+      provider: 'nextcloud',
+      serverUrl: 'https://cloud.example.test/nextcloud',
+    });
+
+    await expect(provider.createShareLink('../raid')).rejects.toThrow(
+      'Invalid remote video name',
     );
     expect(request).not.toHaveBeenCalled();
   });

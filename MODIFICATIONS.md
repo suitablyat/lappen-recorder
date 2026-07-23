@@ -8,6 +8,10 @@ This file is the prominent modification notice for Lappen Recorder, a modified d
 - Added remote upload, download, listing, deletion, playback, authentication, configuration migration, and tests while keeping local storage authoritative.
 - Fixed remote video seek, pause, and authenticated playback behavior.
 - Added Nextcloud public share links and support for long-running WebDAV uploads.
+- Added provider-hosted per-video chat without accounts, centralized APIs, or
+  WebSockets, with bounded documents and conditional writes for concurrency.
+- Hardened provider-specific share and chat IPC with strict normalized names,
+  bounded responses, capability checks, and secret-redacted errors.
 - Changed product, package, installer, update-feed, repository identity, and application artwork to Lappen Recorder so fork builds do not impersonate or update from upstream.
 - Changed the Windows setup from one-click installation to an assisted wizard that allows users to choose the installation folder.
 - Added a non-destructive, one-time migration of compatible configuration files into the fork's separate application-data directory.

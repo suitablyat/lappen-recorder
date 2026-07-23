@@ -46,4 +46,22 @@ describe('RemoteStorageService', () => {
     expect(refreshStatus).toHaveBeenCalledTimes(1);
     expect(refreshVideos).toHaveBeenCalledTimes(1);
   });
+
+  test('redacts provider errors returned through chat IPC operations', async () => {
+    const service = Object.assign(
+      Object.create(RemoteStorageService.prototype),
+      {
+        provider: {
+          capabilities: { chat: true },
+          getChatMessages: jest
+            .fn()
+            .mockRejectedValue(new Error('password=super-secret')),
+        },
+      },
+    ) as RemoteStorageService;
+
+    await expect(
+      RemoteStorageService.prototype.getChatMessages.call(service, 'raid'),
+    ).rejects.toThrow('password=[REDACTED]');
+  });
 });

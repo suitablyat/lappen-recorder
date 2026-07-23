@@ -218,17 +218,21 @@ export default class RemoteStorageService implements StorageClient {
     return correlator;
   }
 
-  getChatMessages(correlator: string): Promise<TChatMessageWithId[]> {
+  async getChatMessages(correlator: string): Promise<TChatMessageWithId[]> {
     this.validateChatCorrelator(correlator);
     if (!this.provider.capabilities.chat) {
       throw new Error(
         'The active remote storage provider does not support chat',
       );
     }
-    return this.provider.getChatMessages(correlator);
+    try {
+      return await this.provider.getChatMessages(correlator);
+    } catch (error) {
+      throw new Error(redactRemoteStorageError(error));
+    }
   }
 
-  addChatMessage(
+  async addChatMessage(
     correlator: string,
     message: string,
   ): Promise<TChatMessageWithId> {
@@ -248,10 +252,18 @@ export default class RemoteStorageService implements StorageClient {
     const userName =
       this.cfg.get<string>('webdavUsername').trim().slice(0, 128) ||
       'Remote user';
-    return this.provider.addChatMessage(correlator, userName, message.trim());
+    try {
+      return await this.provider.addChatMessage(
+        correlator,
+        userName,
+        message.trim(),
+      );
+    } catch (error) {
+      throw new Error(redactRemoteStorageError(error));
+    }
   }
 
-  deleteChatMessage(correlator: string, id: number): Promise<void> {
+  async deleteChatMessage(correlator: string, id: number): Promise<void> {
     this.validateChatCorrelator(correlator);
     if (!Number.isSafeInteger(id) || id < 0) throw new Error('Invalid chat id');
     if (!this.provider.capabilities.chat) {
@@ -259,7 +271,11 @@ export default class RemoteStorageService implements StorageClient {
         'The active remote storage provider does not support chat',
       );
     }
-    return this.provider.deleteChatMessage(correlator, id);
+    try {
+      await this.provider.deleteChatMessage(correlator, id);
+    } catch (error) {
+      throw new Error(redactRemoteStorageError(error));
+    }
   }
 
   private validateChatCorrelator(correlator: string) {
@@ -367,6 +383,7 @@ export default class RemoteStorageService implements StorageClient {
         throw new Error('Invalid remote video name');
       }
       const videoName = sanitizeRemoteFileName(args[0]);
+      if (videoName !== args[0]) throw new Error('Invalid remote video name');
       try {
         const shareUrl = await this.provider.createShareLink(videoName);
         clipboard.writeText(shareUrl);

@@ -20,7 +20,7 @@ interface IProps {
 }
 
 const StorageFilterToggle = (props: IProps) => {
-  const { appState, setAppState, table, categoryState } = props;
+  const { appState, setAppState, categoryState } = props;
   const { storageFilter, language } = appState;
 
   const hasDisk = categoryState.filter((rv) => !rv.cloud).length > 0;

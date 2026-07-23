@@ -49,6 +49,9 @@ const NEXTCLOUD_CHUNK_THRESHOLD_BYTES = 256 * 1024 ** 2;
 const NEXTCLOUD_CHUNK_SIZE_BYTES = 64 * 1024 ** 2;
 const NEXTCLOUD_CHUNK_UPLOAD_ATTEMPTS = 3;
 const VIDEO_UPLOAD_PROGRESS_PERCENT = 95;
+const MAX_CHAT_MESSAGES = 1000;
+const MAX_CHAT_DOCUMENT_BYTES = 1024 * 1024;
+const ChatDocumentSchema = ChatMessageWithId.array().max(MAX_CHAT_MESSAGES);
 
 const decodeXml = (value: string) =>
   value
@@ -135,8 +138,8 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
         ...config,
         auth: { username: this.username, password: this.password },
         timeout: config.timeout ?? this.timeoutMs,
-        maxBodyLength: Infinity,
-        maxContentLength: Infinity,
+        maxBodyLength: config.maxBodyLength ?? Infinity,
+        maxContentLength: config.maxContentLength ?? Infinity,
       });
     } catch (error) {
       if ((error as AxiosError).response?.status === 507) {
@@ -795,8 +798,9 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
         url: this.chatUrl(correlator),
         method: 'GET',
         responseType: 'json',
+        maxContentLength: MAX_CHAT_DOCUMENT_BYTES,
       });
-      const parsed = ChatMessageWithId.array().safeParse(response.data);
+      const parsed = ChatDocumentSchema.safeParse(response.data);
       if (!parsed.success) throw new Error('Invalid remote chat data');
       const etag = response.headers?.etag;
       return {
@@ -860,7 +864,7 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
   ) {
     for (let attempt = 0; attempt < 3; attempt += 1) {
       const document = await this.readChatDocument(correlator);
-      const messages = mutate(document.messages);
+      const messages = ChatDocumentSchema.parse(mutate(document.messages));
       if (
         document.exists &&
         messages.length === document.messages.length &&
@@ -916,6 +920,8 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     }
 
     const videoName = sanitizeRemoteFileName(rawVideoName);
+    if (videoName !== rawVideoName)
+      throw new Error('Invalid remote video name');
     const remotePath = this.nextcloudFilePath(videoName);
     const headers = {
       Accept: 'application/json',

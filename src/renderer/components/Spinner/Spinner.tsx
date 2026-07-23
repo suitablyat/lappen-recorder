@@ -1,10 +1,16 @@
 import { Box, CircularProgress } from '@mui/material';
 
+interface SpinnerProps {
+  size?: number | string;
+  color?: string;
+  className?: string;
+}
+
 export default function Spinner({
   size = '10vh',
   color = '#bb4420',
   className = '',
-}) {
+}: SpinnerProps) {
   return (
     <Box
       className={className}

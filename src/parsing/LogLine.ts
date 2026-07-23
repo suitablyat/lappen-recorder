@@ -18,7 +18,7 @@ export default class LogLine {
 
   // Multi-dimensional array of arguments
   // Example: 'ARENA_MATCH_START', '2547', '33', '2v2', '1'
-  private _args: any[] = [];
+  private _args: unknown[] = [];
 
   // Length of this.args to avoid evaluating this.args.length
   // may times.
@@ -41,13 +41,13 @@ export default class LogLine {
     this.parseLogArg(1);
   }
 
-  arg(index: number): any {
+  arg<T = string>(index: number): T {
     if (!this._args || index >= this._argsListLen) {
       const maxsplit = Math.max(index + 1, this._argsListLen);
       this.parseLogArg(maxsplit);
     }
 
-    return this._args[index];
+    return this._args[index] as T;
   }
 
   /**
@@ -108,11 +108,11 @@ export default class LogLine {
     //
     // This can end up being multidimensional in the case of some combat events
     // that have complex data stored, like `COMBATANT_INFO`.
-    const listItems: any[] = [];
+    const listItems: unknown[][] = [];
 
     let inQuotedString = false;
     let openListCount = 0;
-    let value: any = '';
+    let value: unknown = '';
 
     for (
       this._linePosition;
@@ -173,6 +173,9 @@ export default class LogLine {
         }
       }
 
+      if (typeof value !== 'string') {
+        throw new Error('Unexpected character after a nested log argument');
+      }
       value += char;
     }
 
@@ -190,7 +193,7 @@ export default class LogLine {
   /**
    * Add an argument to the list
    */
-  private addArg(value: any): void {
+  private addArg(value: unknown): void {
     this._args.push(value);
     this._argsListLen = this._args.length;
   }

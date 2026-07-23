@@ -15,8 +15,8 @@ declare global {
       store: ElectronStore;
       ipcRenderer: {
         sendMessage(channel: Channels, args: unknown[]): void;
-        sendSync(channel: Channels, args: unknown[]): any;
-        invoke(channel: Channels, args: unknown[]): Promise<any>;
+        sendSync<T = unknown>(channel: Channels, args: unknown[]): T;
+        invoke<T = unknown>(channel: Channels, args: unknown[]): Promise<T>;
         on(
           channel: string,
           func: (...args: unknown[]) => void,

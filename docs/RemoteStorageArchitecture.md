@@ -16,7 +16,9 @@
   local source is a filesystem path.
 - Providers with the `chat` capability store validated per-video chat documents
   under `WarcraftRecorder/chats/<video-name>.json`. Chat is polled while open;
-  it has no account, guild, proprietary API, or WebSocket dependency.
+  it has no account, guild, proprietary API, or WebSocket dependency. Documents
+  are limited to 1 MiB and 1,000 validated messages, and conditional ETag
+  writes prevent concurrent clients from silently overwriting one another.
 - WebDAV upload progress reserves the final percentage range for server
   acknowledgement, JSON metadata upload, and remote verification. Request-byte
   progress alone is not treated as a completed remote write.
