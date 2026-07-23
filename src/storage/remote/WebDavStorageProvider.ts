@@ -104,6 +104,7 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     this.videosUrl = new URL(`${basePath}/videos/`, this.endpoint).toString();
     this.chatsUrl = new URL(`${basePath}/chats/`, this.endpoint).toString();
     this.capabilities.shareLinks = config.provider === 'nextcloud';
+    this.capabilities.protection = config.provider === 'nextcloud';
 
     if (config.provider === 'nextcloud') {
       const endpointUrl = new URL(this.endpoint);
@@ -729,6 +730,52 @@ export default class WebDavStorageProvider implements RemoteStorageProvider {
     }
     if (failures.length)
       throw new Error('Remote video deletion was only partially successful');
+  }
+
+  async protectVideos(videoNames: string[], protect: boolean) {
+    if (this.provider !== 'nextcloud') {
+      throw new Error('The active WebDAV provider does not support protection');
+    }
+
+    for (const rawName of videoNames) {
+      const videoName = sanitizeRemoteFileName(rawName);
+      if (videoName !== rawName) throw new Error('Invalid remote video name');
+      const metadataUrl = new URL(
+        `${videoName}.json`,
+        this.videosUrl,
+      ).toString();
+
+      for (let attempt = 0; attempt < 3; attempt += 1) {
+        const response = await this.request<unknown>({
+          url: metadataUrl,
+          method: 'GET',
+          responseType: 'json',
+        });
+        if (!this.isMetadata(response.data)) {
+          throw new Error('Remote video metadata is invalid');
+        }
+        const etag = response.headers.etag;
+        const ifMatch =
+          attempt === 2 ? '*' : typeof etag === 'string' ? etag : '*';
+
+        try {
+          await this.request({
+            url: metadataUrl,
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'If-Match': ifMatch,
+            },
+            data: JSON.stringify({ ...response.data, protected: protect }),
+          });
+          break;
+        } catch (error) {
+          if ((error as AxiosError).response?.status !== 412 || attempt === 2) {
+            throw error;
+          }
+        }
+      }
+    }
   }
 
   private chatUrl(rawCorrelator: string) {

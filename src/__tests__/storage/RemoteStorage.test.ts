@@ -221,6 +221,133 @@ describe('WebDavStorageProvider', () => {
     ).toBe(false);
   });
 
+  test.each([true, false])(
+    'persists Nextcloud protection=%s with an ETag precondition',
+    async (protect) => {
+      request.mockImplementation(async (call) => {
+        if (call.method === 'GET') {
+          return {
+            data: { ...metadata, protected: !protect },
+            headers: { etag: '"metadata-v1"' },
+          };
+        }
+        return { data: '', headers: {} };
+      });
+      const provider = new WebDavStorageProvider({
+        ...config,
+        provider: 'nextcloud',
+        serverUrl: 'https://cloud.example.test',
+      });
+
+      await provider.protectVideos(['raid'], protect);
+
+      expect(provider.capabilities.protection).toBe(true);
+      const put = request.mock.calls
+        .map(([call]) => call)
+        .find((call) => call.method === 'PUT');
+      expect(put).toMatchObject({
+        url: expect.stringMatching(/\/raid\.json$/),
+        headers: {
+          'Content-Type': 'application/json',
+          'If-Match': '"metadata-v1"',
+        },
+      });
+      expect(JSON.parse(String(put?.data))).toMatchObject({
+        protected: protect,
+      });
+    },
+  );
+
+  test('retries a conflicting Nextcloud protection update', async () => {
+    let putAttempts = 0;
+    let getAttempts = 0;
+    request.mockImplementation(async (call) => {
+      if (call.method === 'GET') {
+        getAttempts += 1;
+        return {
+          data: metadata,
+          headers: { etag: `"metadata-v${getAttempts}"` },
+        };
+      }
+      if (call.method === 'PUT' && putAttempts++ === 0) {
+        throw new AxiosError(
+          'metadata changed',
+          undefined,
+          undefined,
+          undefined,
+          { status: 412, data: {}, headers: {}, config: {} } as never,
+        );
+      }
+      return { data: '', headers: {} };
+    });
+    const provider = new WebDavStorageProvider({
+      ...config,
+      provider: 'nextcloud',
+      serverUrl: 'https://cloud.example.test',
+    });
+
+    await provider.protectVideos(['raid'], true);
+
+    expect(getAttempts).toBe(2);
+    expect(putAttempts).toBe(2);
+    const puts = request.mock.calls
+      .map(([call]) => call)
+      .filter((call) => call.method === 'PUT');
+    expect(puts[1].headers?.['If-Match']).toBe('"metadata-v2"');
+  });
+
+  test('falls back to an existing-resource precondition for unstable Nextcloud ETags', async () => {
+    let putAttempts = 0;
+    let getAttempts = 0;
+    request.mockImplementation(async (call) => {
+      if (call.method === 'GET') {
+        getAttempts += 1;
+        return {
+          data: metadata,
+          headers: { etag: `"unstable-${getAttempts}"` },
+        };
+      }
+      if (call.method === 'PUT' && putAttempts++ < 2) {
+        throw new AxiosError(
+          'precondition failed',
+          undefined,
+          undefined,
+          undefined,
+          { status: 412, data: {}, headers: {}, config: {} } as never,
+        );
+      }
+      return { data: '', headers: {} };
+    });
+    const provider = new WebDavStorageProvider({
+      ...config,
+      provider: 'nextcloud',
+      serverUrl: 'https://cloud.example.test',
+    });
+
+    await provider.protectVideos(['raid'], true);
+
+    expect(getAttempts).toBe(3);
+    expect(putAttempts).toBe(3);
+    const puts = request.mock.calls
+      .map(([call]) => call)
+      .filter((call) => call.method === 'PUT');
+    expect(puts.map((call) => call.headers?.['If-Match'])).toEqual([
+      '"unstable-1"',
+      '"unstable-2"',
+      '*',
+    ]);
+  });
+
+  test('does not expose protection for generic WebDAV', async () => {
+    const provider = new WebDavStorageProvider(config);
+
+    expect(provider.capabilities.protection).toBe(false);
+    await expect(provider.protectVideos(['raid'], true)).rejects.toThrow(
+      'does not support protection',
+    );
+    expect(request).not.toHaveBeenCalled();
+  });
+
   test('lists only complete MP4 and valid JSON pairs', async () => {
     const xml = `<?xml version="1.0"?><d:multistatus xmlns:d="DAV:">
       <d:response><d:href>/root/LappenRecorder/videos/raid.mp4</d:href><d:propstat><d:prop><d:getcontentlength>100</d:getcontentlength></d:prop></d:propstat></d:response>

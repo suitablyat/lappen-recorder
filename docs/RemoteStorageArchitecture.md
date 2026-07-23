@@ -53,6 +53,14 @@
   protected recordings, provider errors, and incomplete entries are never
   guessed at or deleted. Local recordings remain the source of truth and are
   unaffected.
+- Nextcloud exposes the provider `protection` capability. Locking selected
+  remote rows updates the `protected` field in each recording's JSON metadata
+  through conditional ETag writes; unlocking clears that field. Conflicting
+  metadata changes are re-read and attempted at most three times. If Nextcloud
+  persistently rejects its own returned ETag, the final freshly-read write uses
+  the standard `If-Match: *` existing-resource precondition. Retention consumes
+  the persisted value returned by normal remote listing and therefore never
+  ages out locked rows. Generic WebDAV does not advertise this capability.
 - The renderer wraps local sources in the `vod://wcr/` protocol. The main
   process protocol handler serves those files with byte-range support.
 

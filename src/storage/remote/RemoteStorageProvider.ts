@@ -77,6 +77,7 @@ export interface RemoteStorageProvider {
   ): Promise<void>;
   streamVideo(videoName: string, range?: string): Promise<RemoteVideoStream>;
   deleteVideos(videoNames: string[]): Promise<void>;
+  protectVideos(videoNames: string[], protect: boolean): Promise<void>;
   createShareLink(videoName: string): Promise<string>;
   getChatMessages(correlator: string): Promise<TChatMessageWithId[]>;
   addChatMessage(

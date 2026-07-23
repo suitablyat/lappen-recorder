@@ -152,11 +152,17 @@ export default class RemoteStorageService implements StorageClient {
   }
 
   async protectVideos(videoNames: string[], protect: boolean) {
-    void videoNames;
-    void protect;
-    throw new Error(
-      'The active remote storage provider does not support protection',
-    );
+    if (!this.provider.capabilities.protection) {
+      throw new Error(
+        'The active remote storage provider does not support protection',
+      );
+    }
+    const names = videoNames.map((name) => {
+      const sanitized = sanitizeRemoteFileName(name);
+      if (sanitized !== name) throw new Error('Invalid remote video name');
+      return sanitized;
+    });
+    await this.provider.protectVideos(names, protect);
   }
 
   async uploadVideo(
@@ -394,6 +400,33 @@ export default class RemoteStorageService implements StorageClient {
         if (!video?.cloud || typeof video.videoName !== 'string') return;
         sanitizeRemoteFileName(video.videoName);
         await VideoProcessQueue.getInstance().queueDownload(video);
+      } else if (action === 'protect') {
+        const protect = args[1];
+        const videos = args[2];
+        if (typeof protect !== 'boolean' || !Array.isArray(videos)) return;
+        const names = (videos as RendererVideo[])
+          .filter(
+            (video) => video?.cloud && typeof video.videoName === 'string',
+          )
+          .map((video) => video.videoName);
+        if (names.length === 0) return;
+
+        try {
+          await this.protectVideos(names, protect);
+          send(
+            protect
+              ? 'displayProtectCloudVideos'
+              : 'displayUnprotectCloudVideos',
+            names,
+          );
+        } catch (error) {
+          console.warn(
+            '[RemoteStorage] Failed to update protection',
+            redactRemoteStorageError(error),
+          );
+        } finally {
+          await this.refreshVideos();
+        }
       }
     });
   }
