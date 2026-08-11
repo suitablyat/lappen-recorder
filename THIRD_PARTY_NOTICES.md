@@ -8,11 +8,11 @@ the native GPL components are attached to every Lappen Recorder release.
 
 ## Native recording components
 
-### noobs 0.0.201
+### noobs 0.0.204
 
 - Source repository: https://github.com/aza547/noobs
-- Source commit: `07a28338a871bdf7e0d24cdae65ce16e9470f2fa`
-- Release source archive: `noobs-0.0.201-source.zip`
+- Source commit: `b5a62dc0f7fd62333fc7eb8732df723ed49b0ba4`
+- Release source archive: `noobs-0.0.204-source.zip`
 
 ### OBS Studio (Warcraft Recorder fork) 27.2.0-4590-g71eaeafa4
 
@@ -31,7 +31,7 @@ General Public License, version 2 or later. The shipped FFmpeg build enables
 GPL code and libx264. See the project `LICENSE`, the matching release source
 archives, and the upstream repositories for the complete terms and notices.
 
-The npm package metadata for `noobs@0.0.201` identifies LGPL-2.0, while the
+The npm package metadata for `noobs@0.0.204` identifies LGPL-2.0, while the
 linked OBS components are GPL-covered. Lappen Recorder therefore treats the
 combined native recording component as GPL-covered for distribution.
 
@@ -747,6 +747,7 @@ combined native recording component as GPL-covered for distribution.
 | `xtend@3.0.0` | MIT | [source](https://github.com/Raynos/xtend) |
 | `xtend@4.0.2` | MIT | [source](https://github.com/Raynos/xtend) |
 | `yaml@1.10.3` | ISC | [source](https://github.com/eemeli/yaml) |
+| `yaml@2.9.0` | ISC | [source](https://github.com/eemeli/yaml) |
 | `youtube-video-element@1.9.0` | MIT | [source](https://github.com/muxinc/media-elements) |
 | `zip-stream@7.0.5` | MIT | [source](https://github.com/archiverjs/node-zip-stream) |
 | `zod@3.25.76` | MIT | [source](https://github.com/colinhacks/zod) |
@@ -13487,6 +13488,26 @@ Applies to: `yaml@1.10.3`
 
 ```text
 Copyright 2018 Eemeli Aro <eemeli@gmail.com>
+
+Permission to use, copy, modify, and/or distribute this software for any purpose
+with or without fee is hereby granted, provided that the above copyright notice
+and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
+THIS SOFTWARE.
+```
+
+### Notice cf12d35c36ba
+
+Applies to: `yaml@2.9.0`
+
+```text
+Copyright Eemeli Aro <eemeli@gmail.com>
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
