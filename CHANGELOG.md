@@ -6,6 +6,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [8.0.0-rc.3] - 2026-08-11
+
+### Added
+
+- Added per-source routing across six OBS audio tracks.
+
+### Changed
+
+- Instant Replay remains available during recording overruns.
+- Updated the native `noobs` recording dependency to 0.0.204.
+
+### Fixed
+
+- Fixed pagination buttons not working.
+- Truncated overly long player names in video tables.
+- Made generated third-party notices deterministic across supported npm
+  versions and synchronized the retained `noobs` source metadata.
+
 ## [8.0.0-rc.2] - 2026-07-23
 
 ### Added
@@ -14,28 +32,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   release-signing architecture, and repository-side preparation for a trusted
   GitHub Actions signing workflow. Production signing remains pending SignPath
   enrollment.
-- [Issue 730](https://github.com/aza547/wow-recorder/issues/730) - Add
-  per-source audio track routing.
-
-### Changed
-
-- Add the ability to seek to a clip's source, if it is still available.
-- Added hotkey hints to the video selection table.
-- [Issue 877](https://github.com/aza547/wow-recorder/pull/878) - Instant Replay
-  remains available during an overrun.
-
-### Fixed
-
-- Fixed authenticated remote playback, seeking, pausing, long-running uploads,
-  remote list refresh after upload, retention around protected recordings, and
-  insufficient-storage reporting.
-- Fixed pagination buttons not working.
-- [Issue 855](https://github.com/aza547/wow-recorder/issues/855) - Share log
-  handler timeouts between game modes.
-- Fixed the video-player progress bar not being initialized correctly before
-  playback starts.
-- [Issue 876](https://github.com/aza547/wow-recorder/issues/876) - Fix tag
-  dialog not opening on some categories.
 
 ### Changed
 
