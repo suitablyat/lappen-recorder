@@ -203,6 +203,7 @@ enum Phrase {
   SpeakersLabel,
   MicrophonesLabel,
   AudioSuppressionLabel,
+  AudioTracksLabel,
   MonoInputLabel,
   PushToTalkLabel,
   PushToTalkKeyLabel,

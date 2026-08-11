@@ -34,6 +34,7 @@ export type Channels =
   | 'deleteAudioSource'
   | 'setAudioSourceDevice'
   | 'setAudioSourceWindow'
+  | 'setAudioSourceTracks'
   | 'getDisplayInfo'
   | 'configurePreview'
   | 'showPreview'
@@ -172,6 +173,10 @@ contextBridge.exposeInMainWorld('electron', {
       ipcRenderer.send('setAudioSourceWindow', id, window);
     },
 
+    setAudioSourceTracks(id: string, tracks: number): void {
+      ipcRenderer.send('setAudioSourceTracks', id, tracks);
+    },
+
     setAudioSourceVolume(id: string, volume: number): void {
       ipcRenderer.send('setAudioSourceVolume', id, volume);
     },
@@ -240,7 +245,7 @@ contextBridge.exposeInMainWorld('electron', {
       height: number,
       fps: number,
       sources: RendererVideo[],
-      audioTrackIndex: number,
+      audioSegmentIndex: number,
     ) {
       ipcRenderer.send(
         'createKillVideo',
@@ -248,7 +253,7 @@ contextBridge.exposeInMainWorld('electron', {
         height,
         fps,
         sources,
-        audioTrackIndex,
+        audioSegmentIndex,
       );
     },
 
