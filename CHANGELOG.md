@@ -6,6 +6,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Added the SignPath Foundation code-signing policy, privacy disclosure,
+  release-signing architecture, and repository-side preparation for a trusted
+  GitHub Actions signing workflow. Production signing remains pending SignPath
+  enrollment.
+- [Issue 730](https://github.com/aza547/wow-recorder/issues/730) - Add
+  per-source audio track routing.
+
+### Changed
+
+- Add the ability to seek to a clip's source, if it is still available.
+- Added hotkey hints to the video selection table.
+- [Issue 877](https://github.com/aza547/wow-recorder/pull/878) - Instant Replay
+  remains available during an overrun.
+
+### Fixed
+
+- Fixed authenticated remote playback, seeking, pausing, long-running uploads,
+  remote list refresh after upload, retention around protected recordings, and
+  insufficient-storage reporting.
+- Fixed pagination buttons not working.
+- [Issue 855](https://github.com/aza547/wow-recorder/issues/855) - Share log
+  handler timeouts between game modes.
+- Fixed the video-player progress bar not being initialized correctly before
+  playback starts.
+- [Issue 876](https://github.com/aza547/wow-recorder/issues/876) - Fix tag
+  dialog not opening on some categories.
+
 ## [8.0.0-rc.1] - 2026-07-23
 
 ### Breaking changes
@@ -46,17 +75,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and secret-redacted logging and IPC failures.
 - Added GPL release compliance automation, exact source manifests, third-party
   notices, retained corresponding-source archives, and fork identity notices.
-- Add the ability to seek to a clip's source, if it is still available.
-- Added some hotkey hints to the video selection table.
-
-### Fixed
-
-- Fixed authenticated remote playback, seeking, pausing, long-running uploads,
-  remote list refresh after upload, retention around protected recordings, and
-  insufficient-storage reporting.
-- [Issue 855](https://github.com/aza547/wow-recorder/issues/855) - Share log handler timeouts between game modes.
-- Fix an issue where the progress bar on the video player would not be set correctly until it started playing.
-- [Issue 876](https://github.com/aza547/wow-recorder/issues/876) - Fix tag dialog not opening on some categories.
 
 ## [7.10.1] - 2026-07-18
 ### Fixed

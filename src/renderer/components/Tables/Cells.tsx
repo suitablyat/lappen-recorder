@@ -392,7 +392,7 @@ export const populateViewpointCell = (
           }}
         />
         <div
-          className="font-sans font-semibold text-md text-shadow-instance mx-1"
+          className="font-sans font-semibold text-md text-shadow-instance mx-1 truncate"
           style={{ color: playerClassColor }}
         >
           {playerName}

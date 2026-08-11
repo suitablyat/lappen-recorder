@@ -10,6 +10,7 @@ import {
 const outputPath = join(repositoryRoot, 'THIRD_PARTY_NOTICES.md');
 const packages = collectProductionPackages();
 const sources = getSourceConfiguration();
+const noobs = sources.components.find((component) => component.id === 'noobs');
 const licenseGroups = new Map();
 
 for (const dependency of packages) {
@@ -60,7 +61,7 @@ lines.push(
   'GPL code and libx264. See the project `LICENSE`, the matching release source',
   'archives, and the upstream repositories for the complete terms and notices.',
   '',
-  'The npm package metadata for `noobs@0.0.201` identifies LGPL-2.0, while the',
+  `The npm package metadata for \`noobs@${noobs.version}\` identifies LGPL-2.0, while the`,
   'linked OBS components are GPL-covered. Lappen Recorder therefore treats the',
   'combined native recording component as GPL-covered for distribution.',
   '',

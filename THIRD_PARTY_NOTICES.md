@@ -8,11 +8,11 @@ the native GPL components are attached to every Lappen Recorder release.
 
 ## Native recording components
 
-### noobs 0.0.201
+### noobs 0.0.204
 
 - Source repository: https://github.com/aza547/noobs
-- Source commit: `07a28338a871bdf7e0d24cdae65ce16e9470f2fa`
-- Release source archive: `noobs-0.0.201-source.zip`
+- Source commit: `b5a62dc0f7fd62333fc7eb8732df723ed49b0ba4`
+- Release source archive: `noobs-0.0.204-source.zip`
 
 ### OBS Studio (Warcraft Recorder fork) 27.2.0-4590-g71eaeafa4
 
@@ -31,7 +31,7 @@ General Public License, version 2 or later. The shipped FFmpeg build enables
 GPL code and libx264. See the project `LICENSE`, the matching release source
 archives, and the upstream repositories for the complete terms and notices.
 
-The npm package metadata for `noobs@0.0.201` identifies LGPL-2.0, while the
+The npm package metadata for `noobs@0.0.204` identifies LGPL-2.0, while the
 linked OBS components are GPL-covered. Lappen Recorder therefore treats the
 combined native recording component as GPL-covered for distribution.
 
@@ -556,7 +556,7 @@ combined native recording component as GPL-covered for distribution.
 | `node-abi@4.33.0` | MIT | [source](https://github.com/electron/node-abi) |
 | `node-addon-api@8.5.0` | MIT | [source](https://github.com/nodejs/node-addon-api) |
 | `node-gyp-build@4.6.1` | MIT | [source](https://github.com/prebuild/node-gyp-build) |
-| `noobs@0.0.201` | LGPL-2.0 | [source](https://github.com/aza547/noobs) |
+| `noobs@0.0.204` | LGPL-2.0 | [source](https://github.com/aza547/noobs) |
 | `normalize-path@3.0.0` | MIT | [source](https://github.com/jonschlinkert/normalize-path) |
 | `object-assign@4.1.1` | MIT | [source](https://github.com/sindresorhus/object-assign) |
 | `object-hash@3.0.0` | MIT | [source](https://github.com/puleos/object-hash) |
@@ -8536,7 +8536,7 @@ THE SOFTWARE.
 
 ### Notice 1be990a929b5
 
-Applies to: `noobs@0.0.201`
+Applies to: `noobs@0.0.204`
 
 ```text
 GNU GENERAL PUBLIC LICENSE
