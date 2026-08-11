@@ -75,7 +75,13 @@ export function collectProductionPackages() {
     const lockPath = join(repositoryRoot, installation.lock);
     const lock = readJson(lockPath);
     for (const [location, lockPackage] of Object.entries(lock.packages || {})) {
-      if (!location.includes('node_modules/') || lockPackage.dev === true) continue;
+      if (
+        !location.includes('node_modules/')
+        || lockPackage.dev === true
+        || (lockPackage.peer === true && lockPackage.optional === true)
+      ) {
+        continue;
+      }
 
       const packageDirectory = join(
         repositoryRoot,
