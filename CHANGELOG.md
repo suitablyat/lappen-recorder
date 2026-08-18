@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [8.0.0-rc.4] - 2026-08-18
+
 ### Added
 
 - Updated Mythic+ timers for Midnight season 2.
