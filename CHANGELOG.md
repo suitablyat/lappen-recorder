@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Updated Mythic+ timers for Midnight season 2.
+
+### Fixed
+
+- Fixed a crash when opening the drawer while filtering videos.
+- Ctrl-clicking the only selected row no longer unselects it.
+
 ## [8.0.0-rc.3] - 2026-08-11
 
 ### Added
