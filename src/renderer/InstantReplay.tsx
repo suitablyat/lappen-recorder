@@ -73,7 +73,7 @@ const InstantReplay = (props: IProps) => {
         key={open.path}
         videos={[]}
         instantReplay={open}
-        categoryState={[]}
+        filteredState={[]}
         persistentProgress={persistentProgress}
         config={config}
         appState={appState}

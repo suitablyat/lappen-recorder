@@ -9,13 +9,11 @@ import SaveIcon from '@mui/icons-material/Save';
 import { Workflow } from 'lucide-react';
 import { Tooltip } from './components/Tooltip/Tooltip';
 import { getLocalePhrase } from 'localisation/translations';
-import { Table } from '@tanstack/react-table';
 import { Phrase } from 'localisation/phrases';
 
 interface IProps {
   appState: AppState;
   setAppState: Dispatch<SetStateAction<AppState>>;
-  table: Table<RendererVideo>;
   categoryState: RendererVideo[];
 }
 

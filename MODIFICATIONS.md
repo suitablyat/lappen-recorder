@@ -22,6 +22,14 @@ This file is the prominent modification notice for Lappen Recorder, a modified d
   update-metadata regeneration. Production signing remains disabled until the
   project is accepted and provisioned by SignPath Foundation.
 
+## 2026-09-09
+
+- Merged aza547/wow-recorder main through 0566da15, including encounter, recording, combat-log diagnostics, and React Table v9 dialog updates.
+- Retained the fork identity, release version, optional remote storage, encrypted credentials, and provider-hosted chat.
+- Adapted the new lock/tag controls to provider capabilities and added renderer regression tests.
+- Removed an upstream duplicate combat-log IPC listener that disabled manual hotkeys, and aligned instant replay with the renamed player prop.
+- Replaced the upstream local noobs tarball reference with its verified npm URL, pinned its published source revision, and regenerated third-party notices. The packaged OBS version still identifies source 71eaeafa4; its binary checksum was refreshed for the new noobs package.
+
 ## Release records
 
 Each release's `RELEASE_MANIFEST.json` records the exact Lappen Recorder, `noobs`, OBS, and FFmpeg source commits and SHA-256 hashes. Corresponding-source archives must remain available as long as that release's installer or updater files are available.

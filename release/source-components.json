@@ -4,11 +4,11 @@
     {
       "id": "noobs",
       "name": "noobs",
-      "version": "0.0.204",
+      "version": "0.0.205",
       "repository": "https://github.com/aza547/noobs",
-      "sourceCommit": "b5a62dc0f7fd62333fc7eb8732df723ed49b0ba4",
-      "archiveName": "noobs-0.0.204-source.zip",
-      "packageIntegrity": "sha512-r13FtKpQi7l/bZwkS/+INT1Y+C8X32mA6o8q+4qCH4BVl0fDxoVsNl8xSnbAi3Qi5CKtoPrF7XQlwILqNj0unw==",
+      "sourceCommit": "04e7def2ef053a0af4079e09482f0c688a9f16b2",
+      "archiveName": "noobs-0.0.205-source.zip",
+      "packageIntegrity": "sha512-tOfKsjJzk9oSU4czla20ZAx5N512DlODIU+eHjTbPp2g1WHD1vmsvmvnpB8ponUJ0uWq38Dj0w1VheZuHwkZDg==",
       "binaryPath": "release/app/node_modules/noobs/build/Release/noobs.node"
     },
     {
@@ -19,7 +19,7 @@
       "sourceCommit": "71eaeafa48785c13857a59e147316abad90cc364",
       "archiveName": "OBS-27.2.0-71eaeafa4-source.zip",
       "binaryPath": "release/app/node_modules/noobs/dist/bin/obs.dll",
-      "binarySha256": "b58b0b42d0ff46c366e316f7e8f132b444aee3624aaa949e953f73f521626c76"
+      "binarySha256": "b5e8efdaa2f7cd2e99b7fe848f835e1832b36580915eb2687d673e945cc2af55"
     },
     {
       "id": "ffmpeg",

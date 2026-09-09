@@ -8,11 +8,11 @@ the native GPL components are attached to every Lappen Recorder release.
 
 ## Native recording components
 
-### noobs 0.0.204
+### noobs 0.0.205
 
 - Source repository: https://github.com/aza547/noobs
-- Source commit: `b5a62dc0f7fd62333fc7eb8732df723ed49b0ba4`
-- Release source archive: `noobs-0.0.204-source.zip`
+- Source commit: `04e7def2ef053a0af4079e09482f0c688a9f16b2`
+- Release source archive: `noobs-0.0.205-source.zip`
 
 ### OBS Studio (Warcraft Recorder fork) 27.2.0-4590-g71eaeafa4
 
@@ -31,7 +31,7 @@ General Public License, version 2 or later. The shipped FFmpeg build enables
 GPL code and libx264. See the project `LICENSE`, the matching release source
 archives, and the upstream repositories for the complete terms and notices.
 
-The npm package metadata for `noobs@0.0.204` identifies LGPL-2.0, while the
+The npm package metadata for `noobs@0.0.205` identifies LGPL-2.0, while the
 linked OBS components are GPL-covered. Lappen Recorder therefore treats the
 combined native recording component as GPL-covered for distribution.
 
@@ -203,8 +203,10 @@ combined native recording component as GPL-covered for distribution.
 | `@svta/cml-xml@1.1.4` | Apache-2.0 | [source](https://github.com/streaming-video-technology-alliance/common-media-library) |
 | `@tanstack/query-core@5.101.4` | MIT | [source](https://github.com/TanStack/query) |
 | `@tanstack/react-query@5.101.4` | MIT | [source](https://github.com/TanStack/query) |
-| `@tanstack/react-table@8.21.3` | MIT | [source](https://github.com/TanStack/table) |
-| `@tanstack/table-core@8.21.3` | MIT | [source](https://github.com/TanStack/table) |
+| `@tanstack/react-store@0.11.1` | MIT | [source](https://github.com/TanStack/store) |
+| `@tanstack/react-table@9.0.0` | MIT | [source](https://github.com/TanStack/table) |
+| `@tanstack/store@0.11.1` | MIT | [source](https://github.com/TanStack/store) |
+| `@tanstack/table-core@9.0.0` | MIT | [source](https://github.com/TanStack/table) |
 | `@types/d3-array@3.2.2` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/d3-axis@3.0.6` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
 | `@types/d3-brush@3.0.6` | MIT | [source](https://github.com/DefinitelyTyped/DefinitelyTyped) |
@@ -556,7 +558,7 @@ combined native recording component as GPL-covered for distribution.
 | `node-abi@4.33.0` | MIT | [source](https://github.com/electron/node-abi) |
 | `node-addon-api@8.5.0` | MIT | [source](https://github.com/nodejs/node-addon-api) |
 | `node-gyp-build@4.6.1` | MIT | [source](https://github.com/prebuild/node-gyp-build) |
-| `noobs@0.0.204` | LGPL-2.0 | [source](https://github.com/aza547/noobs) |
+| `noobs@0.0.205` | LGPL-2.0 | [source](https://github.com/aza547/noobs) |
 | `normalize-path@3.0.0` | MIT | [source](https://github.com/jonschlinkert/normalize-path) |
 | `object-assign@4.1.1` | MIT | [source](https://github.com/sindresorhus/object-assign) |
 | `object-hash@3.0.0` | MIT | [source](https://github.com/puleos/object-hash) |
@@ -2159,9 +2161,37 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
+### Notice d71ca6db0f8b
+
+Applies to: `@tanstack/react-store@0.11.1`, `@tanstack/store@0.11.1`
+
+```text
+MIT License
+
+Copyright (c) 2021 Tanner Linsley
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
 ### Notice 805138dc29bb
 
-Applies to: `@tanstack/react-table@8.21.3`, `@tanstack/table-core@8.21.3`
+Applies to: `@tanstack/react-table@9.0.0`, `@tanstack/table-core@9.0.0`
 
 ```text
 MIT License
@@ -8536,7 +8566,7 @@ THE SOFTWARE.
 
 ### Notice 1be990a929b5
 
-Applies to: `noobs@0.0.204`
+Applies to: `noobs@0.0.205`
 
 ```text
 GNU GENERAL PUBLIC LICENSE

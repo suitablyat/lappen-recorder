@@ -34,7 +34,9 @@ const Tooltip = ({
     <TooltipPrimitive.Root
       open={open}
       defaultOpen={defaultOpen}
-      onOpenChange={onOpenChange}
+      onOpenChange={(value) => {
+        onOpenChange?.(value);
+      }}
       delayDuration={delayDuration}
     >
       <TooltipPrimitive.Trigger
@@ -70,7 +72,7 @@ type TooltipProviderProps = TooltipPrimitive.TooltipProviderProps;
 
 const TooltipProvider = ({
   children,
-  delayDuration = 750,
+  delayDuration = 500,
   skipDelayDuration = 300,
   ...props
 }: TooltipProviderProps) => {
