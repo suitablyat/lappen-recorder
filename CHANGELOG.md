@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [8.0.0-rc.5] - 2026-09-09
+
 ### Changed
 
 - Merged upstream recording, encounter, combat-log diagnostics, and video dialog updates through `0566da15`.
@@ -13,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Added Nymrissa World LFR difficulty.
+- Preserved provider capability checks in the new lock and tag dialogs.
+- Fixed a duplicate combat-log refresh listener that could disable manual recording hotkeys.
+- Updated instant replay for the new video-player interface.
 
 ## [8.0.0-rc.4] - 2026-08-18
 
