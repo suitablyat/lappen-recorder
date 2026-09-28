@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [8.0.0-rc.7] - 2026-09-28
+
 ### Fixed
 
 - Restore the React hooks ESLint plugin to the previously validated 5.2 release line. The upstream 7.1 upgrade enabled additional compiler rules before the renderer was migrated, causing CI to fail.

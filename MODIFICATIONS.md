@@ -37,6 +37,11 @@ This file is the prominent modification notice for Lappen Recorder, a modified d
 - Integrated settings persistence fixes and React hook cleanup; the updated lint plugin exposes 16 errors and 9 warnings requiring follow-up.
 - Prepared unsigned prerelease 8.0.0-rc.6 while SignPath enrollment remains pending.
 
+## 2026-09-28 — RC.7
+
+- Restored the previously validated React hooks ESLint 5.2 dependency after the upstream 7.1 upgrade caused CI failures. Application changes from RC.6 are retained.
+- Prepared unsigned prerelease 8.0.0-rc.7 with passing lint, tests, build, and license-compliance checks for the CI correction.
+
 ## Release records
 
 Each release's `RELEASE_MANIFEST.json` records the exact Lappen Recorder, `noobs`, OBS, and FFmpeg source commits and SHA-256 hashes. Corresponding-source archives must remain available as long as that release's installer or updater files are available.
