@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+
+- Preserve valid overrun and minimum encounter duration settings when inputs are cleared.
+- Rotate application logs by date and index and retain up to 500 log files.
+
+### Changed
+
+- Merged upstream React hook cleanup and updated the React hooks ESLint plugin.
+
 ## [8.0.0-rc.5] - 2026-09-09
 
 ### Changed
