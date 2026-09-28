@@ -30,6 +30,13 @@ This file is the prominent modification notice for Lappen Recorder, a modified d
 - Removed an upstream duplicate combat-log IPC listener that disabled manual hotkeys, and aligned instant replay with the renamed player prop.
 - Replaced the upstream local noobs tarball reference with its verified npm URL, pinned its published source revision, and regenerated third-party notices. The packaged OBS version still identifies source 71eaeafa4; its binary checksum was refreshed for the new noobs package.
 
+## 2026-09-28
+
+- Merged upstream through 09d36b90, retaining fork CI, identity, optional remote storage, and profile migration.
+- Integrated indexed application log rotation and 500-file retention using the LappenRecorder filename prefix.
+- Integrated settings persistence fixes and React hook cleanup; the updated lint plugin exposes 16 errors and 9 warnings requiring follow-up.
+- Prepared unsigned prerelease 8.0.0-rc.6 while SignPath enrollment remains pending.
+
 ## Release records
 
 Each release's `RELEASE_MANIFEST.json` records the exact Lappen Recorder, `noobs`, OBS, and FFmpeg source commits and SHA-256 hashes. Corresponding-source archives must remain available as long as that release's installer or updater files are available.
